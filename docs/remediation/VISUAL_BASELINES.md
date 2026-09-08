@@ -73,3 +73,13 @@ department hierarchy remains the explicit T11 pressure/waiver candidate.
 T12 goldens are frozen evidence. Later tickets may compare against them but must
 not update, regenerate, mask, or replace them without explicit user
 authorization.
+
+## T13 regression commands
+
+- Browser behavior: `npm run test:e2e`
+- Source visual comparisons: `npm run test:visual`
+- Visual budget: maximum `0.02` differing pixels at identical viewport/state.
+
+The browser suite uses the installed Chrome executable through Playwright and
+starts/reuses the Lab Vite server on port 4174. It never runs a golden-update
+command; the T12 source images remain the comparison oracle.

@@ -10,9 +10,10 @@ export type ViewportPreset = { width: number; height: number; label: string }
 
 export const VIEWPORT_PRESETS: readonly ViewportPreset[] = [
   { width: 320, height: 700, label: 'Phone narrow' },
-  { width: 390, height: 800, label: 'Phone wide' },
+  { width: 390, height: 844, label: 'Phone wide' },
   { width: 768, height: 900, label: 'Tablet' },
   { width: 1280, height: 900, label: 'Desktop' },
+  { width: 1440, height: 1000, label: 'Source desktop' },
   { width: 1600, height: 1000, label: 'Wide desktop' },
 ]
 
