@@ -226,4 +226,260 @@ export class FakeBackend {
     this.log.append('document', 'delete', `record ${id} deleted`)
     return { ok: true, message: 'Record deleted.' }
   }
+
+  // -------------------------------------------------------------------------
+  // Department mutations
+  // -------------------------------------------------------------------------
+
+  createDepartment(input: { name: string; description: string }): MutationResult {
+    if (!this.projection.canManageDepartments) return this.denied('departments', 'create')
+    const id = Math.max(0, ...this.builder.universe.departments.map((d) => d.id)) + 1
+    const slug = input.name.trim().toLocaleLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || `department-${id}`
+    this.builder.universe.departments.push({ id, name: input.name.trim(), slug, description: input.description.trim() || null, archived: false })
+    this.log.append('departments', 'create', `created "${input.name.trim()}"`)
+    return { ok: true, message: 'Department created.' }
+  }
+
+  archiveDepartment(id: number): MutationResult {
+    const department = this.builder.universe.departments.find((d) => d.id === id)
+    if (!department) return { ok: false, error: 'Department not found.' }
+    if (!this.projection.canManageDepartments || !this.projection.administratedDepartmentIds.includes(id)) return this.denied('departments', 'archive')
+    if (department.archived) return { ok: false, error: 'Department is already archived.' }
+    department.archived = true
+    this.log.append('departments', 'archive', `archived ${department.name}`)
+    return { ok: true, message: 'Department archived.' }
+  }
+
+  restoreDepartment(id: number): MutationResult {
+    const department = this.builder.universe.departments.find((d) => d.id === id)
+    if (!department) return { ok: false, error: 'Department not found.' }
+    if (!this.projection.canManageDepartments || !this.projection.administratedDepartmentIds.includes(id)) return this.denied('departments', 'restore')
+    if (!department.archived) return { ok: false, error: 'Department is not archived.' }
+    department.archived = false
+    this.log.append('departments', 'restore', `restored ${department.name}`)
+    return { ok: true, message: 'Department restored.' }
+  }
+
+  renameDepartment(id: number, name: string): MutationResult {
+    const department = this.builder.universe.departments.find((d) => d.id === id)
+    if (!department) return { ok: false, error: 'Department not found.' }
+    if (!this.projection.canManageDepartments || !this.projection.administratedDepartmentIds.includes(id)) return this.denied('departments', 'rename')
+    department.name = name.trim()
+    this.log.append('departments', 'rename', `renamed ${id}`)
+    return { ok: true, message: 'Department renamed.' }
+  }
+
+  // -------------------------------------------------------------------------
+  // Role mutations
+  // -------------------------------------------------------------------------
+
+  private nextRoleId(): number {
+    return Math.max(0, ...this.builder.universe.roles.map((r) => r.id)) + 1
+  }
+
+  createRole(input: { name: string; departmentId: number }): MutationResult {
+    if (!this.projection.canManageRoles) return this.denied('roles', 'create')
+    if (!this.projection.administratedDepartmentIds.includes(input.departmentId)) return this.denied('roles', 'create')
+    const id = this.nextRoleId()
+    this.builder.universe.roles.push({ id, name: input.name.trim(), departmentId: input.departmentId, parentRoleId: null, folderRead: 'inherit', folderWrite: 'inherit', typeCreate: false, typeEdit: false })
+    this.log.append('roles', 'create', `created "${input.name.trim()}"`)
+    return { ok: true, message: 'Role created.' }
+  }
+
+  renameRole(id: number, name: string): MutationResult {
+    const role = this.builder.universe.roles.find((r) => r.id === id)
+    if (!role) return { ok: false, error: 'Role not found.' }
+    if (!this.projection.canManageRoles || !this.projection.administratedDepartmentIds.includes(role.departmentId)) return this.denied('roles', 'rename')
+    role.name = name.trim()
+    this.log.append('roles', 'rename', `renamed role ${id}`)
+    return { ok: true, message: 'Role renamed.' }
+  }
+
+  deleteRole(id: number): MutationResult {
+    const role = this.builder.universe.roles.find((r) => r.id === id)
+    if (!role) return { ok: false, error: 'Role not found.' }
+    if (!this.projection.canManageRoles || !this.projection.administratedDepartmentIds.includes(role.departmentId)) return this.denied('roles', 'delete')
+    const holders = this.builder.universe.members.filter((m) => m.roleIds.includes(id))
+    if (holders.length > 0) {
+      this.log.append('roles', 'delete', `rejected: role ${id} still assigned`, 'error')
+      return { ok: false, error: 'Remove all holders before deleting this role.' }
+    }
+    this.builder.universe.roles = this.builder.universe.roles.filter((r) => r.id !== id)
+    this.log.append('roles', 'delete', `deleted role ${id}`)
+    return { ok: true, message: 'Role deleted.' }
+  }
+
+  assignRole(roleId: number, characterId: number): MutationResult {
+    const member = this.builder.universe.members.find((m) => m.id === characterId)
+    const role = this.builder.universe.roles.find((r) => r.id === roleId)
+    if (!member || !role) return { ok: false, error: 'Member or role not found.' }
+    if (!this.projection.canManageRoles || !this.projection.administratedDepartmentIds.includes(role.departmentId)) return this.denied('roles', 'assign')
+    if (member.roleIds.includes(roleId)) return { ok: false, error: 'Role is already held by this member.' }
+    member.roleIds.push(roleId)
+    this.log.append('roles', 'assign', `role ${roleId} -> member ${characterId}`)
+    return { ok: true, message: `Assigned ${role.name}.` }
+  }
+
+  unassignRole(roleId: number, characterId: number): MutationResult {
+    const member = this.builder.universe.members.find((m) => m.id === characterId)
+    if (!member) return { ok: false, error: 'Member not found.' }
+    if (!this.projection.canManageRoles) return this.denied('roles', 'unassign')
+    if (!member.roleIds.includes(roleId)) return { ok: false, error: 'Member does not hold this role.' }
+    member.roleIds = member.roleIds.filter((r) => r !== roleId)
+    this.log.append('roles', 'unassign', `role ${roleId} removed from member ${characterId}`)
+    return { ok: true, message: 'Role removed.' }
+  }
+
+  // -------------------------------------------------------------------------
+  // Document Type mutations
+  // -------------------------------------------------------------------------
+
+  createDocumentType(input: { name: string; departmentRootId: number | null; templateMode: 'blank' | 'markdown' | 'form-to-markdown' }): MutationResult {
+    if (!this.projection.canManageDocumentTypes) return this.denied('documentTypes', 'create')
+    const id = Math.max(0, ...this.builder.universe.documentTypes.map((t) => t.id)) + 1
+    this.builder.universe.documentTypes.push({ id, name: input.name.trim(), departmentRootId: input.departmentRootId, parentFolderId: null, templateMode: input.templateMode, archived: false, lifecycleStages: ['Draft', 'Submitted', 'Filed'] })
+    this.log.append('documentTypes', 'create', `created "${input.name.trim()}"`)
+    return { ok: true, message: 'Document Type created.' }
+  }
+
+  duplicateDocumentType(id: number): MutationResult {
+    const type = this.builder.universe.documentTypes.find((t) => t.id === id)
+    if (!type) return { ok: false, error: 'Document Type not found.' }
+    if (!this.projection.canManageDocumentTypes) return this.denied('documentTypes', 'duplicate')
+    const newId = Math.max(0, ...this.builder.universe.documentTypes.map((t) => t.id)) + 1
+    this.builder.universe.documentTypes.push({ ...type, id: newId, name: `${type.name} (copy)`, archived: false })
+    this.log.append('documentTypes', 'duplicate', `duplicated ${id} -> ${newId}`)
+    return { ok: true, message: 'Document Type duplicated.' }
+  }
+
+  setDocumentTypeArchived(id: number, archived: boolean, action: string): MutationResult {
+    const type = this.builder.universe.documentTypes.find((t) => t.id === id)
+    if (!type) return { ok: false, error: 'Document Type not found.' }
+    if (!this.projection.canManageDocumentTypes) return this.denied('documentTypes', action)
+    type.archived = archived
+    this.log.append('documentTypes', action, `${type.name} (${id})`)
+    return { ok: true, message: archived ? 'Document Type archived.' : 'Document Type restored.' }
+  }
+
+  renameDocumentType(id: number, name: string): MutationResult {
+    const type = this.builder.universe.documentTypes.find((t) => t.id === id)
+    if (!type) return { ok: false, error: 'Document Type not found.' }
+    if (!this.projection.canManageDocumentTypes) return this.denied('documentTypes', 'rename')
+    type.name = name.trim()
+    this.log.append('documentTypes', 'rename', `renamed type ${id}`)
+    return { ok: true, message: 'Document Type renamed.' }
+  }
+
+  // -------------------------------------------------------------------------
+  // Invitation mutations
+  // -------------------------------------------------------------------------
+
+  createInvitation(input: { purpose: string; targetLabel: string }): MutationResult {
+    if (!this.projection.canManageInvitations) return this.denied('invitations', 'create')
+    const id = Math.max(0, ...this.builder.universe.invitations.map((i) => i.id)) + 1
+    this.builder.universe.invitations.push({ id, purpose: input.purpose.trim(), targetLabel: input.targetLabel.trim(), issuedByLabel: this.projection.accountName, expiresLabel: 'Expires 2026-12-31', useLabel: 'Unused', statusLabel: 'Active', canRevoke: true })
+    this.log.append('invitations', 'create', `issued to ${input.targetLabel.trim()}`)
+    return { ok: true, message: 'Invitation issued.' }
+  }
+
+  revokeInvitation(id: number): MutationResult {
+    if (!this.projection.canManageInvitations) return this.denied('invitations', 'revoke')
+    const invitation = this.builder.universe.invitations.find((i) => i.id === id)
+    if (!invitation) return { ok: false, error: 'Invitation not found.' }
+    if (!invitation.canRevoke) return { ok: false, error: 'This invitation can no longer be revoked.' }
+    invitation.statusLabel = 'Revoked'
+    invitation.canRevoke = false
+    this.log.append('invitations', 'revoke', `invitation ${id}`)
+    return { ok: true, message: 'Invitation revoked.' }
+  }
+
+  resendInvitation(id: number): MutationResult {
+    if (!this.projection.canManageInvitations) return this.denied('invitations', 'resend')
+    const invitation = this.builder.universe.invitations.find((i) => i.id === id)
+    if (!invitation) return { ok: false, error: 'Invitation not found.' }
+    invitation.expiresLabel = 'Expires 2026-12-31'
+    invitation.statusLabel = 'Active'
+    this.log.append('invitations', 'resend', `invitation ${id}`)
+    return { ok: true, message: 'Invitation resent.' }
+  }
+
+  approveJoin(id: number): MutationResult {
+    if (!this.projection.canManageInvitations) return this.denied('invitations', 'approveJoin')
+    if (!this.builder.universe.joinRequests.some((j) => j.id === id)) return { ok: false, error: 'Join request not found.' }
+    this.builder.universe.joinRequests = this.builder.universe.joinRequests.filter((j) => j.id !== id)
+    this.log.append('invitations', 'approveJoin', `request ${id}`)
+    return { ok: true, message: 'Join request approved.' }
+  }
+
+  denyJoin(id: number): MutationResult {
+    if (!this.projection.canManageInvitations) return this.denied('invitations', 'denyJoin')
+    if (!this.builder.universe.joinRequests.some((j) => j.id === id)) return { ok: false, error: 'Join request not found.' }
+    this.builder.universe.joinRequests = this.builder.universe.joinRequests.filter((j) => j.id !== id)
+    this.log.append('invitations', 'denyJoin', `request ${id}`)
+    return { ok: true, message: 'Join request denied.' }
+  }
+
+  approveClaim(id: number): MutationResult {
+    if (!this.projection.canManageInvitations) return this.denied('invitations', 'approveClaim')
+    if (!this.builder.universe.claimRequests.some((c) => c.id === id)) return { ok: false, error: 'Claim request not found.' }
+    this.builder.universe.claimRequests = this.builder.universe.claimRequests.filter((c) => c.id !== id)
+    this.log.append('invitations', 'approveClaim', `request ${id}`)
+    return { ok: true, message: 'Claim request approved.' }
+  }
+
+  denyClaim(id: number): MutationResult {
+    if (!this.projection.canManageInvitations) return this.denied('invitations', 'denyClaim')
+    if (!this.builder.universe.claimRequests.some((c) => c.id === id)) return { ok: false, error: 'Claim request not found.' }
+    this.builder.universe.claimRequests = this.builder.universe.claimRequests.filter((c) => c.id !== id)
+    this.log.append('invitations', 'denyClaim', `request ${id}`)
+    return { ok: true, message: 'Claim request denied.' }
+  }
+
+  // -------------------------------------------------------------------------
+  // People search (ephemeral, server-filtered in production)
+  // -------------------------------------------------------------------------
+
+  searchMembers(query: string): Array<{ id: number; name: string; href: string }> {
+    const baseUrl = this.builder.baseUrl
+    const q = query.trim().toLocaleLowerCase()
+    return this.builder.universe.members
+      .filter((m) => m.status === 'active' && (q === '' || m.name.toLocaleLowerCase().includes(q)))
+      .slice(0, 25)
+      .map((m) => ({ id: m.id, name: m.name, href: `${baseUrl}/manage/people/${m.id}` }))
+  }
+
+  // -------------------------------------------------------------------------
+  // Work mutations
+  // -------------------------------------------------------------------------
+
+  approveWorkEntry(entryId: number): MutationResult {
+    if (entryId >= 2000) {
+      const id = entryId - 2000
+      return this.approveClaim(id)
+    }
+    if (entryId >= 1000) {
+      const id = entryId - 1000
+      return this.approveJoin(id)
+    }
+    if (!this.projection.canApproveWork) return this.denied('work', 'approve')
+    const record = this.findRecord(entryId)
+    if (!record) return { ok: false, error: 'Work item not found.' }
+    const scope = this.projection.workScopeDepartmentIds
+    if (scope !== 'all' && !scope.includes(record.departmentId)) return this.denied('work', 'approve')
+    return this.setLifecycle(entryId, 'filed', 'work.approve')
+  }
+
+  returnWorkEntry(entryId: number): MutationResult {
+    if (!this.projection.canApproveWork) return this.denied('work', 'return')
+    const record = this.findRecord(entryId)
+    if (!record) return { ok: false, error: 'Work item not found.' }
+    const scope = this.projection.workScopeDepartmentIds
+    if (scope !== 'all' && !scope.includes(record.departmentId)) return this.denied('work', 'return')
+    return this.setLifecycle(entryId, 'draft', 'work.return')
+  }
+
+  private denied(scope: string, action: string): MutationResult {
+    this.log.append(scope, action, 'denied: persona lacks capability', 'error')
+    return { ok: false, error: 'This operation is not permitted for the current viewer.' }
+  }
 }

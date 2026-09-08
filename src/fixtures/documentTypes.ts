@@ -24,6 +24,7 @@ export const DOCUMENT_TYPES: readonly DocumentTypeEntity[] = [
   { id: 8, name: 'Personnel Record', departmentRootId: 1, parentFolderId: null, templateMode: 'form-to-markdown', archived: false, lifecycleStages: ['Draft', 'Filed'] },
   { id: 9, name: 'Field Notes', departmentRootId: 4, parentFolderId: null, templateMode: 'markdown', archived: false, lifecycleStages: ['Draft', 'Filed'] },
   { id: 10, name: 'Obsolete Charter', departmentRootId: 1, parentFolderId: null, templateMode: 'blank', archived: true, lifecycleStages: ['Draft', 'Filed'] },
+  { id: 11, name: 'Station Bulletin', departmentRootId: null, parentFolderId: null, templateMode: 'markdown', archived: false, lifecycleStages: ['Draft', 'Filed'] },
 ]
 
 export function documentTypeById(id: number): DocumentTypeEntity {
