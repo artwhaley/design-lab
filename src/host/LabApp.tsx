@@ -22,6 +22,8 @@ import { SurfaceNavigator } from './SurfaceNavigator'
 import { PreviewPane, type Viewport } from './PreviewPane'
 import { PathSimulator, type SurfaceParams } from './PathSimulator'
 import { resolveDesignRuntime } from './designRuntime'
+import { ScenarioPanel } from './ScenarioPanel'
+import { ActionLog as ActionLogView } from './ActionLog'
 
 export type LabRuntimeFlags = {
   latencyMs: number
@@ -34,6 +36,7 @@ const DEFAULT_FLAGS: LabRuntimeFlags = { latencyMs: 120, failNextMutation: false
 
 export function LabApp() {
   const designs = useMemo(() => getDesignDefinitions(), [])
+  const [panel, setPanel] = useState<'scenario' | 'studio' | 'log'>('scenario')
   const [designKey, setDesignKey] = useState<string>(designs[0]?.key ?? '')
   const [compareKey, setCompareKey] = useState<string | null>(null)
   const [surface, setSurface] = useState<SurfaceKey>('home')
@@ -59,8 +62,13 @@ export function LabApp() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scenarioKey])
   useEffect(() => {
-    if (backendRef.current) backendRef.current.latencyMs = flags.latencyMs
-  }, [flags.latencyMs])
+    if (backendRef.current) {
+      backendRef.current.latencyMs = flags.latencyMs
+      backendRef.current.failNextMutation = flags.failNextMutation
+      backendRef.current.readError = flags.readError
+      backendRef.current.loadingOverride = flags.loadingOverride
+    }
+  }, [flags])
 
   const simulator = useMemo(() => new PathSimulator('/domain/aster-reach'), [])
 
@@ -182,23 +190,29 @@ export function LabApp() {
           </div>
 
           <aside className="lab-right-panel" aria-label="Lab side panel">
-            <div className="lab-panel-body">
-              <h3>Workbench</h3>
-              <p className="lab-hint">
-                Scenario controls (T07), the Action Log (T07), and the Studio/config panel (T08) land here.
-                Preview is fully navigable already.
-              </p>
-              <label htmlFor="lab-surface-detail">Current surface</label>
-              <div id="lab-surface-detail" style={{ fontSize: 13 }}>{activeSurface.label}</div>
-              <label htmlFor="lab-route-family">Route family</label>
-              <div id="lab-route-family" className="lab-hint">{activeSurface.routeFamily}</div>
-              {viaCompat ? (
-                <>
-                  <label htmlFor="lab-compat-note">Compatibility route</label>
-                  <div id="lab-compat-note" className="lab-hint">
-                    /{viaCompat} resolves to {viaCompat === 'review' ? 'Work' : 'Departments'} semantics (no separate Design slot).
-                  </div>
-                </>
+            <div className="lab-tabs" role="tablist" aria-label="Lab workbench tabs">
+              <button type="button" role="tab" aria-selected={panel === 'scenario'} className={panel === 'scenario' ? 'lab-active' : undefined} onClick={() => setPanel('scenario')}>Scenario</button>
+              <button type="button" role="tab" aria-selected={panel === 'studio'} className={panel === 'studio' ? 'lab-active' : undefined} onClick={() => setPanel('studio')}>Studio</button>
+              <button type="button" role="tab" aria-selected={panel === 'log'} className={panel === 'log' ? 'lab-active' : undefined} onClick={() => setPanel('log')}>Log</button>
+            </div>
+            <div className="lab-panel-body" role="tabpanel">
+              {panel === 'scenario' ? (
+                <ScenarioPanel
+                  scenario={scenario}
+                  flags={flags}
+                  onScenarioChange={setScenario}
+                  onFlagsChange={setFlags}
+                  onReset={handleReset}
+                />
+              ) : null}
+              {panel === 'studio' ? (
+                <div>
+                  <h3>Studio</h3>
+                  <p className="lab-hint">Per-Design config banks and the Design-owned Studio editor arrive in T08.</p>
+                </div>
+              ) : null}
+              {panel === 'log' && backend ? (
+                <ActionLogView log={backend.log} />
               ) : null}
             </div>
           </aside>
