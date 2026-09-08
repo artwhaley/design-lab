@@ -3,7 +3,7 @@ import { Component, useCallback, useEffect, useMemo, useRef, useState, type Erro
 import { buildScenario } from '../fixtures'
 import type { LabDesignDefinition } from '../contracts'
 import { getDesignDefinition } from '../designs/registry'
-import { ActionLog, FakeBackend } from '../workspaces'
+import { ActionLog, FakeBackend, type FakeBackendSnapshot } from '../workspaces'
 import { resolveDesignRuntime } from '../host/designRuntime'
 import { PreviewRenderer } from './PreviewRenderer'
 import {
@@ -104,6 +104,34 @@ export function PreviewRuntimeApp({ instanceId: explicitInstanceId }: Props) {
     backendRef.current = bundle?.backend ?? null
   }, [bundle])
 
+  useEffect(() => {
+    const backend = bundle?.backend
+    if (!backend) return
+    let cursor = backend.log.entries.length
+    return backend.log.subscribe(() => {
+      if (cursor > backend.log.entries.length) cursor = 0
+      for (const entry of backend.log.entries.slice(cursor)) {
+        postPreviewMessage({
+          protocol: PREVIEW_PROTOCOL_VERSION,
+          instanceId,
+          type: 'preview:log',
+          entry: { scope: entry.scope, action: entry.action, detail: entry.detail, level: entry.level },
+        })
+      }
+      cursor = backend.log.entries.length
+    })
+  }, [bundle, instanceId])
+
+  const handleNavigate = useCallback((href: string) => {
+    postPreviewMessage({ protocol: PREVIEW_PROTOCOL_VERSION, instanceId, type: 'preview:navigate', href })
+  }, [instanceId])
+  const handleExternal = useCallback((href: string) => {
+    postPreviewMessage({ protocol: PREVIEW_PROTOCOL_VERSION, instanceId, type: 'preview:external', href })
+  }, [instanceId])
+  const handleBackendSnapshot = useCallback((snapshot: FakeBackendSnapshot) => {
+    postPreviewMessage({ protocol: PREVIEW_PROTOCOL_VERSION, instanceId, type: 'preview:backend-snapshot', snapshot, localRevision: snapshot.revision })
+  }, [instanceId])
+
   if (!state) return <div data-testid="preview-waiting" className="preview-waiting">Waiting for Lab host…</div>
   if (!bundle) {
     reportError(`Unknown Design: ${state.designKey}`)
@@ -120,9 +148,9 @@ export function PreviewRuntimeApp({ instanceId: explicitInstanceId }: Props) {
         surface={state.surface}
         params={state.params}
         viaCompat={state.viaCompat}
-        onNavigate={(href) => postPreviewMessage({ protocol: PREVIEW_PROTOCOL_VERSION, instanceId, type: 'preview:navigate', href })}
-        onExternal={(href) => postPreviewMessage({ protocol: PREVIEW_PROTOCOL_VERSION, instanceId, type: 'preview:external', href })}
-        onBackendSnapshot={(snapshot) => postPreviewMessage({ protocol: PREVIEW_PROTOCOL_VERSION, instanceId, type: 'preview:backend-snapshot', snapshot, localRevision: snapshot.revision })}
+        onNavigate={handleNavigate}
+        onExternal={handleExternal}
+        onBackendSnapshot={handleBackendSnapshot}
       />
     </PreviewErrorBoundary>
   )

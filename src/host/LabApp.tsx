@@ -15,7 +15,7 @@ import {
   type SurfaceKey,
 } from '../contracts'
 import { buildScenario, DEFAULT_SPEC, type ScenarioSpec } from '../fixtures'
-import { ActionLog, FakeBackend } from '../workspaces'
+import { ActionLog, FakeBackend, type FakeBackendSnapshot } from '../workspaces'
 import { getDesignDefinition, getDesignDefinitions } from '../designs/registry'
 import { LabChrome } from './LabChrome'
 import { SurfaceNavigator } from './SurfaceNavigator'
@@ -49,6 +49,8 @@ export function LabApp() {
   const [flags, setFlags] = useState<LabRuntimeFlags>(DEFAULT_FLAGS)
   const [viewport, setViewport] = useState<Viewport | null>(null)
   const [viaCompat, setViaCompat] = useState<'review' | 'subdomains' | undefined>(undefined)
+  const [backendVersion, setBackendVersion] = useState(0)
+  const [authoritativeHydrate, setAuthoritativeHydrate] = useState<{ snapshot: FakeBackendSnapshot; sourceInstanceId: string; token: number } | undefined>()
 
   const design: LabDesignDefinition | undefined = getDesignDefinition(designKey)
   const compareDesign: LabDesignDefinition | undefined = compareKey ? getDesignDefinition(compareKey) : undefined
@@ -80,6 +82,8 @@ export function LabApp() {
     const next = new FakeBackend(builder, log, flags.latencyMs)
     backendRef.current = next
     setBackend(next)
+    setBackendVersion((version) => version + 1)
+    setAuthoritativeHydrate(undefined)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scenarioKey])
   useEffect(() => {
@@ -115,6 +119,8 @@ export function LabApp() {
 
   const handleReset = (): void => {
     backendRef.current?.reset()
+    setBackendVersion((version) => version + 1)
+    setAuthoritativeHydrate(undefined)
     setFlags(DEFAULT_FLAGS)
     setScenario(DEFAULT_SPEC)
     setSurface('home')
@@ -183,10 +189,28 @@ export function LabApp() {
 
   const activeSurface = surfaceByKey(surface)
   const routeNote = viaCompat ? `/domain/aster-reach/${viaCompat}` : null
+  const authoritativeSnapshot = useMemo(() => backend?.snapshot() ?? null, [backend, backendVersion])
+
+  const handleBackendSnapshot = (snapshot: FakeBackendSnapshot, sourceInstanceId: string): void => {
+    const backendNow = backendRef.current
+    if (!backendNow || snapshot.revision <= backendNow.snapshot().revision) return
+    backendNow.hydrate(snapshot)
+    setAuthoritativeHydrate({ snapshot, sourceInstanceId, token: backendVersion + 1 })
+    setBackendVersion((version) => version + 1)
+  }
+
+  const handlePreviewLog = (entry: { scope: string; action: string; detail: string; level: 'info' | 'error' }, sourceInstanceId: string): void => {
+    backendRef.current?.log.append(`iframe:${sourceInstanceId}`, `${entry.scope}.${entry.action}`, entry.detail, entry.level)
+  }
+
+  const handlePreviewError = (message: string, sourceInstanceId: string): void => {
+    backendRef.current?.log.append(`iframe:${sourceInstanceId}`, 'error', message, 'error')
+  }
 
   const previewFrame = (innerDesign: LabDesignDefinition | undefined, testId: string) => {
     if (!backend) return <div className="lab-hint" style={{ padding: 24 }}>Scenario initializing…</div>
     if (!innerDesign) return <div className="lab-hint" style={{ padding: 24 }}>Select a registered Design to preview.</div>
+    if (!authoritativeSnapshot) return <div className="lab-hint" style={{ padding: 24 }}>Scenario initializing…</div>
     const draft = innerDesign.key === designKey
       ? activeDraft
       : (() => {
@@ -206,10 +230,14 @@ export function LabApp() {
         scenario={scenario}
         flags={flags}
         config={{ raw: draft.raw, savedVersion: draft.savedVersion }}
-        backendSnapshot={backend.snapshot()}
+        backendSnapshot={authoritativeSnapshot}
+        authoritativeHydrate={authoritativeHydrate}
         viewport={viewport}
         onNavigate={handleNavigate}
         onExternal={(href) => backend.log.append('navigation', 'external', href)}
+        onBackendSnapshot={handleBackendSnapshot}
+        onLog={handlePreviewLog}
+        onError={(message) => handlePreviewError(message, testId)}
       />
     )
   }

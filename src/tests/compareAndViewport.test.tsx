@@ -27,6 +27,31 @@ describe('compare mode shares semantic state', () => {
     expect(names).toContain('Shared Folder')
   })
 
+  it('keeps snapshot revisions monotonic without counting transport logs or hydration', () => {
+    const hostLog = new ActionLog()
+    const host = new FakeBackend(buildScenario({ persona: 'admin', dataState: 'populated' }), hostLog, 0)
+    const initial = host.snapshot()
+
+    hostLog.append('navigation', 'surface', 'management.folders')
+    hostLog.append('iframe:lab-preview-a', 'folders.create', 'transported action')
+    expect(host.snapshot().revision).toBe(initial.revision)
+
+    const created = host.createFolder(null, 'Revision Folder')
+    expect(created.ok).toBe(true)
+    const mutated = host.snapshot()
+    expect(mutated.revision).toBe(initial.revision + 1)
+
+    const peer = new FakeBackend(buildScenario({ persona: 'admin', dataState: 'populated' }), new ActionLog(), 0)
+    peer.hydrate(mutated)
+    expect(peer.snapshot().revision).toBe(mutated.revision)
+    peer.log.append('iframe:lab-preview-a', 'folders.create', 'hydration echo guard')
+    expect(peer.snapshot().revision).toBe(mutated.revision)
+
+    const peerCreated = peer.createFolder(null, 'Peer Revision Folder')
+    expect(peerCreated.ok).toBe(true)
+    expect(peer.snapshot().revision).toBe(mutated.revision + 1)
+  })
+
   it('keeps separate config banks per Design', () => {
     clearAllBanks()
     saveBank('stub-one', { version: 1, config: { accent: '#111111' } })

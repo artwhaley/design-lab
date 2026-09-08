@@ -36,6 +36,7 @@ export class ActionLog {
   entries: LabLogEntry[] = []
   private listeners = new Set<() => void>()
   private counter = 0
+  private semanticCounter = 0
 
   subscribe = (listener: () => void): (() => void) => {
     this.listeners.add(listener)
@@ -44,6 +45,9 @@ export class ActionLog {
 
   append(scope: string, action: string, detail = '', level: LogLevel = 'info'): void {
     this.entries.push({ id: ++this.counter, scope, action, detail, level, at: Date.now() })
+    if (!scope.startsWith('navigation') && !scope.startsWith('studio') && !scope.startsWith('diagnostics') && !scope.startsWith('backend') && !scope.startsWith('iframe:')) {
+      this.semanticCounter += 1
+    }
     for (const listener of [...this.listeners]) listener()
   }
 
@@ -53,7 +57,7 @@ export class ActionLog {
   }
 
   get revision(): number {
-    return this.counter
+    return this.semanticCounter
   }
 }
 
@@ -79,11 +83,13 @@ export class FakeBackend {
   loadingOverride = false
 
   private snapshotRevision = 0
+  private observedLogRevision = 0
 
   constructor(builder: ScenarioBuilder, log = new ActionLog(), latencyMs = 120) {
     this.builder = builder
     this.log = log
     this.latencyMs = latencyMs
+    this.observedLogRevision = log.revision
   }
 
   get projection() {
@@ -92,7 +98,11 @@ export class FakeBackend {
 
   /** Return detached, JSON-safe semantic state for preview transport. */
   snapshot(): FakeBackendSnapshot {
-    this.snapshotRevision = Math.max(this.snapshotRevision, this.log.revision)
+    const logRevision = this.log.revision
+    if (logRevision > this.observedLogRevision) {
+      this.snapshotRevision += logRevision - this.observedLogRevision
+      this.observedLogRevision = logRevision
+    }
     return {
       universe: cloneSerializable(this.builder.universe),
       revision: this.snapshotRevision,
@@ -103,6 +113,7 @@ export class FakeBackend {
   hydrate(snapshot: FakeBackendSnapshot): void {
     this.builder.universe = cloneSerializable(snapshot.universe)
     this.snapshotRevision = snapshot.revision
+    this.observedLogRevision = this.log.revision
   }
 
   async wait(extra = 0): Promise<void> {
@@ -123,6 +134,8 @@ export class FakeBackend {
     this.builder.universe = buildUniverse(this.builder.spec.dataState)
     this.readError = false
     this.loadingOverride = false
+    this.snapshotRevision = 0
+    this.observedLogRevision = this.log.revision
     this.log.append('backend', 'reset', 'scenario state restored to baseline')
   }
 

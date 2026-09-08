@@ -25,22 +25,29 @@ type Props = {
   flags: LabRuntimeFlags
   config: PreviewState['config']
   backendSnapshot: FakeBackendSnapshot
+  authoritativeHydrate?: {
+    snapshot: FakeBackendSnapshot
+    sourceInstanceId: string
+    token: number
+  }
   viewport: Viewport | null
   onNavigate(href: string): void
   onExternal(href: string): void
   onBackendSnapshot?(snapshot: FakeBackendSnapshot, sourceInstanceId: string): void
+  onLog?(entry: { scope: string; action: string; detail: string; level: 'info' | 'error' }, sourceInstanceId: string): void
   onReady?(instanceId: string): void
   onError?(message: string): void
 }
 
 export function IframePreviewPane(props: Props) {
   const {
-    testId, instanceId, designKey, surface, params, viaCompat, scenario, flags, config, backendSnapshot, viewport,
-    onNavigate, onExternal, onBackendSnapshot, onReady, onError,
+    testId, instanceId, designKey, surface, params, viaCompat, scenario, flags, config, backendSnapshot, authoritativeHydrate, viewport,
+    onNavigate, onExternal, onBackendSnapshot, onLog, onReady, onError,
   } = props
   const iframeRef = useRef<HTMLIFrameElement | null>(null)
   const [ready, setReady] = useState(false)
   const initializedRef = useRef(false)
+  const lastHydrateTokenRef = useRef<number | null>(null)
   const state = useMemo<PreviewState>(() => ({
     designKey,
     surface,
@@ -90,22 +97,36 @@ export function IframePreviewPane(props: Props) {
         case 'preview:backend-snapshot':
           onBackendSnapshot?.(event.data.snapshot, instanceId)
           break
+        case 'preview:log':
+          onLog?.(event.data.entry, instanceId)
+          break
         case 'preview:error':
           onError?.(event.data.message)
-          break
-        case 'preview:log':
           break
       }
     }
     window.addEventListener('message', onMessage)
     return () => window.removeEventListener('message', onMessage)
-  }, [instanceId, onBackendSnapshot, onError, onExternal, onNavigate, onReady, sendInit])
+  }, [instanceId, onBackendSnapshot, onError, onExternal, onLog, onNavigate, onReady, sendInit])
 
   useEffect(() => {
     if (ready && initializedRef.current) {
       send({ protocol: PREVIEW_PROTOCOL_VERSION, instanceId, type: 'preview:update', ...state })
     }
   }, [instanceId, ready, send, state])
+
+  useEffect(() => {
+    if (!ready || !initializedRef.current || !authoritativeHydrate || authoritativeHydrate.sourceInstanceId === instanceId) return
+    if (authoritativeHydrate.token === lastHydrateTokenRef.current) return
+    lastHydrateTokenRef.current = authoritativeHydrate.token
+    send({
+      protocol: PREVIEW_PROTOCOL_VERSION,
+      instanceId,
+      type: 'preview:hydrate-backend',
+      snapshot: authoritativeHydrate.snapshot,
+      sourceInstanceId: authoritativeHydrate.sourceInstanceId,
+    })
+  }, [authoritativeHydrate, instanceId, ready, send])
 
   const style: CSSProperties = {
     display: 'block',
