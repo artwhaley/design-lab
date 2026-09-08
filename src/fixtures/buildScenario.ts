@@ -306,7 +306,7 @@ function roleLabelsOf(universe: Universe, memberId: number): string[] {
 
 export class ScenarioBuilder {
   readonly spec: ScenarioSpec
-  readonly universe: Universe
+  universe: Universe
   readonly projection: PersonaProjection
   readonly baseUrl: string
 

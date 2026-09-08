@@ -111,6 +111,18 @@ export interface RecordsWorkspace {
     value: number
     setValue(value: number): void
   }
+  /**
+   * Folder mutations reachable from the Records surface (Lab addition to the
+   * production dialog-state-only snapshot: the Records matrix requires
+   * Create/Rename/Delete Folder behavior; see docs/CONTRACT_PRESSURE.md).
+   */
+  mutations: {
+    pending: string | null
+    error: string | null
+    createFolder(parentId: number | null, name: string): Promise<boolean>
+    renameFolder(id: number, name: string): Promise<boolean>
+    deleteFolder(id: number): Promise<boolean>
+  }
   capabilities: RecordsCapabilities
   reset(): void
 }
