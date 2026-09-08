@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Aster Reach mark">
+  <circle cx="48" cy="48" r="44" fill="#1a2e3c" stroke="#bce6d3" stroke-width="3"/>
+  <circle cx="48" cy="48" r="26" fill="none" stroke="#d8a05a" stroke-width="2"/>
+  <circle cx="48" cy="48" r="8" fill="#bce6d3"/>
+  <path d="M48 4 L52 30 L48 26 L44 30 Z" fill="#d8a05a"/>
+  <path d="M14 24 L38 40 L34 43 L14 31 Z" fill="#bce6d3"/>
+  <path d="M82 24 L58 40 L62 43 L82 31 Z" fill="#bce6d3"/>
+  <path d="M14 72 L38 56 L34 53 L14 65 Z" fill="#bce6d3"/>
+  <path d="M82 72 L58 56 L62 53 L82 65 Z" fill="#bce6d3"/>
+</svg>

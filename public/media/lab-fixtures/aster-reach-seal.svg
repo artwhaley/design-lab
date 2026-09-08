@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Aster Reach seal">
+  <circle cx="60" cy="60" r="56" fill="#142128" stroke="#bce6d3" stroke-width="2"/>
+  <circle cx="60" cy="60" r="46" fill="none" stroke="#d8a05a" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <text x="60" y="46" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#edf2ef">ASTER</text>
+  <text x="60" y="62" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#edf2ef">REACH</text>
+  <text x="60" y="80" text-anchor="middle" font-family="Georgia, serif" font-size="7" fill="#a7b7bc">MEMORY IS THE ANCHOR</text>
+  <path d="M60 16 L63 26 L57 26 Z" fill="#bce6d3"/>
+  <path d="M60 104 L63 94 L57 94 Z" fill="#bce6d3"/>
+</svg>

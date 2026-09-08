@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 240" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Aster Reach banner">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b1419"/>
+      <stop offset="1" stop-color="#1a2e3c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="240" fill="url(#sky)"/>
+  <circle cx="180" cy="70" r="26" fill="#d8a05a" opacity="0.9"/>
+  <circle cx="430" cy="150" r="5" fill="#edf2ef" opacity="0.5"/>
+  <circle cx="620" cy="80" r="3" fill="#edf2ef" opacity="0.4"/>
+  <circle cx="760" cy="170" r="4" fill="#edf2ef" opacity="0.6"/>
+  <circle cx="980" cy="100" r="6" fill="#edf2ef" opacity="0.3"/>
+  <path d="M0 200 Q 300 150 600 195 T 1200 190" fill="none" stroke="#bce6d3" stroke-width="2" opacity="0.7"/>
+  <path d="M0 215 Q 350 175 700 210 T 1200 205" fill="none" stroke="#bce6d3" stroke-width="1.5" opacity="0.45"/>
+</svg>
