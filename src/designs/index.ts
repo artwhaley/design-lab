@@ -5,5 +5,6 @@
  * directly — only via the registry (Guardrail 3).
  */
 import './contract-probe'
+import './obsidian-lab'
 
 export * from './registry'
