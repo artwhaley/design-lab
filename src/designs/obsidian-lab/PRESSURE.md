@@ -21,3 +21,27 @@
   directory. `MembersAdapter` is therefore a clearly marked extension using
   source Obsidian CSS primitives and vocabulary, with no new authorization or
   workflow logic.
+
+## T10 interactive adapters
+
+- Records: the frozen source view exposes a fourth `Title Z–A` ordering and
+  page-number controls, while the Lab workspace exposes only `newest`,
+  `oldest`, `title`, and load-more semantics. The adapter exposes the truthful
+  Lab orderings and translates the source page controls to the workspace's
+  load-more operation; unsupported title-descending selection remains inert
+  rather than creating a second ordering algorithm. Record menu hrefs remain
+  ordinary card links because the frozen source callback API consumes them as
+  actions and the Lab RecordsWorkspace has no navigation callback.
+
+- Folder manager: the frozen Arborist component owns local search/sort and
+  reports rename/move actions as labels rather than stable ids/parent ids. The
+  adapter synchronizes row selection/search with the Lab workspace, resolves
+  uniquely named folders for rename/delete, and provides a source-styled move
+  dialog for an explicit target parent. Drag-move remains a source callback
+  limitation; no inferred target is sent to the workspace.
+
+- Document types: the frozen tree owns local selection and emits action labels.
+  The adapter mirrors selected document-type ids into the Lab workspace and
+  maps create/duplicate/archive/rename operations where the workspace exposes
+  them. Source-only destructive Delete and drag-move operations are not
+  translated into unsupported Lab mutations.

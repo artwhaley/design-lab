@@ -9,16 +9,16 @@ import { register } from '../registry'
 import { obsidianConfig, type ObsidianConfig } from './config'
 import { ObsidianShellAdapter } from './adapters/ShellAdapter'
 import { HomeAdapter } from './adapters/HomeAdapter'
-import { ObsidianRecords } from './ObsidianRecords'
-import { ObsidianDocument } from './ObsidianDocument'
+import { RecordsAdapter } from './adapters/RecordsAdapter'
+import { DocumentAdapter } from './adapters/DocumentAdapter'
 import { AboutAdapter } from './adapters/AboutAdapter'
 import { LoreAdapter } from './adapters/LoreAdapter'
 import { DepartmentsAdapter } from './adapters/DepartmentsAdapter'
 import { ObsidianDepartmentDetail } from './ObsidianDepartmentDetail'
 import { MemberAdapter } from './adapters/MemberAdapter'
 import { MembersAdapter } from './adapters/MembersAdapter'
-import { ObsidianFolderManager } from './ObsidianFolderManager'
-import { ObsidianDocumentTypes } from './ObsidianDocumentTypes'
+import { FoldersAdapter } from './adapters/management/FoldersAdapter'
+import { DocumentTypesAdapter } from './adapters/management/DocumentTypesAdapter'
 import {
   ObsidianDepartmentsManagement,
   ObsidianInvitationsManagement,
@@ -44,8 +44,8 @@ const obsidianLab: LabDesignDefinition<ObsidianConfig> = {
   Shell: ObsidianShellAdapter,
   pages: {
     home: HomeAdapter,
-    records: ObsidianRecords,
-    document: ObsidianDocument,
+    records: RecordsAdapter,
+    document: DocumentAdapter,
     departments: DepartmentsAdapter,
     department: ObsidianDepartmentDetail,
     about: AboutAdapter,
@@ -55,9 +55,9 @@ const obsidianLab: LabDesignDefinition<ObsidianConfig> = {
     work: ObsidianWork,
     management: {
       departments: ObsidianDepartmentsManagement,
-      folders: ObsidianFolderManager,
+      folders: FoldersAdapter,
       roles: ObsidianRolesManagement,
-      documentTypes: ObsidianDocumentTypes,
+      documentTypes: DocumentTypesAdapter,
       people: ObsidianPeopleManagement,
       person: ObsidianPersonManagement,
       invitations: ObsidianInvitationsManagement,

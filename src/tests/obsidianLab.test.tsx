@@ -5,17 +5,18 @@
  * fc22e6c7db7da05b6166e2f126c5e6c9e6a20223.
  */
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import type { LabDesignDefinition, SurfaceKey } from '../contracts'
 import { BASE_THEME_VARS, missingRequiredSlots } from '../contracts'
 import '../designs'
+import { DocumentAdapter } from '../designs/obsidian-lab/adapters/DocumentAdapter'
 import { getDesignDefinition } from '../designs/registry'
 import { obsidianConfig } from '../designs/obsidian-lab/config'
 import { buildScenario, type ScenarioSpec } from '../fixtures'
 import { resolveDesignRuntime } from '../host/designRuntime'
 import { PreviewPane } from '../host/PreviewPane'
-import { ActionLog, FakeBackend } from '../workspaces'
+import { ActionLog, DocumentActionBridgeImpl, FakeBackend } from '../workspaces'
 
 const obsidian = (): LabDesignDefinition => getDesignDefinition('obsidian-lab') as LabDesignDefinition
 
@@ -103,23 +104,41 @@ describe('Obsidian Lab — interactive workspace compatibility', () => {
     const pane = renderPane(backend, 'records', 'obs-records')
     fireEvent.change(within(pane).getByLabelText(/search records/i), { target: { value: 'xylos' } })
     await waitFor(() => {
-      expect(within(pane).getByText(/records shown/i)).toBeInTheDocument()
+      expect(within(pane).getByText(/\d+ records$/i)).toBeInTheDocument()
     })
+  })
+
+  it('selects a source records folder through the shared workspace', async () => {
+    const backend = makeBackend({ persona: 'admin', dataState: 'populated' })
+    const pane = renderPane(backend, 'records', 'obs-records-folder')
+    const folderId = backend.builder.universe.folders.find((folder) => folder.name === 'Colonies')!.id
+    const folderButton = within(pane).getAllByRole('button', { name: /Colonies/i }).find((button) => button.textContent?.includes('12'))
+    if (!folderButton) throw new Error('Colonies folder button did not render')
+    fireEvent.click(folderButton)
+    await Promise.resolve()
+    await Promise.resolve()
+    await Promise.resolve()
+    expect(backend.log.entries.some((entry) => entry.scope === 'records.folderSelect' && entry.action === 'query' && entry.detail.includes(`in ${folderId}`))).toBe(true)
   })
 
   it('creates a folder through the Records folder dialog mutation', async () => {
     const backend = makeBackend({ persona: 'admin', dataState: 'populated' })
     const pane = renderPane(backend, 'records', 'obs-records-create')
     const before = backend.builder.universe.folders.length
-    // folder quick actions are direct buttons (Radix menus were replaced for
-    // the Records folder management; the modal portals to document.body)
-    fireEvent.click(within(pane).getByRole('button', { name: /^create folder$/i }))
-    const dialog = await screen.findByRole('dialog')
-    fireEvent.change(within(dialog).getByLabelText(/folder name/i), { target: { value: 'Obsidian Collection' } })
+    const menuButton = within(pane).getByRole('button', { name: /folder management/i })
+    fireEvent.keyDown(menuButton, { key: 'ArrowDown', code: 'ArrowDown' })
+    expect(menuButton).toHaveAttribute('aria-expanded', 'true')
+    fireEvent.click(screen.getByRole('menuitem', { name: /^create folder$/i }))
+    const dialog = document.body.querySelector('[role="dialog"]') as HTMLElement | null
+    expect(dialog).not.toBeNull()
+    if (!dialog) throw new Error('Create folder dialog did not open')
+    const nameInput = within(dialog).getByLabelText(/folder name/i)
+    fireEvent.change(nameInput, { target: { value: 'Obsidian Collection' } })
     fireEvent.submit(within(dialog).getByRole('button', { name: /^create$/i }).closest('form')!)
-    await waitFor(() => {
-      expect(backend.builder.universe.folders.length).toBe(before + 1)
-    })
+    await Promise.resolve()
+    await Promise.resolve()
+    await Promise.resolve()
+    expect(backend.builder.universe.folders.length).toBe(before + 1)
   })
 
   it('creates a folder through the Folder Manager', async () => {
@@ -127,25 +146,51 @@ describe('Obsidian Lab — interactive workspace compatibility', () => {
     const pane = renderPane(backend, 'management.folders', 'obs-folders')
     const before = backend.builder.universe.folders.length
     fireEvent.click(within(pane).getByRole('button', { name: /^new folder$/i }))
-    const dialog = await screen.findByRole('dialog')
+    const dialog = document.body.querySelector('[role="dialog"]') as HTMLElement | null
+    expect(dialog).not.toBeNull()
+    if (!dialog) throw new Error('New folder dialog did not open')
     fireEvent.change(within(dialog).getByLabelText(/folder name/i), { target: { value: 'Tree Folder' } })
     fireEvent.submit(within(dialog).getByRole('button', { name: /^create$/i }).closest('form')!)
-    await waitFor(() => {
-      expect(backend.builder.universe.folders.length).toBe(before + 1)
-    })
+    await Promise.resolve()
+    await Promise.resolve()
+    await Promise.resolve()
+    expect(backend.builder.universe.folders.length).toBe(before + 1)
   })
 
-  it('executes a document lifecycle action through the bridge', async () => {
+  it('updates the source document-type inspector from a Lab selection', () => {
     const backend = makeBackend({ persona: 'admin', dataState: 'populated' })
-    const pane = renderPane(backend, 'document', 'obs-document')
+    const pane = renderPane(backend, 'management.documentTypes', 'obs-types-selection')
+    const typeName = backend.builder.universe.documentTypes.find((type) => type.name === 'Survey Report')!.name
+    fireEvent.click(within(pane).getAllByText(typeName)[0]!)
+    expect(within(pane).getByRole('heading', { name: typeName })).toBeInTheDocument()
+    expect(within(pane).queryByText(/choose a document type/i)).not.toBeInTheDocument()
+  })
+
+  it('preserves visitor action absence at the source boundary', () => {
+    const backend = makeBackend({ persona: 'visitor', dataState: 'populated' })
+    const recordsPane = renderPane(backend, 'records', 'obs-visitor-records-actions')
+    expect(within(recordsPane).queryByRole('button', { name: /folder management/i })).not.toBeInTheDocument()
+    const documentPane = renderPane(backend, 'document', 'obs-visitor-document-actions')
+    const actionsButton = within(documentPane).getByRole('button', { name: /document actions/i })
+    fireEvent.keyDown(actionsButton, { key: 'ArrowDown', code: 'ArrowDown' })
+    expect(screen.getByRole('menuitem', { name: /^view record$/i })).toBeInTheDocument()
+    expect(screen.queryByRole('menuitem', { name: /^edit$/i })).not.toBeInTheDocument()
+  })
+
+  it('executes a source document action through the bridge', async () => {
+    const backend = makeBackend({ persona: 'admin', dataState: 'populated' })
+    const design = obsidian()
+    const resolution = resolveDesignRuntime(design, obsidianConfig.defaults, null)
+    if (!resolution.runtime) throw new Error('obsidian defaults must validate')
+    const recordId = backend.builder.defaultRecordId()!
+    const bridge = new DocumentActionBridgeImpl(backend, backend.builder.documentModel(recordId))
+    const run = vi.spyOn(bridge, 'run').mockResolvedValue({ ok: true, message: 'ok' })
+    render(<DocumentAdapter model={backend.builder.documentModel(recordId)} runtime={resolution.runtime as never} actions={bridge} />)
+    const pane = document.querySelector('[class*="documentPage"]') as HTMLElement
     const actionsButton = within(pane).getByRole('button', { name: /document actions/i })
-    fireEvent.click(actionsButton)
-    const submit = within(pane).queryByText(/^submit$/i)
-    if (submit) {
-      fireEvent.click(submit)
-      await waitFor(() => {
-        expect(backend.log.entries.some((e) => e.action === 'submit')).toBe(true)
-      })
-    }
+    fireEvent.keyDown(actionsButton, { key: 'ArrowDown', code: 'ArrowDown' })
+    expect(actionsButton).toHaveAttribute('aria-expanded', 'true')
+    fireEvent.click(screen.getByRole('menuitem', { name: /^view record$/i }))
+    expect(run).toHaveBeenCalledWith('view')
   })
 })

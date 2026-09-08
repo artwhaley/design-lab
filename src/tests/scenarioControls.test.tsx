@@ -76,8 +76,8 @@ describe('host scenario behavior', () => {
     // The backend rebuilds asynchronously via effect; wait for the new shell.
     await screen.findByLabelText('Persona')
     // Visitor projection is enforced at the model layer (covered by fixture
-    // tests); here we assert the switch did not crash and preview still renders.
-    expect(within(screen.getByTestId('lab-preview')).getByTestId('stub-home')).toBeInTheDocument()
+    // tests); here we assert the switch did not crash and the preview boundary remains mounted.
+    expect(within(screen.getByTestId('lab-preview')).getByTestId('preview-iframe')).toBeInTheDocument()
   })
 
   it('flags wire into the fake backend (next mutation fails is consumed once)', () => {
