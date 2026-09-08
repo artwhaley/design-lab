@@ -1,0 +1,535 @@
+import type { DomainShellModel } from '@/lib/page-models/shell'
+import type { HomePageModel } from '@/lib/page-models/home'
+import type { RecordsPageModel } from '@/lib/page-models/records'
+import type { DocumentPageModel } from '@/lib/page-models/document'
+import type { AboutPageModel, LorePageModel } from '@/lib/page-models/info'
+import type { DepartmentPageModel, DepartmentsPageModel } from '@/lib/page-models/departments'
+import type { NavigationItem } from '@/lib/page-models/common'
+import type { MembersPageModel } from '@/lib/page-models/members'
+import type { DepartmentsManagementPageModel } from '@/lib/page-models/management/departments'
+import type { FolderManagementPageModel } from '@/lib/page-models/management/folders'
+import type { InvitationsManagementPageModel } from '@/lib/page-models/management/invitations'
+import type { WorkPageModel } from '@/lib/page-models/management/work'
+import type { RoleManagementPageModel } from '@/lib/page-models/management/roles'
+import type { DocumentTypesManagementPageModel } from '@/lib/page-models/management/documentTypes'
+import type { PeopleManagementPageModel, PersonManagementPageModel } from '@/lib/page-models/management/people'
+import type { FolderTreeNode, RoleDepartment } from '@/components/people/PersonAccessTrees'
+import type { TypeTreeData, TypeTreeLeaf, TypeTreeNode, InspectorFolderNode } from '@/lib/documents/typeTree'
+
+/** Deterministic, safe, representative fixtures for the Theme Studio preview. No DB query. */
+const PREVIEW_BASE = '/domain/preview-domain'
+const PREVIEW_DESTINATIONS: NavigationItem[] = [
+  { label: 'About', segment: 'about', href: `${PREVIEW_BASE}/about` },
+  { label: 'Lore', segment: 'lore', href: `${PREVIEW_BASE}/lore` },
+  { label: 'Departments', segment: 'departments', href: `${PREVIEW_BASE}/departments` },
+  { label: 'Records', segment: 'records', href: `${PREVIEW_BASE}/records` },
+]
+
+export const SHELL_PREVIEW_MODEL: DomainShellModel = {
+  domain: {
+    id: 0,
+    slug: 'preview-domain',
+    name: 'Preview Domain',
+    motto: 'A world worth remembering',
+    logoUrl: null,
+    bannerUrl: null,
+    backgroundUrl: null,
+  },
+  primaryNavigation: [
+    { label: 'Home', segment: '', href: PREVIEW_BASE },
+    ...PREVIEW_DESTINATIONS,
+  ],
+  managementNavigation: [
+    { label: 'People', segment: 'manage/people', href: `${PREVIEW_BASE}/manage/people` },
+    { label: 'Members', segment: 'members', href: `${PREVIEW_BASE}/members` },
+    { label: 'Roles', segment: 'roles', href: `${PREVIEW_BASE}/roles` },
+    { label: 'Folders', segment: 'manage/folders', href: `${PREVIEW_BASE}/manage/folders` },
+    { label: 'Departments', segment: 'manage/departments', href: `${PREVIEW_BASE}/manage/departments` },
+    { label: 'Document Types', segment: 'document-types', href: `${PREVIEW_BASE}/document-types` },
+    { label: 'Invitations', segment: 'manage/invitations', href: `${PREVIEW_BASE}/manage/invitations` },
+    { label: 'Customize', segment: 'customize', href: `${PREVIEW_BASE}/customize` },
+  ],
+  operatingContext: {
+    platformLabel: 'Loreforge',
+    availableDomains: [],
+    activeDomainId: 0,
+    availableCharacters: [],
+    activeCharacterId: null,
+    account: null,
+  },
+  routes: { baseUrl: PREVIEW_BASE, workUrl: `${PREVIEW_BASE}/work` },
+}
+
+export const HOME_PREVIEW_MODEL: HomePageModel = {
+  baseUrl: PREVIEW_BASE,
+  domain: { name: 'Preview Domain', motto: 'A world worth remembering' },
+  welcome: { html: '<p>A preview Domain, assembled purely for the customization experience.</p>', editHref: `${PREVIEW_BASE}/pages/home/edit` },
+  destinations: PREVIEW_DESTINATIONS,
+  recentRecords: [
+    { id: '1', title: 'Incident Report 2026-014', type: 'Report', activity: 'filed · Sep 1, 2026' },
+    { id: '2', title: 'Trade Ledger, Folio 9', type: 'Ledger', activity: 'updated · Aug 28, 2026' },
+    { id: '3', title: 'Commission Charter', type: 'Charter', activity: 'filed · Aug 20, 2026' },
+  ],
+}
+
+export const RECORDS_PREVIEW_MODEL: RecordsPageModel = {
+  baseUrl: PREVIEW_BASE,
+  domainSlug: 'preview-domain',
+  folders: [],
+  totalReadableRecordCount: 3,
+  records: HOME_PREVIEW_MODEL.recentRecords.map((record, index) => ({
+    id: index + 1,
+    title: record.title,
+    folderId: null,
+    documentTypeId: null,
+    updatedAt: '2026-09-01T00:00:00.000Z',
+    preparedBy: 'Elias Vane',
+    lifecycle: 'filed',
+    locked: false,
+    capabilities: { read: true, edit: true, supersede: true, delete: false },
+  })),
+  documentTypes: [{ id: 1, name: 'Report' }, { id: 2, name: 'Ledger' }, { id: 3, name: 'Charter' }],
+  supersessionEdges: [],
+  query: { folderId: null, search: '' },
+  capabilities: { manageFolders: true, actOnRecords: true, deleteRecords: false },
+  vocabulary: { documentSingular: 'Record', documentPlural: 'Records', folderPlural: 'Folders' },
+}
+
+export const DOCUMENT_PREVIEW_MODEL: DocumentPageModel = {
+  baseUrl: PREVIEW_BASE,
+  domainSlug: 'preview-domain',
+  recordId: 1,
+  title: 'Incident Report 2026-014',
+  bodyHtml: '<p>The clerk ruled a fresh line and copied the incident as spoken.</p><blockquote>Order was restored by sundown.</blockquote>',
+  bodySource: null,
+  meta: [
+    { label: 'Prepared by', value: 'Elias Vane' },
+    { label: 'Date', value: 'September 1, 2026' },
+  ],
+  lifecycle: 'filed',
+  locked: false,
+  isSuperseded: false,
+  supersession: { supersededBy: null, supersedes: null },
+  concerns: [],
+  tags: ['incident', 'ledger'],
+  preparedByLabel: 'Elias Vane',
+  capabilities: { edit: true, submit: false, file: false, approve: false, restore: false, deprecate: true, lock: true, unlock: false, delete: false, supersede: true },
+  routes: { editUrl: `${PREVIEW_BASE}/documents/1/edit`, historyUrl: `${PREVIEW_BASE}/documents/1/history`, supersedeUrl: `${PREVIEW_BASE}/records/new?supersedes=1` },
+  statusMessage: null,
+}
+
+// ---------------------------------------------------------------------------
+// Conformance fixtures (P08D-T00). These deliberately exercise every Records
+// and Document contract surface so the shared assertion helpers can prove a
+// Design's capability reachability — not just that it mounts.
+// ---------------------------------------------------------------------------
+
+/**
+ * Full-featured Records fixture: root + nested + system folders, editable,
+ * non-editable, supersedable, and deletable records, a supersession pair,
+ * several Document Types, and every capability flag raised.
+ */
+export const RECORDS_CONFORMANCE_MODEL: RecordsPageModel = {
+  baseUrl: PREVIEW_BASE,
+  domainSlug: 'preview-domain',
+  folders: [
+    {
+      id: 1,
+      name: 'Civic Affairs',
+      systemManaged: false,
+      readableRecordCount: 4,
+      children: [
+        { id: 2, name: 'Commissions', systemManaged: false, readableRecordCount: 1, children: [] },
+      ],
+    },
+    { id: 3, name: 'System Vault', systemManaged: true, readableRecordCount: 0, children: [] },
+  ],
+  totalReadableRecordCount: 5,
+  records: [
+    { id: 10, title: 'Editable Draft Charter', folderId: 1, documentTypeId: 1, updatedAt: '2026-09-01T00:00:00.000Z', preparedBy: 'Elias Vane', lifecycle: 'draft', locked: false, capabilities: { read: true, edit: true, supersede: false, delete: false } },
+    { id: 11, title: 'Filed Read-Only Resolution', folderId: 1, documentTypeId: 3, updatedAt: '2026-08-20T00:00:00.000Z', preparedBy: 'Mira Sable', lifecycle: 'filed', locked: false, capabilities: { read: true, edit: false, supersede: false, delete: false } },
+    { id: 12, title: 'Ordinance 2026-101', folderId: 2, documentTypeId: 2, updatedAt: '2026-08-01T00:00:00.000Z', preparedBy: 'Elias Vane', lifecycle: 'filed', locked: false, capabilities: { read: true, edit: false, supersede: false, delete: false } },
+    { id: 13, title: 'Ordinance 2026-102', folderId: 2, documentTypeId: 2, updatedAt: '2026-09-02T00:00:00.000Z', preparedBy: 'Elias Vane', lifecycle: 'filed', locked: false, capabilities: { read: true, edit: true, supersede: true, delete: false } },
+    { id: 14, title: 'Scrap Note', folderId: 3, documentTypeId: null, updatedAt: '2026-07-15T00:00:00.000Z', preparedBy: null, lifecycle: 'draft', locked: false, capabilities: { read: true, edit: false, supersede: false, delete: true } },
+  ],
+  documentTypes: [
+    { id: 1, name: 'Charter' },
+    { id: 2, name: 'Ordinance' },
+    { id: 3, name: 'Resolution' },
+  ],
+  supersessionEdges: [{ newerId: 13, olderId: 12 }],
+  query: { folderId: null, search: '' },
+  capabilities: { manageFolders: true, actOnRecords: true, deleteRecords: true },
+  vocabulary: { documentSingular: 'Record', documentPlural: 'Records', folderPlural: 'Folders' },
+}
+
+/** Records fixture with zero readable records, for empty-state conformance. */
+export const EMPTY_RECORDS_CONFORMANCE_MODEL: RecordsPageModel = {
+  ...RECORDS_CONFORMANCE_MODEL,
+  folders: [],
+  totalReadableRecordCount: 0,
+  records: [],
+  supersessionEdges: [],
+}
+
+const DOCUMENT_HTML = '<p>The clerk ruled a fresh line and copied the incident as spoken.</p>'
+const DOCUMENT_SOURCE = '# Conformance Record\n\nThe clerk ruled a fresh line and copied the incident as spoken.'
+
+/**
+ * Document fixture factory. Start from the Filed state with every lifecycle
+ * capability that Filed permits; override per lifecycle state.
+ */
+export function documentFixture(overrides: Partial<DocumentPageModel> = {}): DocumentPageModel {
+  return {
+    baseUrl: PREVIEW_BASE,
+    domainSlug: 'preview-domain',
+    recordId: 1,
+    title: 'Conformance Record',
+    bodyHtml: DOCUMENT_HTML,
+    bodySource: null,
+    meta: [
+      { label: 'Prepared by', value: 'Elias Vane' },
+      { label: 'Date', value: 'September 1, 2026' },
+    ],
+    lifecycle: 'filed',
+    locked: false,
+    isSuperseded: false,
+    supersession: { supersededBy: null, supersedes: null },
+    concerns: [{ name: 'Harbor Commission' }],
+    tags: ['conformance'],
+    preparedByLabel: 'Elias Vane',
+    capabilities: { edit: true, submit: false, file: false, approve: false, restore: false, deprecate: true, lock: true, unlock: false, delete: true, supersede: true },
+    routes: {
+      editUrl: `${PREVIEW_BASE}/documents/1/edit`,
+      historyUrl: `${PREVIEW_BASE}/documents/1/history`,
+      supersedeUrl: `${PREVIEW_BASE}/records/new?supersedes=1`,
+    },
+    statusMessage: null,
+    ...overrides,
+  }
+}
+
+/** Draft: editable, submittable, fileable, lockable. */
+export const DRAFT_DOCUMENT_MODEL = documentFixture({
+  lifecycle: 'draft',
+  capabilities: { edit: true, submit: true, file: true, approve: false, restore: false, deprecate: false, lock: true, unlock: false, delete: true, supersede: false },
+})
+
+/** Submitted: awaiting approval; no longer editable. */
+export const SUBMITTED_DOCUMENT_MODEL = documentFixture({
+  lifecycle: 'submitted',
+  capabilities: { edit: false, submit: false, file: false, approve: true, restore: false, deprecate: false, lock: false, unlock: false, delete: false, supersede: false },
+})
+
+/** Filed: deprecatable, lockable, supersedable, deletable. */
+export const FILED_DOCUMENT_MODEL = documentFixture({})
+
+/** Deprecated: restorable, supersedable. */
+export const DEPRECATED_DOCUMENT_MODEL = documentFixture({
+  lifecycle: 'deprecated',
+  capabilities: { edit: false, submit: false, file: false, approve: false, restore: true, deprecate: false, lock: false, unlock: false, delete: false, supersede: true },
+})
+
+/** Locked: unlockable, otherwise read-only. */
+export const LOCKED_DOCUMENT_MODEL = documentFixture({
+  locked: true,
+  capabilities: { edit: false, submit: false, file: false, approve: false, restore: false, deprecate: false, lock: false, unlock: true, delete: false, supersede: false },
+})
+
+/** Superseded: read-only, carries the successor link, no creation actions. */
+export const SUPERSEDED_DOCUMENT_MODEL = documentFixture({
+  isSuperseded: true,
+  supersession: {
+    supersededBy: { id: 2, title: 'Ordinance 2026-102', createdLabel: 'September 2, 2026', preparedByLabel: 'Elias Vane' },
+    supersedes: null,
+  },
+  capabilities: { edit: false, submit: false, file: false, approve: false, restore: false, deprecate: false, lock: false, unlock: false, delete: false, supersede: false },
+})
+
+/** Filed record carrying a predecessor: shows the Supersedes link. */
+export const SUCCESSOR_DOCUMENT_MODEL = documentFixture({
+  title: 'Ordinance 2026-102',
+  supersession: {
+    supersededBy: null,
+    supersedes: { id: 12, title: 'Ordinance 2026-101' },
+  },
+})
+
+/** Raw source is viewable; body rendering is replaced by the source view. */
+export const SOURCE_DOCUMENT_MODEL = documentFixture({
+  bodySource: DOCUMENT_SOURCE,
+})
+
+/** A status/error message surfaced by the route after a failed action. */
+export const STATUS_DOCUMENT_MODEL = documentFixture({
+  statusMessage: { code: 'conformance', text: 'Retry your change.' },
+})
+
+// ---------------------------------------------------------------------------
+// Thin-page fixtures (P08D-T00) — Departments / Department / About / Lore.
+// ---------------------------------------------------------------------------
+
+export const DEPARTMENTS_PREVIEW_MODEL: DepartmentsPageModel = {
+  baseUrl: PREVIEW_BASE,
+  domainSlug: 'preview-domain',
+  domainName: 'Preview Domain',
+  departments: [
+    { id: 1, name: 'Harbor Commission', slug: 'harbor-commission', description: 'Oversees the docks and ship registries.', memberCount: 4 },
+    { id: 2, name: 'Census Office', slug: 'census-office', description: null, memberCount: 2 },
+  ],
+  manageHref: `${PREVIEW_BASE}/manage/people`,
+  vocabulary: { subdomainSingular: 'Department', subdomainPlural: 'Departments' },
+}
+
+export const DEPARTMENT_PREVIEW_MODEL: DepartmentPageModel = {
+  baseUrl: PREVIEW_BASE,
+  domainSlug: 'preview-domain',
+  name: 'Harbor Commission',
+  description: 'Oversees the docks and ship registries.',
+  members: [
+    { id: 1, name: 'Elias Vane' },
+    { id: 2, name: 'Mira Sable' },
+  ],
+  folderNames: ['Dock Ledgers', 'Ship Registries'],
+  manageHref: `${PREVIEW_BASE}/manage/people`,
+  vocabulary: { subdomainSingular: 'Department', subdomainPlural: 'Departments', folderPlural: 'Folders', memberPlural: 'Participants' },
+  destinations: [],
+}
+
+export const ABOUT_PREVIEW_MODEL: AboutPageModel = {
+  baseUrl: PREVIEW_BASE,
+  bodyHtml: '<p>Preview Domain was founded to keep a true record of the port.</p>',
+  editHref: `${PREVIEW_BASE}/pages/about/edit`,
+  destinations: [],
+}
+
+export const LORE_PREVIEW_MODEL: LorePageModel = {
+  baseUrl: PREVIEW_BASE,
+  destinations: [],
+  entries: [],
+}
+// ---------------------------------------------------------------------------
+// OBSIDIAN-T09 operational conformance fixtures (deterministic, no DB).
+// ---------------------------------------------------------------------------
+
+export const OPERATIONAL_BASE = PREVIEW_BASE
+
+export const FOLDERS_MANAGEMENT_MODEL: FolderManagementPageModel = {
+  baseUrl: OPERATIONAL_BASE,
+  domainSlug: 'preview-domain',
+  domainName: 'Preview Domain',
+  domainId: 42,
+  rootManageable: true,
+  status: null,
+  nodes: [
+    { id: 1, name: 'Hall of Coin', createdAt: '2026-01-01T00:00:00.000Z', systemManaged: false, canManage: true, children: [] },
+    { id: 2, name: 'Sealed Vault', createdAt: '2026-01-02T00:00:00.000Z', systemManaged: false, canManage: false, children: [] },
+  ],
+}
+
+export const FOLDERS_MANAGEMENT_DENIED_MODEL: FolderManagementPageModel = {
+  ...FOLDERS_MANAGEMENT_MODEL,
+  rootManageable: false,
+  nodes: [
+    { id: 1, name: 'Hall of Coin', createdAt: '2026-01-01T00:00:00.000Z', systemManaged: false, canManage: false, children: [] },
+  ],
+}
+
+export const WORK_MANAGEMENT_MODEL: WorkPageModel = {
+  baseUrl: OPERATIONAL_BASE,
+  domainSlug: 'preview-domain',
+  domainName: 'Preview Domain',
+  domainId: 42,
+  authorized: true,
+  domainAdmin: true,
+  status: null,
+  entries: [
+    { kind: 'document', id: 11, title: 'Incident Report 2026-014', summary: 'Submitted', href: `${OPERATIONAL_BASE}/documents/11`, requestedAt: '2026-09-01T00:00:00.000Z', domainId: 42, folderName: 'Reports' },
+    { kind: 'join', id: 12, title: 'Domain join · New User', summary: 'Character', href: `${OPERATIONAL_BASE}/manage/invitations`, requestedAt: '2026-09-01T00:00:00.000Z', domainId: 42 },
+  ],
+}
+
+export const WORK_MANAGEMENT_EMPTY_MODEL: WorkPageModel = {
+  baseUrl: OPERATIONAL_BASE,
+  domainSlug: 'preview-domain',
+  domainName: 'Preview Domain',
+  domainId: 42,
+  authorized: true,
+  domainAdmin: false,
+  status: null,
+  entries: [],
+}
+
+export const MEMBERS_MANAGEMENT_MODEL: MembersPageModel = {
+  baseUrl: OPERATIONAL_BASE,
+  domainSlug: 'preview-domain',
+  domainName: 'Preview Domain',
+  domainId: 42,
+  canSearch: true,
+  searchResults: [],
+  query: '',
+  status: null,
+  rows: [
+    { membershipId: 101, characterId: 201, name: 'Elias Vane', localDisplayName: 'Eli', controllingUserName: 'eli@example.com', membershipStatus: 'active', departments: ['Harbor Commission'], roles: ['Dockmaster'] },
+  ],
+  vocabulary: { domainSingular: 'Domain', memberPlural: 'Members', subdomainSingular: 'Department', subdomainPlural: 'Departments', rolePlural: 'Roles' },
+}
+
+export const MEMBERS_MANAGEMENT_VIEWER_MODEL: MembersPageModel = {
+  ...MEMBERS_MANAGEMENT_MODEL,
+  canSearch: false,
+}
+
+export const DEPARTMENTS_MANAGEMENT_MODEL: DepartmentsManagementPageModel = {
+  baseUrl: OPERATIONAL_BASE,
+  domainSlug: 'preview-domain',
+  domainName: 'Preview Domain',
+  domainId: 42,
+  canCreate: true,
+  status: null,
+  departments: [
+    { id: 1, name: 'Harbor Commission', slug: 'harbor-commission', archived: false, canArchive: true, canRestore: false },
+  ],
+  vocabulary: { subdomainSingular: 'Department', subdomainPlural: 'Departments', roleSingular: 'Role' },
+}
+
+export const DEPARTMENTS_MANAGEMENT_VIEWER_MODEL: DepartmentsManagementPageModel = {
+  ...DEPARTMENTS_MANAGEMENT_MODEL,
+  canCreate: false,
+  departments: [
+    { id: 1, name: 'Harbor Commission', slug: 'harbor-commission', archived: true, canArchive: false, canRestore: true },
+  ],
+}
+
+export const INVITATIONS_MANAGEMENT_MODEL: InvitationsManagementPageModel = {
+  baseUrl: OPERATIONAL_BASE,
+  domainSlug: 'preview-domain',
+  domainName: 'Preview Domain',
+  domainId: 42,
+  canManage: true,
+  status: null,
+  invitations: [
+    { id: 301, purpose: 'Domain join', targetLabel: '—', issuedByLabel: 'Mira Sable', expiresLabel: 'Never', useLabel: '0', statusLabel: 'Active', canRevoke: true },
+    { id: 302, purpose: 'Character claim', targetLabel: 'Elias Vane', issuedByLabel: 'Mira Sable', expiresLabel: 'Never', useLabel: '1 / 1', statusLabel: 'Exhausted', canRevoke: false },
+  ],
+  pendingJoins: [
+    { id: 401, applicantLabel: 'new@example.com', characterLabel: 'New Character: Fern', requestedAt: '2026-09-01T00:00:00.000Z' },
+  ],
+  pendingClaims: [],
+  claimTargets: [],
+}
+
+// ---------------------------------------------------------------------------
+// Full-host parity fixtures (P2-T05 / P2-T12).
+//
+// Site Studio historically needed only the four fixtures above. The Lab's
+// required render set is broader, so these additional deterministic models
+// make the production checkout the oracle for every Class A surface as well.
+// They are intentionally boring data: the parity harness is measuring host
+// and Design rendering, not a live database snapshot.
+// ---------------------------------------------------------------------------
+
+const PARITY_ROLE_DEPARTMENTS: RoleDepartment[] = [
+  {
+    id: 1,
+    name: 'Harbor Commission',
+    roles: [{ id: 1, name: 'Dockmaster', held: true, assignable: true, children: [] }],
+  },
+]
+
+const PARITY_FOLDER_NODES: FolderTreeNode[] = [
+  { id: 1, name: 'Dock Ledgers', systemManaged: false, readState: 'grant', writeState: 'grant', children: [] },
+]
+
+const PARITY_TYPES: TypeTreeLeaf[] = [
+  {
+    id: 1,
+    name: 'Harbor report',
+    description: 'A report filed by the Harbor Commission.',
+    active: true,
+    departmentId: 1,
+    typeFolderId: null,
+    templateSelection: 'markdown',
+    templateId: null,
+    templateName: null,
+    templateKind: null,
+    constructedTemplates: { markdown: null, form: null },
+  },
+]
+
+const PARITY_TYPE_NODE: TypeTreeNode = {
+  id: 'type-1',
+  kind: 'type',
+  name: 'Harbor report',
+  leaf: PARITY_TYPES[0],
+  children: [],
+}
+
+const PARITY_TYPE_TREE: TypeTreeData = {
+  roots: [{ id: 'dept-1', kind: 'department', name: 'Harbor Commission', children: [PARITY_TYPE_NODE] }],
+  hasUnassigned: false,
+  departments: [{ id: 1, name: 'Harbor Commission', archived: false }],
+  types: PARITY_TYPES,
+}
+
+const PARITY_INSPECTOR_FOLDERS: InspectorFolderNode[] = [
+  { id: 1, name: 'Dock Ledgers', children: [] },
+]
+
+export const ROLES_MANAGEMENT_MODEL: RoleManagementPageModel = {
+  baseUrl: OPERATIONAL_BASE,
+  domainSlug: 'preview-domain',
+  domainName: 'Preview Domain',
+  domainId: 42,
+  departments: PARITY_ROLE_DEPARTMENTS,
+  roleRecords: [{ id: 1, name: 'Dockmaster', departmentId: 1, parentRoleId: null }],
+  holdersByRole: { '1': [{ id: 101, name: 'Elias Vane' }] },
+  folderNodes: PARITY_FOLDER_NODES,
+  folderStatesByRole: { '1': { '1': { readState: 'grant', writeState: 'grant' } } },
+  types: [{ id: 1, name: 'Harbor report' }],
+  typeStatesByRole: { '1': { '1': { read: 'grant', create_document: 'grant', edit_document: 'grant' } } },
+  manageableDepartmentIds: [1],
+  assignableRoleIds: [1],
+  initialRoleId: 1,
+  status: null,
+}
+
+export const DOCUMENT_TYPES_MANAGEMENT_MODEL: DocumentTypesManagementPageModel = {
+  baseUrl: OPERATIONAL_BASE,
+  domainSlug: 'preview-domain',
+  domainName: 'Preview Domain',
+  domainId: 42,
+  tree: PARITY_TYPE_TREE,
+  inspector: {
+    roles: [{ id: 1, name: 'Dockmaster', active: true }],
+    folders: PARITY_INSPECTOR_FOLDERS,
+    stagesByType: { 1: { draft: null, submitted: null, filed: null, deprecated: null } },
+  },
+  canManage: true,
+  status: null,
+}
+
+export const PEOPLE_MANAGEMENT_MODEL: PeopleManagementPageModel = {
+  baseUrl: OPERATIONAL_BASE,
+  domainSlug: 'preview-domain',
+  domainName: 'Preview Domain',
+  domainId: 42,
+  canOpenPeople: true,
+  status: null,
+}
+
+export const PERSON_MANAGEMENT_MODEL: PersonManagementPageModel = {
+  baseUrl: OPERATIONAL_BASE,
+  domainSlug: 'preview-domain',
+  domainName: 'Preview Domain',
+  domainId: 42,
+  character: { id: 101, name: 'Elias Vane', kind: 'player', status: 'active' },
+  controller: { id: 201, name: 'Elias', email: 'elias@example.test' },
+  localDisplayName: 'Eli',
+  roleDepartments: PARITY_ROLE_DEPARTMENTS,
+  folderNodes: PARITY_FOLDER_NODES,
+  typeAccess: [{ id: 1, name: 'Harbor report', read: { allowed: true, source: 'Role-derived' }, create: { allowed: true, source: 'Role-derived' }, edit: { allowed: true, source: 'Role-derived' } }],
+  canManageMembers: true,
+  roleFilter: 'held',
+  status: null,
+}

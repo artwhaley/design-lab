@@ -4,8 +4,8 @@ export const PREVIEW_SELECTOR = 'iframe[data-testid="preview-iframe"]'
 
 export async function openLab(page: Page): Promise<Frame> {
   await page.goto('/?fixture=obsidian-fidelity', { waitUntil: 'networkidle' })
-  await page.locator('#lab-design-select').selectOption({ label: 'Obsidian Lab' })
-  await expect(page.locator('#lab-design-select')).toHaveValue('obsidian-lab')
+  await page.locator('#lab-design-select').selectOption({ label: 'Obsidian' })
+  await expect(page.locator('#lab-design-select')).toHaveValue('obsidian')
   await expect(page.locator('nav[aria-label="Design Lab surfaces"]')).toBeVisible()
   await expect(page.locator(PREVIEW_SELECTOR)).toBeAttached()
   await expect.poll(() => page.frames().filter((frame) => frame.url().includes('/preview.html')).length).toBeGreaterThan(0)

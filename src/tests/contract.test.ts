@@ -83,7 +83,7 @@ describe('contract version', () => {
 
 describe('surface catalog', () => {
   it('enumerates exactly the required Class A slots', () => {
-    expect(CLASS_A_KEYS).toHaveLength(17)
+    expect(CLASS_A_KEYS).toHaveLength(16)
     expect(CLASS_A_KEYS).toEqual(REQUIRED_DESIGN_SLOTS)
   })
 

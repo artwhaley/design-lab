@@ -134,7 +134,6 @@ export function IframePreviewPane(props: Props) {
     background: '#fff',
     width: viewport ? `${viewport.width}px` : '100%',
     height: viewport ? `${viewport.height}px` : '100%',
-    minHeight: viewport ? undefined : '640px',
   }
 
   return (

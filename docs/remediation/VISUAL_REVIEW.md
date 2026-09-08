@@ -1,5 +1,8 @@
 # Obsidian fidelity review gate
 
+> This is the historical T12 incubation review. Phase 2 supersedes it with
+> the production-vs-Lab report at `docs/parity/cross-host/results.json`.
+
 Generated from the immutable source snapshot fc22e6c on 2026-09-08. The source PNGs are the T12 goldens; paired images show source on the left and Lab on the right. The numeric comparison uses pixelmatch with the unchanged acceptance threshold of <=2% differing pixels.
 
 ## Remediation record

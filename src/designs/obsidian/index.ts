@@ -1,0 +1,54 @@
+import type { DesignDefinition } from '@/lib/design/types'
+import type { ObsidianConfigV1 } from './config'
+import { ObsidianShell } from './ObsidianShell'
+import { ObsidianRecords } from './ObsidianRecords'
+import { ObsidianDocument } from './ObsidianDocument'
+import { ObsidianStudioEditor } from './studio/ObsidianStudioEditor'
+import { ObsidianAboutView, ObsidianDepartmentView, ObsidianDepartmentsView, ObsidianHomeView, ObsidianLoreView } from './thin'
+import { ObsidianDepartments as ObsidianDepartmentsManagement, ObsidianDocumentTypes, ObsidianFolders, ObsidianInvitations, ObsidianMembers, ObsidianPeople, ObsidianPerson, ObsidianRoles, ObsidianWork } from './operational'
+import { migrateObsidianConfig, obsidianDefaults, obsidianFromLegacy, resolveObsidianTheme, validateObsidianConfig } from './config'
+
+/**
+ * Obsidian Design definition. It is a first-class production renderer: the
+ * slot bodies are type-honest adapters over the ported components and shared
+ * workspaces; no casts are used at the Design boundary.
+ */
+export const obsidian: DesignDefinition<ObsidianConfigV1> = {
+  key: 'obsidian',
+  status: 'first-class',
+  name: 'Obsidian',
+  description: 'A night-harbour world: dark atmospheric surfaces, luminous accents, cinematic records.',
+  preview: { thumbnail: '/design-assets/obsidian/thumbnail.svg' },
+  config: {
+    version: 1,
+    defaults: obsidianDefaults,
+    validate: validateObsidianConfig,
+    migrate: migrateObsidianConfig,
+    fromLegacy: obsidianFromLegacy,
+    resolveTheme: resolveObsidianTheme,
+  },
+  studio: { Editor: ObsidianStudioEditor },
+  Shell: ObsidianShell,
+  pages: {
+    home: ObsidianHomeView,
+    records: ObsidianRecords,
+    document: ObsidianDocument,
+    departments: ObsidianDepartmentsView,
+    department: ObsidianDepartmentView,
+    about: ObsidianAboutView,
+    lore: ObsidianLoreView,
+    work: ObsidianWork,
+    members: ObsidianMembers,
+    management: {
+      departments: ObsidianDepartmentsManagement,
+      folders: ObsidianFolders,
+      roles: ObsidianRoles,
+      documentTypes: ObsidianDocumentTypes,
+      people: ObsidianPeople,
+      person: ObsidianPerson,
+      invitations: ObsidianInvitations,
+    },
+  },
+}
+
+export default obsidian

@@ -23,6 +23,5 @@ describe('generic Lab route context', () => {
   it('builds deterministic paths with route parameters', () => {
     expect(canonicalPathForSurface('document', { recordId: 47 })).toBe('/domain/aster-reach/documents/47')
     expect(canonicalPathForSurface('department', { departmentSlug: 'survey-cartography' })).toBe('/domain/aster-reach/departments/survey-cartography')
-    expect(canonicalPathForSurface('member', { characterId: 7 })).toBe('/domain/aster-reach/members/7')
   })
 })

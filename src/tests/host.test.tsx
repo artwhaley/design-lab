@@ -25,7 +25,7 @@ describe('path simulator', () => {
     expect(surface('/domain/aster-reach/lore')).toBe('lore')
     expect(surface('/domain/aster-reach/lore/the-tangle')).toBe('lore')
     expect(surface('/domain/aster-reach/members')).toBe('members')
-    expect(surface('/domain/aster-reach/members/7')).toBe('member')
+    expect(surface('/domain/aster-reach/members/7')).toBe('external:/domain/aster-reach/members/7')
     expect(surface('/domain/aster-reach/work')).toBe('work')
   })
 

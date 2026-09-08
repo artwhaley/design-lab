@@ -1,11 +1,13 @@
 import { Component, useCallback, useEffect, useMemo, useRef, useState, type ErrorInfo, type ReactNode } from 'react'
 
 import { buildScenario } from '../fixtures'
-import type { LabDesignDefinition } from '../contracts'
-import { getDesignDefinition } from '../designs/registry'
+import type { DesignDefinition } from '@/lib/design/types'
+import { getDesignDefinition } from '@/lib/design/generated/registry'
 import { ActionLog, FakeBackend, type FakeBackendSnapshot } from '../workspaces'
-import { resolveDesignRuntime } from '../host/designRuntime'
+import { resolveProductionRuntime, type ProductionRuntime } from '../host/productionRuntime'
 import { PreviewRenderer } from './PreviewRenderer'
+import { onPreviewNavigate, onPreviewRefresh } from './navigation'
+import { installProductionActionEmulator } from './actionApiEmulator'
 import {
   PREVIEW_PROTOCOL_VERSION,
   isHostToPreviewMessage,
@@ -23,10 +25,10 @@ function getInstanceId(explicit?: string): string {
 }
 
 type RuntimeBundle = {
-  design: LabDesignDefinition
+  design: DesignDefinition
   builder: ReturnType<typeof buildScenario>
   backend: FakeBackend
-  runtime: ReturnType<typeof resolveDesignRuntime>['runtime']
+  runtime: ProductionRuntime
 }
 
 class PreviewErrorBoundary extends Component<{ children: ReactNode; onError(error: Error): void }, { error: Error | null }> {
@@ -51,7 +53,6 @@ class PreviewErrorBoundary extends Component<{ children: ReactNode; onError(erro
 export function PreviewRuntimeApp({ instanceId: explicitInstanceId }: Props) {
   const instanceId = useMemo(() => getInstanceId(explicitInstanceId), [explicitInstanceId])
   const [state, setState] = useState<PreviewState | null>(null)
-  const [obsidianEnvironmentReady, setObsidianEnvironmentReady] = useState(false)
   const [backendEpoch, setBackendEpoch] = useState(0)
   const backendRef = useRef<FakeBackend | null>(null)
 
@@ -87,19 +88,6 @@ export function PreviewRuntimeApp({ instanceId: explicitInstanceId }: Props) {
     return () => window.removeEventListener('message', onMessage)
   }, [instanceId, reportError])
 
-  useEffect(() => {
-    let cancelled = false
-    if (state?.designKey !== 'obsidian-lab') {
-      setObsidianEnvironmentReady(true)
-      return () => { cancelled = true }
-    }
-    setObsidianEnvironmentReady(false)
-    void import('../designs/obsidian-lab/previewEnvironment')
-      .then(() => { if (!cancelled) setObsidianEnvironmentReady(true) })
-      .catch((error: unknown) => { if (!cancelled) reportError(error instanceof Error ? error : String(error)) })
-    return () => { cancelled = true }
-  }, [reportError, state?.designKey])
-
   const bundle = useMemo<RuntimeBundle | null>(() => {
     if (!state) return null
     const design = getDesignDefinition(state.designKey)
@@ -110,7 +98,7 @@ export function PreviewRuntimeApp({ instanceId: explicitInstanceId }: Props) {
     backend.readError = state.flags.readError
     backend.loadingOverride = state.flags.loadingOverride
     backend.hydrate(state.backendSnapshot)
-    const resolution = resolveDesignRuntime(design, state.config.raw, state.config.savedVersion)
+    const resolution = resolveProductionRuntime(design, state.config.raw, state.config.savedVersion)
     return { design, builder, backend, runtime: resolution.runtime }
   }, [state])
 
@@ -146,10 +134,19 @@ export function PreviewRuntimeApp({ instanceId: explicitInstanceId }: Props) {
     postPreviewMessage({ protocol: PREVIEW_PROTOCOL_VERSION, instanceId, type: 'preview:backend-snapshot', snapshot, localRevision: snapshot.revision })
   }, [instanceId])
 
+  const handleMutation = useCallback(() => {
+    if (bundle) handleBackendSnapshot(bundle.backend.snapshot())
+  }, [bundle, handleBackendSnapshot])
+
+  useEffect(() => {
+    if (!bundle) return
+    return installProductionActionEmulator(bundle.backend, (error) => reportError(error), handleMutation)
+  }, [bundle, handleMutation, reportError])
+
+  useEffect(() => onPreviewNavigate(handleNavigate), [handleNavigate])
+  useEffect(() => onPreviewRefresh(() => setBackendEpoch((epoch) => epoch + 1)), [])
+
   if (!state) return <div data-testid="preview-waiting" className="preview-waiting">Waiting for Lab host…</div>
-  if (state.designKey === 'obsidian-lab' && !obsidianEnvironmentReady) {
-    return <div data-testid="preview-environment-loading" className="preview-waiting">Loading Obsidian preview environment…</div>
-  }
   if (!bundle) {
     reportError(`Unknown Design: ${state.designKey}`)
     return <div data-testid="preview-error" className="preview-error"><strong>Design preview unavailable</strong><span>Unknown Design: {state.designKey}</span></div>

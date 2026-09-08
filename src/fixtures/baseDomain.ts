@@ -23,30 +23,27 @@ export const DOMAIN_BACKGROUND_URL = '/media/lab-fixtures/atmosphere.svg'
 export const STRESS_DOMAIN_NAME = 'The Commonwealth of the Aster Reach Settlement, Outer Belt Survey & Colonial Archives'
 export const STRESS_DOMAIN_MOTTO = 'Sixty years of records, every one of them filed, and we will file sixty more if it takes a hundred archivists to do it.'
 
-export function primaryNavigation(persona: 'visitor' | 'member' | 'departmentManager' | 'admin'): NavigationItem[] {
-  const items: NavigationItem[] = [
+export function primaryNavigation(_persona: 'visitor' | 'member' | 'departmentManager' | 'admin'): NavigationItem[] {
+  return [
     { label: 'Home', segment: '', href: BASE_URL },
-    { label: 'Records', segment: 'records', href: `${BASE_URL}/records` },
-    { label: 'Departments', segment: 'departments', href: `${BASE_URL}/departments` },
     { label: 'About', segment: 'about', href: `${BASE_URL}/about` },
     { label: 'Lore', segment: 'lore', href: `${BASE_URL}/lore` },
-    { label: 'Members', segment: 'members', href: `${BASE_URL}/members` },
+    { label: 'Departments', segment: 'departments', href: `${BASE_URL}/departments` },
+    { label: 'Records', segment: 'records', href: `${BASE_URL}/records` },
   ]
-  if (persona !== 'visitor') {
-    items.push({ label: 'Work', segment: 'work', href: `${BASE_URL}/work` })
-  }
-  return items
 }
 
 export function managementNavigation(persona: 'visitor' | 'member' | 'departmentManager' | 'admin'): NavigationItem[] {
   if (persona === 'admin') {
     return [
-      { label: 'Departments', segment: 'manage/departments', href: `${BASE_URL}/manage/departments` },
-      { label: 'Folders', segment: 'manage/folders', href: `${BASE_URL}/manage/folders` },
-      { label: 'Roles', segment: 'roles', href: `${BASE_URL}/roles` },
-      { label: 'Document Types', segment: 'document-types', href: `${BASE_URL}/document-types` },
       { label: 'People', segment: 'manage/people', href: `${BASE_URL}/manage/people` },
+      { label: 'Members', segment: 'members', href: `${BASE_URL}/members` },
+      { label: 'Roles', segment: 'roles', href: `${BASE_URL}/roles` },
+      { label: 'Folders', segment: 'manage/folders', href: `${BASE_URL}/manage/folders` },
+      { label: 'Departments', segment: 'manage/departments', href: `${BASE_URL}/manage/departments` },
+      { label: 'Document Types', segment: 'document-types', href: `${BASE_URL}/document-types` },
       { label: 'Invitations', segment: 'manage/invitations', href: `${BASE_URL}/manage/invitations` },
+      { label: 'Customize', segment: 'customize', href: `${BASE_URL}/customize` },
     ]
   }
   if (persona === 'departmentManager') {

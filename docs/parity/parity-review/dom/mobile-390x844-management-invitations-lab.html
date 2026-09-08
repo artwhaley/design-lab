@@ -1,0 +1,207 @@
+<div class="obsidian-module__FBweVW__root" data-template="obsidian" style="--tenant-primary: #bce6d3; --tenant-secondary: #142128; --tenant-accent: #bce6d3; --tenant-page-bg: #0b1419; --tenant-surface-bg: #142128; --tenant-surface-border: #bce6d3; --tenant-text-on-primary: #1A1A1A; --tenant-heading-font: Georgia, 'Times New Roman', Times, serif; --tenant-body-font: Verdana, Geneva, Tahoma, sans-serif; --tenant-muted-text: #a7b7bc; --obsidian-bg: #0b1419; --obsidian-surface: #142128; --obsidian-text: #edf2ef; --obsidian-muted: #a7b7bc; --obsidian-accent: #bce6d3; --obsidian-max: 1440px; --obsidian-gutter: 56px; --obsidian-radius: 18px; --obsidian-atmosphere: /design-assets/obsidian/atmosphere.png;">
+<a class="obsidian-module__FBweVW__skip" href="#main-content">Skip to content</a>
+<div class="obsidian-module__FBweVW__contextBar">
+<div aria-label="Operating context" class="operating-module-scss-module__x0PMsq__contextBar operating-module-scss-module__x0PMsq__obsidianContext">
+<a class="operating-module-scss-module__x0PMsq__platformBrand" href="/">LOREFORGE <svg aria-hidden="true" class="lucide lucide-arrow-up-right" fill="none" height="12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 7h10v10">
+</path>
+<path d="M7 17 17 7">
+</path>
+</svg>
+</a>
+<form action="/api/switch-tenant" class="operating-module-scss-module__x0PMsq__contextControl" method="post">
+<label class="operating-module-scss-module__x0PMsq__contextLabel" for="tenant-switcher">Domain</label>
+<select class="operating-module-scss-module__x0PMsq__contextSelect" disabled="" id="tenant-switcher" name="tenantSlug">
+<option selected="" value="preview-domain">preview-domain</option>
+</select>
+</form>
+<form class="operating-module-scss-module__x0PMsq__contextControl">
+<span aria-hidden="true" class="operating-module-scss-module__x0PMsq__avatar">A</span>
+<label class="operating-module-scss-module__x0PMsq__contextLabel" for="character-switcher">Acting as</label>
+<select class="operating-module-scss-module__x0PMsq__contextSelect" id="character-switcher" name="characterId">
+<option selected="" value="">No participating Character</option>
+</select>
+<input name="returnTo" type="hidden" value="/design-parity/management-invitations">
+</form>
+</div>
+</div>
+<div class="obsidian-module__FBweVW__navPosition">
+<div class="obsidian-module__FBweVW__navigation">
+<a aria-label="Preview Domain Domain home" class="obsidian-module__FBweVW__identity" href="/design-parity">
+<span class="obsidian-module__FBweVW__emblem">
+<svg aria-hidden="true" class="lucide lucide-aperture" fill="none" height="27" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" width="27" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="10">
+</circle>
+<path d="m14.31 8 5.74 9.94">
+</path>
+<path d="M9.69 8h11.48">
+</path>
+<path d="m7.38 12 5.74-9.94">
+</path>
+<path d="M9.69 16 3.95 6.06">
+</path>
+<path d="M14.31 16H2.83">
+</path>
+<path d="m16.62 12-5.74 9.94">
+</path>
+</svg>
+</span>
+<span>Preview Domain</span>
+</a>
+<nav aria-label="Primary navigation" class="obsidian-module__FBweVW__desktopNav">
+<a aria-current="page" class="obsidian-module__FBweVW__activeNav" href="/design-parity">Home</a>
+<a class="" href="/design-parity/about">About</a>
+<a class="" href="/design-parity/lore">Lore</a>
+<a class="" href="/design-parity/departments">Departments</a>
+<a class="" href="/design-parity/records">Records</a>
+<a class="" href="/design-parity/work">Work</a>
+</nav>
+<nav aria-label="Management navigation" class="obsidian-module__FBweVW__srOnly">
+<a href="/design-parity/manage/people">People</a>
+<a href="/design-parity/members">Members</a>
+<a href="/design-parity/roles">Roles</a>
+<a href="/design-parity/manage/folders">Folders</a>
+<a href="/design-parity/manage/departments">Departments</a>
+<a href="/design-parity/document-types">Document Types</a>
+<a href="/design-parity/manage/invitations">Invitations</a>
+<a href="/design-parity/customize">Customize</a>
+</nav>
+<button aria-expanded="false" aria-haspopup="dialog" aria-label="Open navigation" class="obsidian-module__FBweVW__mobileMenu" data-state="closed" type="button">
+<svg aria-hidden="true" class="lucide lucide-menu" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 5h16">
+</path>
+<path d="M4 12h16">
+</path>
+<path d="M4 19h16">
+</path>
+</svg>
+</button>
+</div>
+</div>
+<main id="main-content" tabindex="-1">
+<div class="obsidian-module__FBweVW__workspacePage">
+<header class="obsidian-module__FBweVW__pageHeading">
+<div>
+<p class="obsidian-module__FBweVW__eyebrow">ACCESS CONTROL</p>
+<h1>Invitations</h1>
+<p>Invite people to join the domain or claim a character.</p>
+</div>
+</header>
+<form action="">
+<input name="purpose" type="hidden" value="domain_join">
+<input name="domainId" type="hidden" value="42">
+<input name="tenantSlug" type="hidden" value="preview-domain">
+<button aria-expanded="false" aria-haspopup="menu" aria-label="Invitation purpose" class="obsidian-module__FBweVW__choiceTrigger" data-state="closed" type="button">Join<svg aria-hidden="true" class="lucide lucide-chevron-down" fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg">
+<path d="m6 9 6 6 6-6">
+</path>
+</svg>
+</button>
+<label class="obsidian-module__FBweVW__search">
+<svg aria-hidden="true" class="lucide lucide-search" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="m21 21-4.34-4.34">
+</path>
+<circle cx="11" cy="11" r="8">
+</circle>
+</svg>
+<span class="obsidian-module__FBweVW__srOnly">Maximum uses</span>
+<input min="2" name="maxUses" placeholder="Unlimited uses" type="number">
+</label>
+<button class="obsidian-module__FBweVW__primaryButton" type="submit">
+<svg aria-hidden="true" class="lucide lucide-plus" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+<path d="M5 12h14">
+</path>
+<path d="M12 5v14">
+</path>
+</svg> Send invitation</button>
+</form>
+<section aria-label="Invitations" class="obsidian-module__FBweVW__managementSurface">
+<div class="obsidian-module__FBweVW__managementTable">
+<div class="obsidian-module__FBweVW__managementHead">
+<span>Purpose</span>
+<span>Target</span>
+<span>Status</span>
+<span class="obsidian-module__FBweVW__srOnly">Actions</span>
+</div>
+<div class="obsidian-module__FBweVW__managementRow">
+<strong>Domain join</strong>
+<span>— · Never</span>
+<span class="obsidian-module__FBweVW__managementStatus">Active</span>
+<span class="obsidian-module__FBweVW__srOnly">Revoke</span>
+<button aria-expanded="false" aria-haspopup="menu" aria-label="Actions for — · Never" class="obsidian-module__FBweVW__menuTrigger" data-state="closed" type="button">
+<svg aria-hidden="true" class="lucide lucide-ellipsis lucide-more-horizontal" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="1">
+</circle>
+<circle cx="19" cy="12" r="1">
+</circle>
+<circle cx="5" cy="12" r="1">
+</circle>
+</svg>
+</button>
+</div>
+<div class="obsidian-module__FBweVW__managementRow">
+<strong>Character claim</strong>
+<span>Elias Vane · Never</span>
+<span class="obsidian-module__FBweVW__managementStatus">Exhausted</span>
+<button aria-expanded="false" aria-haspopup="menu" aria-label="Actions for Elias Vane · Never" class="obsidian-module__FBweVW__menuTrigger" data-state="closed" type="button">
+<svg aria-hidden="true" class="lucide lucide-ellipsis lucide-more-horizontal" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="1">
+</circle>
+<circle cx="19" cy="12" r="1">
+</circle>
+<circle cx="5" cy="12" r="1">
+</circle>
+</svg>
+</button>
+</div>
+</div>
+<div>
+<div>
+<p class="obsidian-module__FBweVW__eyebrow">PENDING JOINS</p>
+<div>
+<span>new@example.com → New Character: Fern</span>
+<button aria-expanded="false" aria-haspopup="menu" aria-label="Actions for new@example.com" class="obsidian-module__FBweVW__menuTrigger" data-state="closed" type="button">
+<svg aria-hidden="true" class="lucide lucide-ellipsis lucide-more-horizontal" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="1">
+</circle>
+<circle cx="19" cy="12" r="1">
+</circle>
+<circle cx="5" cy="12" r="1">
+</circle>
+</svg>
+</button>
+</div>
+</div>
+<div>
+<p class="obsidian-module__FBweVW__eyebrow">PENDING CLAIMS</p>
+<p class="obsidian-module__FBweVW__managementEmpty">None.</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<footer class="obsidian-module__FBweVW__footer">
+<div>
+<span class="obsidian-module__FBweVW__footerMark">◈</span> Preview Domain<span class="obsidian-module__FBweVW__footerMotto">A world worth remembering</span>
+</div>
+<div class="obsidian-module__FBweVW__footerLinks">
+<button aria-expanded="false" aria-haspopup="menu" aria-label="Manage domain" class="obsidian-module__FBweVW__menuTrigger" data-state="closed" type="button">
+<svg aria-hidden="true" class="lucide lucide-settings-2" fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg">
+<path d="M14 17H5">
+</path>
+<path d="M19 7h-9">
+</path>
+<circle cx="17" cy="17" r="3">
+</circle>
+<circle cx="7" cy="7" r="3">
+</circle>
+</svg>Manage domain</button>
+<a href="/">LoreForge dashboard <svg aria-hidden="true" class="lucide lucide-arrow-up-right" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 7h10v10">
+</path>
+<path d="M7 17 17 7">
+</path>
+</svg>
+</a>
+</div>
+</footer>
+</div>

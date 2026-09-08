@@ -368,10 +368,12 @@ export class ScenarioBuilder {
       managementNavigation: this.spec.fixtureProfile === 'obsidian-fidelity'
         ? [
             { label: 'People', segment: 'manage/people', href: `${this.baseUrl}/manage/people` },
+            { label: 'Members', segment: 'members', href: `${this.baseUrl}/members` },
             { label: 'Roles', segment: 'roles', href: `${this.baseUrl}/roles` },
             { label: 'Folders', segment: 'manage/folders', href: `${this.baseUrl}/manage/folders` },
             { label: 'Departments', segment: 'manage/departments', href: `${this.baseUrl}/manage/departments` },
-            { label: 'Document types', segment: 'document-types', href: `${this.baseUrl}/document-types` },
+            { label: 'Document Types', segment: 'document-types', href: `${this.baseUrl}/document-types` },
+            { label: 'Invitations', segment: 'manage/invitations', href: `${this.baseUrl}/manage/invitations` },
             { label: 'Customize', segment: 'customize', href: `${this.baseUrl}/customize` },
           ]
         : managementNavigation(projection.persona),

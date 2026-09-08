@@ -1,0 +1,167 @@
+{
+  "fixtureSource": "production/src/lib/design/fixtures.ts",
+  "surface": "management-folders",
+  "surfaceKey": "management.folders",
+  "pathname": "/design-parity/management-folders",
+  "shell": {
+    "domain": {
+      "id": 0,
+      "slug": "preview-domain",
+      "name": "Preview Domain",
+      "motto": "A world worth remembering",
+      "logoUrl": null,
+      "bannerUrl": null,
+      "backgroundUrl": null
+    },
+    "primaryNavigation": [
+      {
+        "label": "Home",
+        "segment": "",
+        "href": "/design-parity"
+      },
+      {
+        "label": "About",
+        "segment": "about",
+        "href": "/design-parity/about"
+      },
+      {
+        "label": "Lore",
+        "segment": "lore",
+        "href": "/design-parity/lore"
+      },
+      {
+        "label": "Departments",
+        "segment": "departments",
+        "href": "/design-parity/departments"
+      },
+      {
+        "label": "Records",
+        "segment": "records",
+        "href": "/design-parity/records"
+      }
+    ],
+    "managementNavigation": [
+      {
+        "label": "People",
+        "segment": "manage/people",
+        "href": "/design-parity/manage/people"
+      },
+      {
+        "label": "Members",
+        "segment": "members",
+        "href": "/design-parity/members"
+      },
+      {
+        "label": "Roles",
+        "segment": "roles",
+        "href": "/design-parity/roles"
+      },
+      {
+        "label": "Folders",
+        "segment": "manage/folders",
+        "href": "/design-parity/manage/folders"
+      },
+      {
+        "label": "Departments",
+        "segment": "manage/departments",
+        "href": "/design-parity/manage/departments"
+      },
+      {
+        "label": "Document Types",
+        "segment": "document-types",
+        "href": "/design-parity/document-types"
+      },
+      {
+        "label": "Invitations",
+        "segment": "manage/invitations",
+        "href": "/design-parity/manage/invitations"
+      },
+      {
+        "label": "Customize",
+        "segment": "customize",
+        "href": "/design-parity/customize"
+      }
+    ],
+    "operatingContext": {
+      "platformLabel": "Loreforge",
+      "availableDomains": [],
+      "activeDomainId": 0,
+      "availableCharacters": [],
+      "activeCharacterId": null,
+      "account": null
+    },
+    "routes": {
+      "baseUrl": "/design-parity",
+      "workUrl": "/design-parity/work"
+    }
+  },
+  "page": {
+    "baseUrl": "/design-parity",
+    "domainSlug": "preview-domain",
+    "domainName": "Preview Domain",
+    "domainId": 42,
+    "rootManageable": true,
+    "status": null,
+    "nodes": [
+      {
+        "id": 1,
+        "name": "Hall of Coin",
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "systemManaged": false,
+        "canManage": true,
+        "children": []
+      },
+      {
+        "id": 2,
+        "name": "Sealed Vault",
+        "createdAt": "2026-01-02T00:00:00.000Z",
+        "systemManaged": false,
+        "canManage": false,
+        "children": []
+      }
+    ]
+  },
+  "config": {
+    "palette": {
+      "background": "#0b1419",
+      "surface": "#142128",
+      "text": "#edf2ef",
+      "muted": "#a7b7bc",
+      "accent": "#bce6d3"
+    },
+    "geometry": {
+      "contentMax": 1440,
+      "pageGutter": 56,
+      "surfaceRadius": 18
+    },
+    "records": {
+      "defaultView": "cards",
+      "cardPageSize": 6,
+      "listPageSize": 50
+    },
+    "atmosphere": {
+      "url": "/design-assets/obsidian/atmosphere.png"
+    }
+  },
+  "theme": {
+    "--tenant-primary": "#bce6d3",
+    "--tenant-secondary": "#142128",
+    "--tenant-accent": "#bce6d3",
+    "--tenant-page-bg": "#0b1419",
+    "--tenant-surface-bg": "#142128",
+    "--tenant-surface-border": "#bce6d3",
+    "--tenant-text-on-primary": "#1A1A1A",
+    "--tenant-heading-font": "Georgia, 'Times New Roman', Times, serif",
+    "--tenant-body-font": "Verdana, Geneva, Tahoma, sans-serif",
+    "--tenant-muted-text": "#a7b7bc",
+    "--obsidian-bg": "#0b1419",
+    "--obsidian-surface": "#142128",
+    "--obsidian-text": "#edf2ef",
+    "--obsidian-muted": "#a7b7bc",
+    "--obsidian-accent": "#bce6d3",
+    "--obsidian-max": "1440px",
+    "--obsidian-gutter": "56px",
+    "--obsidian-radius": "18px",
+    "--obsidian-atmosphere": "/design-assets/obsidian/atmosphere.png"
+  }
+}

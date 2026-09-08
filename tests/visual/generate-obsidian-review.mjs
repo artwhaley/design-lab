@@ -131,7 +131,7 @@ async function main() {
   try {
     const page = await browser.newPage({ viewport: { width: 2400, height: 1200 } })
     await page.goto(`${LAB_ORIGIN}/?fixture=obsidian-fidelity`, { waitUntil: 'networkidle' })
-    await page.locator('#lab-design-select').selectOption({ label: 'Obsidian Lab' })
+    await page.locator('#lab-design-select').selectOption({ label: 'Obsidian' })
     for (const viewport of viewports) {
       await selectViewport(page, viewport.label, viewport.width, viewport.height)
       for (const item of cases) results.push(await captureCase(page, viewport, item))

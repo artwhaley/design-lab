@@ -97,7 +97,7 @@ const isString = (value: unknown): value is string => typeof value === 'string'
 const isNullableNumber = (value: unknown): value is number | null => value === null || (typeof value === 'number' && Number.isFinite(value))
 const isSurfaceKey = (value: unknown): value is SurfaceKey => (
   value === 'home' || value === 'records' || value === 'document' || value === 'departments' || value === 'department' ||
-  value === 'about' || value === 'lore' || value === 'members' || value === 'member' || value === 'work' ||
+  value === 'about' || value === 'lore' || value === 'members' || value === 'work' ||
   value === 'management.departments' || value === 'management.folders' || value === 'management.roles' ||
   value === 'management.documentTypes' || value === 'management.people' || value === 'management.person' ||
   value === 'management.invitations' || value === 'shared.forms' || value === 'shared.templates' || value === 'shared.import' ||
@@ -121,7 +121,7 @@ function isScenarioSpec(value: unknown): value is ScenarioSpec {
   if (!isRecord(value)) return false
   return (value.persona === 'visitor' || value.persona === 'member' || value.persona === 'departmentManager' || value.persona === 'admin') &&
     (value.dataState === 'populated' || value.dataState === 'empty' || value.dataState === 'stress') &&
-    (value.fixtureProfile === undefined || value.fixtureProfile === 'default' || value.fixtureProfile === 'obsidian-fidelity')
+    (value.fixtureProfile === undefined || value.fixtureProfile === 'default' || value.fixtureProfile === 'obsidian-fidelity' || value.fixtureProfile === 'production-preview')
 }
 
 function isRuntimeFlags(value: unknown): value is LabRuntimeFlags {

@@ -68,7 +68,7 @@ describe('Contract Probe conformance — static contract', () => {
   it('implements every required surface slot', () => {
     const design = probe()
     expect(missingRequiredSlots(design)).toEqual([])
-    expect(REQUIRED_DESIGN_SLOTS.length).toBeGreaterThanOrEqual(17)
+    expect(REQUIRED_DESIGN_SLOTS.length).toBe(16)
   })
 
   it('validates defaults and rejects bad input', () => {
@@ -127,7 +127,6 @@ describe('Contract Probe conformance — populated Domain Admin smoke renders', 
     'about',
     'lore',
     'members',
-    'member',
     'work',
     'management.departments',
     'management.folders',

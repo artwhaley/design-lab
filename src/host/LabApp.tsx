@@ -10,19 +10,19 @@ import {
   LAB_CONTRACT_VERSION,
   SURFACE_CATALOG,
   surfaceByKey,
-  type LabDesignDefinition,
   type SurfaceDescriptor,
   type SurfaceKey,
 } from '../contracts'
 import { buildScenario, DEFAULT_SPEC, type ScenarioSpec } from '../fixtures'
 import { ActionLog, FakeBackend, type FakeBackendSnapshot } from '../workspaces'
-import { getDesignDefinition, getDesignDefinitions } from '../designs/registry'
+import type { DesignDefinition } from '@/lib/design/types'
+import { getDesignDefinition, getDesignDefinitions } from '@/lib/design/generated/registry'
 import { LabChrome } from './LabChrome'
 import { SurfaceNavigator } from './SurfaceNavigator'
 import { IframePreviewPane } from './IframePreviewPane'
 import type { Viewport } from './PreviewPane'
 import { PathSimulator, type SurfaceParams } from './PathSimulator'
-import { resolveDesignRuntime } from './designRuntime'
+import { resolveProductionRuntime } from './productionRuntime'
 import { ScenarioPanel } from './ScenarioPanel'
 import { ActionLog as ActionLogView } from './ActionLog'
 import { StudioPanel } from './StudioPanel'
@@ -47,7 +47,7 @@ export function LabApp() {
   const [params, setParams] = useState<SurfaceParams>({})
   const [scenario, setScenario] = useState<ScenarioSpec>(() => {
     const fixtureProfile = new URLSearchParams(window.location.search).get('fixture')
-    return fixtureProfile === 'obsidian-fidelity' ? { ...DEFAULT_SPEC, fixtureProfile } : DEFAULT_SPEC
+    return fixtureProfile === 'obsidian-fidelity' || fixtureProfile === 'production-preview' ? { ...DEFAULT_SPEC, fixtureProfile } : DEFAULT_SPEC
   })
   const [flags, setFlags] = useState<LabRuntimeFlags>(DEFAULT_FLAGS)
   const [viewport, setViewport] = useState<Viewport | null>(null)
@@ -55,8 +55,8 @@ export function LabApp() {
   const [backendVersion, setBackendVersion] = useState(0)
   const [authoritativeHydrate, setAuthoritativeHydrate] = useState<{ snapshot: FakeBackendSnapshot; sourceInstanceId: string; token: number } | undefined>()
 
-  const design: LabDesignDefinition | undefined = getDesignDefinition(designKey)
-  const compareDesign: LabDesignDefinition | undefined = compareKey ? getDesignDefinition(compareKey) : undefined
+  const design: DesignDefinition | undefined = getDesignDefinition(designKey)
+  const compareDesign: DesignDefinition | undefined = compareKey ? getDesignDefinition(compareKey) : undefined
 
   // --- Per-Design config drafts + saved banks (T08) -------------------------
   type ConfigDraft = { raw: unknown; savedVersion: number | null; dirty: boolean }
@@ -140,8 +140,7 @@ export function LabApp() {
 
   const handleSave = (): void => {
     if (!design) return
-    const resolved = resolveDesignRuntime(design, activeDraft.raw, activeDraft.savedVersion)
-    if (!resolved.runtime) return
+    const resolved = resolveProductionRuntime(design, activeDraft.raw, activeDraft.savedVersion)
     if (resolved.errors.length > 0) {
       backendRef.current?.log.append('studio', 'save', 'blocked by validation errors', 'error')
       return
@@ -185,7 +184,7 @@ export function LabApp() {
 
   const activeResolution = useMemo(() => {
     if (!design) return null
-    const resolved = resolveDesignRuntime(design, activeDraft.raw, activeDraft.savedVersion)
+    const resolved = resolveProductionRuntime(design, activeDraft.raw, activeDraft.savedVersion)
     return resolved
   }, [design, activeDraft.raw, activeDraft.savedVersion])
   const studioValidationErrors = activeResolution?.errors ?? []
@@ -210,7 +209,7 @@ export function LabApp() {
     backendRef.current?.log.append(`iframe:${sourceInstanceId}`, 'error', message, 'error')
   }
 
-  const previewFrame = (innerDesign: LabDesignDefinition | undefined, testId: string) => {
+  const previewFrame = (innerDesign: DesignDefinition | undefined, testId: string) => {
     if (!backend) return <div className="lab-hint" style={{ padding: 24 }}>Scenario initializing…</div>
     if (!innerDesign) return <div className="lab-hint" style={{ padding: 24 }}>Select a registered Design to preview.</div>
     if (!authoritativeSnapshot) return <div className="lab-hint" style={{ padding: 24 }}>Scenario initializing…</div>
@@ -254,8 +253,8 @@ export function LabApp() {
         onDesignChange={setDesignKey}
         onCompareChange={setCompareKey}
         surface={activeSurface}
-        compareEnabled={designs.length > 1}
-        onToggleCompare={() => setCompareKey(compareKey ? null : (designs.find((d) => d.key !== designKey)?.key ?? null))}
+        compareEnabled
+        onToggleCompare={() => setCompareKey(compareKey ? null : (designs.find((d) => d.key !== designKey)?.key ?? designKey))}
         onReset={handleReset}
         onRunDiagnostics={handleDiagnostics}
         routeNote={routeNote}

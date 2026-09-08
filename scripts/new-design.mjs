@@ -1,22 +1,14 @@
 /**
- * new-design — scaffold a new Design from designs/_template.
- *
- *   npm run new-design -- <key> "<Name>"
- *
- * Copies the template folder, renames identifiers (Template/template →
- * Name/key), renames the CSS + component files, and prints the one remaining
- * source edit: registering the Design in src/designs/index.ts.
- *
- * The script never touches the host; the only required edit after copy is
- * static registry registration (Guardrail 10).
+ * Create a production-shaped Design folder that can be discovered in the Lab
+ * and copied unchanged into production. The generated presentation is small
+ * on purpose, but it implements every current production slot.
  */
-import { cpSync, existsSync, readdirSync, readFileSync, renameSync, statSync, writeFileSync } from 'node:fs'
+import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)))
-const templateDir = join(root, 'src', 'designs', '_template')
-
 const [key, name] = process.argv.slice(2)
 
 function fail(message) {
@@ -24,72 +16,82 @@ function fail(message) {
   process.exit(1)
 }
 
-if (!key || !name) fail('Usage: npm run new-design -- <key> "<Name>"\n  e.g. npm run new-design -- obsidian-lab "Obsidian Lab"')
-if (!/^[a-z][a-z0-9-]*$/.test(key)) fail('Design key must be lowercase kebab-case, e.g. "obsidian-lab".')
+if (!key || !name) fail('Usage: npm run new-design -- <key> "<Name>"')
+if (!/^[a-z][a-z0-9-]*$/.test(key)) fail('Design key must be lowercase kebab-case, e.g. "folder-parity-probe".')
 if (key === '_template' || key === 'template') fail('The template key is reserved.')
-if (!existsSync(templateDir)) fail('Template folder not found: src/designs/_template')
 
 const targetDir = join(root, 'src', 'designs', key)
 if (existsSync(targetDir)) fail(`A Design already exists at src/designs/${key}.`)
+const assetsDir = join(targetDir, 'assets')
+mkdirSync(assetsDir, { recursive: true })
 
-const pascal = name.replace(/[^a-zA-Z0-9]+/g, '').replace(/^./, (c) => c.toUpperCase())
-const keyCamel = key.replace(/-([a-z0-9])/g, (_, c) => c.toUpperCase())
-const scream = key.replace(/-/g, '_').toUpperCase()
+const configType = `${name.replace(/[^a-zA-Z0-9]+/g, '').replace(/^./, (c) => c.toUpperCase())}ConfigV1`
+const configName = `${key.replace(/-([a-z0-9])/g, (_, c) => c.toUpperCase())}Config`
+const constantName = `${key.replace(/-/g, '_').toUpperCase()}_DEFAULTS`
+const safeName = name.replaceAll('`', '\\`').replaceAll("'", "\\'")
+const description = `${name} — a production-shaped Design scaffold.`
 
-// Specific-first replacement order; the generic lowercase `template` → key
-// runs last so it never corrupts identifiers handled above.
-const replacements = [
-  ['<Name>', name],
-  ['<key>', key],
-  ['TEMPLATE_DEFAULTS', `${scream}_DEFAULTS`],
-  ['TemplateConfigV1', `${pascal}ConfigV1`],
-  ['templateDesign', `${keyCamel}Design`],
-  ['templateConfig', `${keyCamel}Config`],
-  ['Template', pascal],
-  ['TEMPLATE', scream],
-  ['template', key],
-]
+writeFileSync(join(targetDir, 'design.manifest.json'), `${JSON.stringify({
+  manifestVersion: 1,
+  designContractVersion: 1,
+  key,
+  sortOrder: 100,
+  name,
+  status: 'first-class',
+  description,
+  entry: './index.ts',
+  preview: { thumbnail: 'assets/thumbnail.svg' },
+}, null, 2)}\n`)
 
-const fileRenames = [
-  ['template.css', `${key}.css`],
-  ['TemplateShell.tsx', `${pascal}Shell.tsx`],
-  ['TemplateStudio.tsx', `${pascal}Studio.tsx`],
-  ['TemplatePages.tsx', `${pascal}Pages.tsx`],
-]
+writeFileSync(join(targetDir, 'config.ts'), `import type { DesignDefinition } from '@/lib/design/types'
 
-function rewrite(content) {
-  for (const [from, to] of replacements) content = content.split(from).join(to)
-  return content
+export type ${configType} = { accent: string }
+export const ${constantName}: ${configType} = { accent: '#8ab8a1' }
+const HEX = /^#[0-9a-fA-F]{6}$/
+
+export const ${configName}: DesignDefinition<${configType}>['config'] = {
+  version: 1,
+  defaults: ${constantName},
+  validate(raw) {
+    if (!raw || typeof raw !== 'object' || typeof (raw as { accent?: unknown }).accent !== 'string' || !HEX.test((raw as { accent: string }).accent)) return { ok: false, errors: ['accent must be a 6-digit hex color.'] }
+    return { ok: true, value: { accent: (raw as { accent: string }).accent } }
+  },
+  migrate(fromVersion, raw) { return fromVersion === 1 ? ${configName}.validate(raw) : { ok: false, errors: [\`Unsupported config version \${fromVersion}.\`] } },
+  resolveTheme(config) {
+    return { base: { primary: '#183027', secondary: '#2c5542', accent: config.accent, pageBg: '#f3f7f4', surfaceBg: '#ffffff', surfaceBorder: '#ccd8d0', textOnPrimary: '#ffffff', headingFont: 'Manrope, sans-serif', bodyFont: 'Manrope, sans-serif', mutedText: '#557066' }, vars: { '--${key}-accent': config.accent } }
+  },
+}
+`)
+
+writeFileSync(join(targetDir, 'index.ts'), `import { createElement, type ChangeEvent, type ReactNode } from 'react'
+import type { DesignDefinition } from '@/lib/design/types'
+import type { DesignStudioEditorProps } from '@/lib/design/contracts'
+import { ${configName}, type ${configType} } from './config'
+
+function Shell({ children }: { children: ReactNode }) { return createElement('div', { style: { minHeight: '100%', padding: 24, fontFamily: 'var(--tenant-body-font)' } }, createElement('header', null, createElement('strong', null, '${safeName}')), createElement('main', null, children)) }
+function Page({ title }: { title: string }) { return createElement('section', null, createElement('h1', null, title), createElement('p', null, 'Production-shaped ${safeName} surface.')) }
+function Studio({ value, onChange }: DesignStudioEditorProps<${configType}>) { return createElement('label', null, 'Accent', createElement('input', { value: value.accent, onChange: (event: ChangeEvent<HTMLInputElement>) => onChange({ ...value, accent: event.target.value }) })) }
+const studio: { Editor: typeof Studio } = { Editor: Studio }
+
+const design: DesignDefinition<${configType}> = {
+  key: '${key}', status: 'first-class', name: '${safeName}', description: '${description}',
+  preview: { thumbnail: '/design-assets/${key}/thumbnail.svg' }, config: ${configName}, studio,
+  Shell,
+  pages: {
+    home: () => createElement(Page, { title: 'Home' }), records: () => createElement(Page, { title: 'Records' }), document: () => createElement(Page, { title: 'Document' }),
+    departments: () => createElement(Page, { title: 'Departments' }), department: () => createElement(Page, { title: 'Department' }), about: () => createElement(Page, { title: 'About' }),
+    lore: () => createElement(Page, { title: 'Lore' }), members: () => createElement(Page, { title: 'Members' }), work: () => createElement(Page, { title: 'Work' }),
+    management: { departments: () => createElement(Page, { title: 'Manage Departments' }), folders: () => createElement(Page, { title: 'Manage Folders' }), roles: () => createElement(Page, { title: 'Manage Roles' }), documentTypes: () => createElement(Page, { title: 'Document Types' }), people: () => createElement(Page, { title: 'People' }), person: () => createElement(Page, { title: 'Person' }), invitations: () => createElement(Page, { title: 'Invitations' }) },
+  },
 }
 
-cpSync(templateDir, targetDir, { recursive: true })
+export default design
+`)
 
-for (const entry of readdirSync(targetDir)) {
-  const full = join(targetDir, entry)
-  if (statSync(full).isFile()) {
-    if (entry.endsWith('.ts') || entry.endsWith('.tsx') || entry.endsWith('.css') || entry.endsWith('.md')) {
-      writeFileSync(full, rewrite(readFileSync(full, 'utf8')))
-    }
-  }
-  const rename = fileRenames.find(([from]) => from === entry)
-  if (rename) {
-    renameSync(full, join(targetDir, rename[1]))
-  }
-}
+writeFileSync(join(assetsDir, 'thumbnail.svg'), `<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360"><rect width="640" height="360" fill="#183027"/><text x="32" y="190" fill="#8ab8a1" font-family="sans-serif" font-size="32">${name}</text></svg>\n`)
+const sourceAtmosphere = join(root, 'src', 'designs', 'obsidian', 'assets', 'atmosphere.png')
+if (!existsSync(sourceAtmosphere)) fail('Obsidian bundled atmosphere source is required to scaffold a default image.')
+cpSync(sourceAtmosphere, join(assetsDir, 'atmosphere.png'))
 
-// Self-register the copied Design: the template's index only exports the
-// definition (the _template must never appear in the registry), but the
-// copied Design registers itself on import — so the only required source
-// edit remains the single import in src/designs/index.ts.
-const indexFile = join(targetDir, 'index.ts')
-const indexSrc = readFileSync(indexFile, 'utf8')
-if (!indexSrc.includes('register(')) {
-  writeFileSync(indexFile, `${indexSrc.trimEnd()}\n\nimport { register } from '../registry'\nregister(${keyCamel}Design)\n`)
-}
-
-console.log(`\n✅ Created src/designs/${key}/ from _template.`)
-console.log(`   Key: ${key} · Name: ${name} · Identifiers: ${pascal} / ${keyCamel} / ${scream}`)
-console.log('\nNext steps:')
-console.log(`   1. Register it in src/designs/index.ts:\n       import './${key}'`)
-console.log('   2. Fill DESIGN_BRIEF.md, then replace every stub surface.')
-console.log('   3. npm run build && npm test (conformance must pass).\n')
+execFileSync(process.execPath, [join(root, 'scripts', 'discover-designs.mjs')], { cwd: root, stdio: 'inherit' })
+console.log(`✅ Created and discovered src/designs/${key}/. Copy this folder unchanged to production after Lab validation.`)

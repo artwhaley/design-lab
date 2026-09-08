@@ -1,0 +1,397 @@
+<div class="obsidian-module__FBweVW__root" data-template="obsidian" style="--tenant-primary: #bce6d3; --tenant-secondary: #142128; --tenant-accent: #bce6d3; --tenant-page-bg: #0b1419; --tenant-surface-bg: #142128; --tenant-surface-border: #bce6d3; --tenant-text-on-primary: #1A1A1A; --tenant-heading-font: Georgia, 'Times New Roman', Times, serif; --tenant-body-font: Verdana, Geneva, Tahoma, sans-serif; --tenant-muted-text: #a7b7bc; --obsidian-bg: #0b1419; --obsidian-surface: #142128; --obsidian-text: #edf2ef; --obsidian-muted: #a7b7bc; --obsidian-accent: #bce6d3; --obsidian-max: 1440px; --obsidian-gutter: 56px; --obsidian-radius: 18px; --obsidian-atmosphere: /design-assets/obsidian/atmosphere.png;">
+<a class="obsidian-module__FBweVW__skip" href="#main-content">Skip to content</a>
+<div class="obsidian-module__FBweVW__contextBar">
+<div aria-label="Operating context" class="operating-module-scss-module__x0PMsq__contextBar operating-module-scss-module__x0PMsq__obsidianContext">
+<a class="operating-module-scss-module__x0PMsq__platformBrand" href="/">LOREFORGE <svg aria-hidden="true" class="lucide lucide-arrow-up-right" fill="none" height="12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 7h10v10">
+</path>
+<path d="M7 17 17 7">
+</path>
+</svg>
+</a>
+<form action="/api/switch-tenant" class="operating-module-scss-module__x0PMsq__contextControl" method="post">
+<label class="operating-module-scss-module__x0PMsq__contextLabel" for="tenant-switcher">Domain</label>
+<select class="operating-module-scss-module__x0PMsq__contextSelect" disabled="" id="tenant-switcher" name="tenantSlug">
+<option selected="" value="preview-domain">preview-domain</option>
+</select>
+</form>
+<form class="operating-module-scss-module__x0PMsq__contextControl">
+<span aria-hidden="true" class="operating-module-scss-module__x0PMsq__avatar">A</span>
+<label class="operating-module-scss-module__x0PMsq__contextLabel" for="character-switcher">Acting as</label>
+<select class="operating-module-scss-module__x0PMsq__contextSelect" id="character-switcher" name="characterId">
+<option selected="" value="">No participating Character</option>
+</select>
+<input name="returnTo" type="hidden" value="/design-parity/records">
+</form>
+</div>
+</div>
+<div class="obsidian-module__FBweVW__navPosition">
+<div class="obsidian-module__FBweVW__navigation">
+<a aria-label="Preview Domain Domain home" class="obsidian-module__FBweVW__identity" href="/design-parity">
+<span class="obsidian-module__FBweVW__emblem">
+<svg aria-hidden="true" class="lucide lucide-aperture" fill="none" height="27" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" width="27" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="10">
+</circle>
+<path d="m14.31 8 5.74 9.94">
+</path>
+<path d="M9.69 8h11.48">
+</path>
+<path d="m7.38 12 5.74-9.94">
+</path>
+<path d="M9.69 16 3.95 6.06">
+</path>
+<path d="M14.31 16H2.83">
+</path>
+<path d="m16.62 12-5.74 9.94">
+</path>
+</svg>
+</span>
+<span>Preview Domain</span>
+</a>
+<nav aria-label="Primary navigation" class="obsidian-module__FBweVW__desktopNav">
+<a class="" href="/design-parity">Home</a>
+<a class="" href="/design-parity/about">About</a>
+<a class="" href="/design-parity/lore">Lore</a>
+<a class="" href="/design-parity/departments">Departments</a>
+<a aria-current="page" class="obsidian-module__FBweVW__activeNav" href="/design-parity/records">Records</a>
+<a class="" href="/design-parity/work">Work</a>
+</nav>
+<nav aria-label="Management navigation" class="obsidian-module__FBweVW__srOnly">
+<a href="/design-parity/manage/people">People</a>
+<a href="/design-parity/members">Members</a>
+<a href="/design-parity/roles">Roles</a>
+<a href="/design-parity/manage/folders">Folders</a>
+<a href="/design-parity/manage/departments">Departments</a>
+<a href="/design-parity/document-types">Document Types</a>
+<a href="/design-parity/manage/invitations">Invitations</a>
+<a href="/design-parity/customize">Customize</a>
+</nav>
+<button aria-expanded="false" aria-haspopup="dialog" aria-label="Open navigation" class="obsidian-module__FBweVW__mobileMenu" data-state="closed" type="button">
+<svg aria-hidden="true" class="lucide lucide-menu" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 5h16">
+</path>
+<path d="M4 12h16">
+</path>
+<path d="M4 19h16">
+</path>
+</svg>
+</button>
+</div>
+</div>
+<main id="main-content" tabindex="-1">
+<div class="obsidian-module__FBweVW__workspacePage">
+<div class="obsidian-module__FBweVW__pageHeading">
+<div>
+<p class="obsidian-module__FBweVW__eyebrow">THE DOMAIN ARCHIVE</p>
+<h1>Records<span class="obsidian-module__FBweVW__titleDot">.</span>
+</h1>
+<p>Every story leaves a trace.</p>
+</div>
+<div class="obsidian-module__FBweVW__pageActions">
+<a class="obsidian-module__FBweVW__secondaryButton" href="/design-parity/import">
+<svg aria-hidden="true" class="lucide lucide-upload" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3v12">
+</path>
+<path d="m17 8-5-5-5 5">
+</path>
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4">
+</path>
+</svg>Import</a>
+<a class="obsidian-module__FBweVW__primaryButton" href="/design-parity/records/new">
+<svg aria-hidden="true" class="lucide lucide-plus" fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M5 12h14">
+</path>
+<path d="M12 5v14">
+</path>
+</svg>New document</a>
+</div>
+</div>
+<div class="obsidian-module__FBweVW__archive">
+<aside aria-label="Archive folders" class="obsidian-module__FBweVW__folderPanel">
+<div class="obsidian-module__FBweVW__folderHeading">
+<span class="obsidian-module__FBweVW__eyebrow">COLLECTIONS</span>
+<button aria-expanded="false" aria-haspopup="menu" aria-label="Folder management" class="obsidian-module__FBweVW__menuTrigger" data-state="closed" type="button">
+<svg aria-hidden="true" class="lucide lucide-ellipsis lucide-more-horizontal" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="1">
+</circle>
+<circle cx="19" cy="12" r="1">
+</circle>
+<circle cx="5" cy="12" r="1">
+</circle>
+</svg>
+</button>
+</div>
+<div class="obsidian-module__FBweVW__srOnly">
+<a href="/design-parity/manage/folders">Create folder</a>
+<a href="/design-parity/manage/folders">Rename folder</a>
+<a href="/design-parity/manage/folders">Delete folder</a>
+</div>
+<button class="obsidian-module__FBweVW__allRecords obsidian-module__FBweVW__selectedFolder">
+<svg aria-hidden="true" class="lucide lucide-folders" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M20 5a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2.5a1.5 1.5 0 0 1 1.2.6l.6.8a1.5 1.5 0 0 0 1.2.6z">
+</path>
+<path d="M3 8.268a2 2 0 0 0-1 1.738V19a2 2 0 0 0 2 2h11a2 2 0 0 0 1.732-1">
+</path>
+</svg>
+<span>All records</span>
+<small>3</small>
+</button>
+<div class="obsidian-module__FBweVW__folderTree">
+</div>
+<div class="obsidian-module__FBweVW__folderNote">
+<span class="obsidian-module__FBweVW__liveDot">
+</span>THE DOMAIN ARCHIVE<p>3 readable records</p>
+</div>
+</aside>
+<section aria-label="Records" class="obsidian-module__FBweVW__recordsPanel">
+<div class="obsidian-module__FBweVW__archiveToolbar">
+<button aria-expanded="false" class="obsidian-module__FBweVW__mobileFolderButton">
+<svg aria-hidden="true" class="lucide lucide-folders" fill="none" height="19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="19" xmlns="http://www.w3.org/2000/svg">
+<path d="M20 5a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2.5a1.5 1.5 0 0 1 1.2.6l.6.8a1.5 1.5 0 0 0 1.2.6z">
+</path>
+<path d="M3 8.268a2 2 0 0 0-1 1.738V19a2 2 0 0 0 2 2h11a2 2 0 0 0 1.732-1">
+</path>
+</svg>Folders</button>
+<label class="obsidian-module__FBweVW__search">
+<svg aria-hidden="true" class="lucide lucide-search" fill="none" height="19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="19" xmlns="http://www.w3.org/2000/svg">
+<path d="m21 21-4.34-4.34">
+</path>
+<circle cx="11" cy="11" r="8">
+</circle>
+</svg>
+<input aria-label="Search records" placeholder="Search the archive…" type="search" value="">
+</label>
+<div class="obsidian-module__FBweVW__srOnly">
+<select aria-label="Document type">
+<option selected="" value="all">All types</option>
+<option value="1">Report</option>
+<option value="2">Ledger</option>
+<option value="3">Charter</option>
+</select>
+</div>
+<button aria-expanded="false" aria-haspopup="menu" aria-label="Document type" class="obsidian-module__FBweVW__choiceTrigger" data-state="closed" type="button">All types<svg aria-hidden="true" class="lucide lucide-chevron-down" fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg">
+<path d="m6 9 6 6 6-6">
+</path>
+</svg>
+</button>
+</div>
+<div class="obsidian-module__FBweVW__resultsHeading">
+<div>
+<span>All records</span>
+<small aria-live="polite">3 records</small>
+</div>
+<div class="obsidian-module__FBweVW__resultControls">
+<label class="obsidian-module__FBweVW__checkbox">
+<input checked="" type="checkbox">
+<svg aria-hidden="true" class="lucide lucide-check" fill="none" height="12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
+<path d="M20 6 9 17l-5-5">
+</path>
+</svg>
+<span>Include subfolders</span>
+<span class="obsidian-module__FBweVW__srOnly">Search subfolders</span>
+</label>
+<button aria-expanded="false" aria-haspopup="menu" aria-label="Sort records" class="obsidian-module__FBweVW__choiceTrigger" data-state="closed" type="button">Newest first<svg aria-hidden="true" class="lucide lucide-chevron-down" fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg">
+<path d="m6 9 6 6 6-6">
+</path>
+</svg>
+</button>
+<div aria-label="Records view" class="obsidian-module__FBweVW__viewToggle" dir="ltr" role="radiogroup" style="outline: none;" tabindex="-1">
+<button aria-checked="true" aria-label="Card view" data-radix-collection-item="" data-state="on" role="radio" tabindex="-1" type="button">
+<svg aria-hidden="true" class="lucide lucide-layout-grid" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+<rect height="7" rx="1" width="7" x="3" y="3">
+</rect>
+<rect height="7" rx="1" width="7" x="14" y="3">
+</rect>
+<rect height="7" rx="1" width="7" x="14" y="14">
+</rect>
+<rect height="7" rx="1" width="7" x="3" y="14">
+</rect>
+</svg>
+</button>
+<button aria-checked="false" aria-label="List view" data-radix-collection-item="" data-state="off" role="radio" tabindex="-1" type="button">
+<svg aria-hidden="true" class="lucide lucide-list" fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 5h.01">
+</path>
+<path d="M3 12h.01">
+</path>
+<path d="M3 19h.01">
+</path>
+<path d="M8 5h13">
+</path>
+<path d="M8 12h13">
+</path>
+<path d="M8 19h13">
+</path>
+</svg>
+</button>
+</div>
+</div>
+</div>
+<div class="obsidian-module__FBweVW__recordGrid">
+<article class="obsidian-module__FBweVW__recordCard ">
+<div class="obsidian-module__FBweVW__recordCardTop">
+<span class="obsidian-module__FBweVW__recordType">
+</span>
+<span class="obsidian-module__FBweVW__status ">filed</span>
+</div>
+<h2>
+<a href="/design-parity/documents/1">Incident Report 2026-014</a>
+</h2>
+<div class="obsidian-module__FBweVW__recordByline">Elias Vane</div>
+<div class="obsidian-module__FBweVW__recordCardBottom">
+<time datetime="2026-09-01T00:00:00.000Z">Sep 1, 2026</time>
+<button aria-expanded="false" aria-haspopup="menu" aria-label="Actions for Incident Report 2026-014" class="obsidian-module__FBweVW__menuTrigger" data-state="closed" type="button">
+<svg aria-hidden="true" class="lucide lucide-ellipsis lucide-more-horizontal" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="1">
+</circle>
+<circle cx="19" cy="12" r="1">
+</circle>
+<circle cx="5" cy="12" r="1">
+</circle>
+</svg>
+</button>
+<span class="obsidian-module__FBweVW__srOnly">
+<a href="/design-parity/documents/1/edit">Edit</a>
+<a href="/design-parity/records/new?supersedes=1">Supersede</a>
+</span>
+<a aria-label="Read Incident Report 2026-014" href="/design-parity/documents/1">
+<svg aria-hidden="true" class="lucide lucide-arrow-up-right" fill="none" height="19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="19" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 7h10v10">
+</path>
+<path d="M7 17 17 7">
+</path>
+</svg>
+</a>
+</div>
+</article>
+<article class="obsidian-module__FBweVW__recordCard ">
+<div class="obsidian-module__FBweVW__recordCardTop">
+<span class="obsidian-module__FBweVW__recordType">
+</span>
+<span class="obsidian-module__FBweVW__status ">filed</span>
+</div>
+<h2>
+<a href="/design-parity/documents/2">Trade Ledger, Folio 9</a>
+</h2>
+<div class="obsidian-module__FBweVW__recordByline">Elias Vane</div>
+<div class="obsidian-module__FBweVW__recordCardBottom">
+<time datetime="2026-09-01T00:00:00.000Z">Sep 1, 2026</time>
+<button aria-expanded="false" aria-haspopup="menu" aria-label="Actions for Trade Ledger, Folio 9" class="obsidian-module__FBweVW__menuTrigger" data-state="closed" type="button">
+<svg aria-hidden="true" class="lucide lucide-ellipsis lucide-more-horizontal" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="1">
+</circle>
+<circle cx="19" cy="12" r="1">
+</circle>
+<circle cx="5" cy="12" r="1">
+</circle>
+</svg>
+</button>
+<span class="obsidian-module__FBweVW__srOnly">
+<a href="/design-parity/documents/2/edit">Edit</a>
+<a href="/design-parity/records/new?supersedes=2">Supersede</a>
+</span>
+<a aria-label="Read Trade Ledger, Folio 9" href="/design-parity/documents/2">
+<svg aria-hidden="true" class="lucide lucide-arrow-up-right" fill="none" height="19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="19" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 7h10v10">
+</path>
+<path d="M7 17 17 7">
+</path>
+</svg>
+</a>
+</div>
+</article>
+<article class="obsidian-module__FBweVW__recordCard ">
+<div class="obsidian-module__FBweVW__recordCardTop">
+<span class="obsidian-module__FBweVW__recordType">
+</span>
+<span class="obsidian-module__FBweVW__status ">filed</span>
+</div>
+<h2>
+<a href="/design-parity/documents/3">Commission Charter</a>
+</h2>
+<div class="obsidian-module__FBweVW__recordByline">Elias Vane</div>
+<div class="obsidian-module__FBweVW__recordCardBottom">
+<time datetime="2026-09-01T00:00:00.000Z">Sep 1, 2026</time>
+<button aria-expanded="false" aria-haspopup="menu" aria-label="Actions for Commission Charter" class="obsidian-module__FBweVW__menuTrigger" data-state="closed" type="button">
+<svg aria-hidden="true" class="lucide lucide-ellipsis lucide-more-horizontal" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="1">
+</circle>
+<circle cx="19" cy="12" r="1">
+</circle>
+<circle cx="5" cy="12" r="1">
+</circle>
+</svg>
+</button>
+<span class="obsidian-module__FBweVW__srOnly">
+<a href="/design-parity/documents/3/edit">Edit</a>
+<a href="/design-parity/records/new?supersedes=3">Supersede</a>
+</span>
+<a aria-label="Read Commission Charter" href="/design-parity/documents/3">
+<svg aria-hidden="true" class="lucide lucide-arrow-up-right" fill="none" height="19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="19" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 7h10v10">
+</path>
+<path d="M7 17 17 7">
+</path>
+</svg>
+</a>
+</div>
+</article>
+</div>
+<div class="obsidian-module__FBweVW__pagination">
+<span>Showing 1–3 of 3</span>
+<div class="obsidian-module__FBweVW__paginationControls">
+<span>Cards per page</span>
+<button aria-expanded="false" aria-haspopup="menu" aria-label="Cards per page" class="obsidian-module__FBweVW__choiceTrigger" data-state="closed" type="button">6<svg aria-hidden="true" class="lucide lucide-chevron-down" fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg">
+<path d="m6 9 6 6 6-6">
+</path>
+</svg>
+</button>
+<button aria-label="Previous page" class="obsidian-module__FBweVW__pageButton" disabled="">
+<svg aria-hidden="true" class="lucide lucide-arrow-left" fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg">
+<path d="m12 19-7-7 7-7">
+</path>
+<path d="M19 12H5">
+</path>
+</svg>
+</button>
+<span class="obsidian-module__FBweVW__pageCount">1 / 1</span>
+<button aria-label="Next page" class="obsidian-module__FBweVW__pageButton" disabled="">
+<svg aria-hidden="true" class="lucide lucide-arrow-right" fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg">
+<path d="M5 12h14">
+</path>
+<path d="m12 5 7 7-7 7">
+</path>
+</svg>
+</button>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<footer class="obsidian-module__FBweVW__footer">
+<div>
+<span class="obsidian-module__FBweVW__footerMark">◈</span> Preview Domain<span class="obsidian-module__FBweVW__footerMotto">A world worth remembering</span>
+</div>
+<div class="obsidian-module__FBweVW__footerLinks">
+<button aria-expanded="false" aria-haspopup="menu" aria-label="Manage domain" class="obsidian-module__FBweVW__menuTrigger" data-state="closed" type="button">
+<svg aria-hidden="true" class="lucide lucide-settings-2" fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg">
+<path d="M14 17H5">
+</path>
+<path d="M19 7h-9">
+</path>
+<circle cx="17" cy="17" r="3">
+</circle>
+<circle cx="7" cy="7" r="3">
+</circle>
+</svg>Manage domain</button>
+<a href="/">LoreForge dashboard <svg aria-hidden="true" class="lucide lucide-arrow-up-right" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 7h10v10">
+</path>
+<path d="M7 17 17 7">
+</path>
+</svg>
+</a>
+</div>
+</footer>
+</div>

@@ -4,10 +4,16 @@
  * -> Save -> per-Design saved bank. The host owns Save/Revert/Defaults/dirty/
  * validation; the Design owns the editor itself.
  */
-import type { DesignAssetRef, LabDesignDefinition } from '../contracts'
+import type { DesignAssetRef } from '@/lib/design/contracts'
+import type { ComponentType } from 'react'
 
 type Props<TConfig extends object> = {
-  design: LabDesignDefinition<TConfig>
+  design: {
+    key: string
+    name: string
+    config: { version: number }
+    studio: { Editor: ComponentType<{ value: TConfig; onChange(next: TConfig): void; domain: { name: string; motto: string; logoUrl: string | null }; uploadAsset(file: File, purpose: string): Promise<DesignAssetRef> }> }
+  }
   draft: unknown
   savedVersion: number | null
   dirty: boolean

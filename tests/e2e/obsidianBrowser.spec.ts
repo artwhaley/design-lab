@@ -2,7 +2,26 @@ import { expect, test } from '@playwright/test'
 
 import { openLab, previewFrames, selectSurface, selectViewport } from './helpers'
 
-test.describe('Obsidian Lab browser behavior', () => {
+test.describe('Obsidian Design Lab browser behavior', () => {
+  test('default preview iframe fills the available Lab frame height', async ({ page }) => {
+    await openLab(page)
+
+    const sizing = await page.evaluate(() => {
+      const frame = document.querySelector<HTMLElement>('.lab-preview-frame')!
+      const wrapper = document.querySelector<HTMLElement>('.lab-iframe-preview')!
+      const iframe = document.querySelector<HTMLIFrameElement>('iframe[data-testid="preview-iframe"]')!
+      return {
+        frameClientHeight: frame.clientHeight,
+        frameScrollHeight: frame.scrollHeight,
+        wrapperHeight: wrapper.getBoundingClientRect().height,
+        iframeHeight: iframe.getBoundingClientRect().height,
+      }
+    })
+
+    expect(Math.abs(sizing.iframeHeight - sizing.wrapperHeight)).toBeLessThanOrEqual(1)
+    expect(sizing.frameScrollHeight).toBe(sizing.frameClientHeight)
+  })
+
   test('preset widths become real iframe viewports and drive source breakpoints', async ({ page }) => {
     const frame = await openLab(page)
 
@@ -53,7 +72,7 @@ test.describe('Obsidian Lab browser behavior', () => {
 
     await frame.getByRole('link', { name: 'The Northwatch Accord', exact: true }).click()
     await expect(frame.getByRole('heading', { name: 'The Northwatch Accord', exact: true })).toBeVisible()
-    await expect(frame.locator('nav[aria-label="Primary navigation"] a[aria-current="page"]')).toHaveText('Records')
+    await expect(frame.locator('nav[aria-label="Primary navigation"] a[aria-current="page"]')).toHaveText('Home')
     expect(previewFrames(page)[0].url()).toContain('/preview.html')
 
     await frame.locator('nav[aria-label="Primary navigation"] a').filter({ hasText: 'Departments' }).click()
@@ -82,8 +101,8 @@ test.describe('Obsidian Lab browser behavior', () => {
     const sourceFrame = frames[0]
     await expect(sourceFrame.getByRole('heading', { name: 'Folders', exact: true })).toBeVisible()
     await sourceFrame.getByRole('button', { name: 'New folder', exact: true }).click()
-    await sourceFrame.getByRole('dialog').getByLabel('Folder name').fill('Shared collection')
-    await sourceFrame.getByRole('dialog').getByRole('button', { name: 'Create', exact: true }).click()
+    await sourceFrame.getByRole('dialog').getByLabel('Name').fill('Shared collection')
+    await sourceFrame.getByRole('dialog').getByRole('button', { name: 'Create folder', exact: true }).click()
 
     await expect.poll(async () => Promise.all(frames.map((candidate) => candidate.locator('text=Shared collection').count()))).toEqual([1, 1])
   })
@@ -100,21 +119,17 @@ test.describe('Obsidian Lab browser behavior', () => {
     expect(fonts.serif).toContain('Instrument Serif')
   })
 
-  test('saved Obsidian config stays in its own Design bank', async ({ page }) => {
+  test('saved Obsidian config stays in its Design bank across Lab navigation', async ({ page }) => {
     const frame = await openLab(page)
     await page.getByRole('tab', { name: 'Studio', exact: true }).click()
-    const background = page.getByLabel('background (hex)')
+    const background = page.getByLabel('Deep background')
     await background.fill('#123456')
     await page.getByRole('button', { name: 'Save', exact: true }).click()
     await expect(background).toHaveValue('#123456')
 
-    const designs = await page.locator('#lab-design-select option').evaluateAll((options) => options.map((option) => ({ value: (option as HTMLOptionElement).value, label: option.textContent })))
-    const other = designs.find((design) => design.label !== 'Obsidian Lab')
-    expect(other).toBeTruthy()
-    await page.locator('#lab-design-select').selectOption(other!.value)
-    await expect(page.locator('#lab-design-select')).toHaveValue(other!.value)
-    await page.locator('#lab-design-select').selectOption({ label: 'Obsidian Lab' })
+    await page.getByRole('tab', { name: 'Scenario', exact: true }).click()
+    await page.getByRole('button', { name: /Manage Folders/ }).click()
     await page.getByRole('tab', { name: 'Studio', exact: true }).click()
-    await expect(page.getByLabel('background (hex)')).toHaveValue('#123456')
+    await expect(page.getByLabel('Deep background')).toHaveValue('#123456')
   })
 })

@@ -17,6 +17,9 @@ describe('Obsidian fidelity fixture profile', () => {
     expect(scenario.shellModel().primaryNavigation.map((item) => item.label)).toEqual([
       'Home', 'About', 'Lore', 'Departments', 'Records',
     ])
+    expect(scenario.shellModel().managementNavigation.map((item) => item.label)).toEqual([
+      'People', 'Members', 'Roles', 'Folders', 'Departments', 'Document Types', 'Invitations', 'Customize',
+    ])
     expect(scenario.homeModel().welcome.html).toBe(OBSIDIAN_HOME_WELCOME_HTML)
     expect(scenario.aboutModel().bodyHtml).toBe(OBSIDIAN_ABOUT_BODY_HTML)
 

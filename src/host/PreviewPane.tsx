@@ -138,10 +138,6 @@ function renderSurfaceBody(
       return <design.pages.lore model={builder.loreModel()} {...common} />
     case 'members':
       return <design.pages.members model={builder.membersModel()} {...common} />
-    case 'member': {
-      const characterId = params.characterId ?? builder.defaultMemberCharacterId() ?? 1
-      return <design.pages.member model={builder.memberModel(characterId)} {...common} />
-    }
     case 'work':
       return <design.pages.work model={builder.workModel()} {...common} workspace={bridges.work!} />
     case 'management.departments':

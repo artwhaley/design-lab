@@ -14,7 +14,6 @@ export type ClassASurfaceKey =
   | 'about'
   | 'lore'
   | 'members'
-  | 'member'
   | 'work'
   | 'management.departments'
   | 'management.folders'
@@ -62,7 +61,6 @@ export const SURFACE_CATALOG: readonly SurfaceDescriptor[] = [
   { key: 'about', label: 'About', kind: 'classA', routeFamily: '/domain/[slug]/about', designSlot: 'pages.about', navigationSegment: 'about' },
   { key: 'lore', label: 'Lore', kind: 'classA', routeFamily: '/domain/[slug]/lore', designSlot: 'pages.lore', navigationSegment: 'lore' },
   { key: 'members', label: 'Members', kind: 'classA', routeFamily: '/domain/[slug]/members', designSlot: 'pages.members', navigationSegment: 'members' },
-  { key: 'member', label: 'Member profile', kind: 'classA', routeFamily: '/domain/[slug]/members/[characterId]', designSlot: 'pages.member', navigationSegment: 'members' },
   { key: 'work', label: 'Work', kind: 'classA', routeFamily: '/domain/[slug]/work', designSlot: 'pages.work', bridge: 'work', navigationSegment: 'work' },
   { key: 'management.departments', label: 'Manage Departments', kind: 'classA', routeFamily: '/domain/[slug]/manage/departments', designSlot: 'pages.management.departments', bridge: 'departments', navigationSegment: null },
   { key: 'management.folders', label: 'Manage Folders', kind: 'classA', routeFamily: '/domain/[slug]/manage/folders', designSlot: 'pages.management.folders', bridge: 'folders', navigationSegment: null },
@@ -110,7 +108,6 @@ export const REQUIRED_DESIGN_SLOTS: readonly string[] = [
   'about',
   'lore',
   'members',
-  'member',
   'work',
   'management.departments',
   'management.folders',

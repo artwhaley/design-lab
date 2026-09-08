@@ -1,5 +1,10 @@
 # T12 Source Obsidian Visual Baselines
 
+> Historical remediation evidence only. The frozen incubation snapshot is not
+> the Phase 2 production oracle. Current parity is measured by
+> `npm run test:cross-host` and recorded in `docs/parity/cross-host/`, using the
+> live production checkout and the same production-shaped Design folder.
+
 These goldens are the visual oracle for the Obsidian fidelity remediation.
 
 ## Provenance
@@ -77,9 +82,10 @@ authorization.
 ## T13 regression commands
 
 - Browser behavior: `npm run test:e2e`
-- Source visual comparisons: `npm run test:visual`
+- Current cross-host visual comparison: `npm run test:cross-host`
 - Visual budget: maximum `0.02` differing pixels at identical viewport/state.
 
-The browser suite uses the installed Chrome executable through Playwright and
-starts/reuses the Lab Vite server on port 4174. It never runs a golden-update
-command; the T12 source images remain the comparison oracle.
+The historical browser suite uses the installed Chrome executable through
+Playwright and starts/reuses the Lab Vite server on port 4174. It never runs a
+golden-update command. The Phase 2 source oracle is production, not these T12
+incubation images.

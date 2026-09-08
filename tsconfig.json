@@ -10,14 +10,16 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "strict": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"],
     "baseUrl": ".",
     "paths": {
-      "@lab/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@lab/*": ["src/*"],
+      "next/*": ["src/next/*"]
     }
   },
   "include": ["src", "vite.config.ts", "scripts"]

@@ -34,7 +34,6 @@ export function canonicalPathForSurface(
     case 'about': return `${base}/about`
     case 'lore': return params.loreSlug ? `${base}/lore/${segment(params.loreSlug)}` : `${base}/lore`
     case 'members': return `${base}/members`
-    case 'member': return `${base}/members/${segment(params.characterId ?? 1)}`
     case 'work': return `${base}/work`
     case 'management.departments': return `${base}/manage/departments`
     case 'management.folders': return `${base}/manage/folders`

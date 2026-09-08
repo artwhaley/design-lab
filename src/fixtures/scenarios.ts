@@ -5,7 +5,7 @@
  */
 export type PersonaKey = 'visitor' | 'member' | 'departmentManager' | 'admin'
 export type DataStateKey = 'populated' | 'empty' | 'stress'
-export type FixtureProfileKey = 'default' | 'obsidian-fidelity'
+export type FixtureProfileKey = 'default' | 'obsidian-fidelity' | 'production-preview'
 
 export type ScenarioSpec = {
   persona: PersonaKey
@@ -33,6 +33,13 @@ export const OBSIDIAN_FIDELITY_SPEC: ScenarioSpec = {
   persona: 'admin',
   dataState: 'populated',
   fixtureProfile: 'obsidian-fidelity',
+}
+
+/** Uses the exact deterministic models exported by production's fixture oracle. */
+export const PRODUCTION_PREVIEW_SPEC: ScenarioSpec = {
+  persona: 'admin',
+  dataState: 'populated',
+  fixtureProfile: 'production-preview',
 }
 
 export const PERSONAS: readonly PersonaKey[] = ['visitor', 'member', 'departmentManager', 'admin']

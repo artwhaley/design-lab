@@ -3,7 +3,6 @@
  * T07 (scenario controls) and T09 (viewport + compare). All controls are
  * labeled for keyboard/AT use.
  */
-import type { LabDesignDefinition } from '../contracts'
 import type { SurfaceDescriptor } from '../contracts'
 
 export type ViewportPreset = { width: number; height: number; label: string }
@@ -12,6 +11,7 @@ export const VIEWPORT_PRESETS: readonly ViewportPreset[] = [
   { width: 320, height: 700, label: 'Phone narrow' },
   { width: 390, height: 844, label: 'Phone wide' },
   { width: 768, height: 900, label: 'Tablet' },
+  { width: 1024, height: 900, label: 'Tablet landscape' },
   { width: 1280, height: 900, label: 'Desktop' },
   { width: 1440, height: 1000, label: 'Source desktop' },
   { width: 1600, height: 1000, label: 'Wide desktop' },
@@ -20,7 +20,7 @@ export const VIEWPORT_PRESETS: readonly ViewportPreset[] = [
 export type { ViewportPreset as ViewportPresetType }
 
 type Props = {
-  designs: LabDesignDefinition[]
+  designs: Array<{ key: string; name: string }>
   designKey: string
   compareKey: string | null
   onDesignChange(key: string): void
@@ -56,7 +56,7 @@ export function LabChrome(props: Props) {
         </select>
       </div>
 
-      {compareEnabled && (
+      {compareEnabled && designs.length > 1 && (
         <div className="lab-control-group">
           <label htmlFor="lab-compare-select">Compare</label>
           <select id="lab-compare-select" value={compareKey ?? ''} onChange={(e) => onCompareChange(e.target.value || null)}>

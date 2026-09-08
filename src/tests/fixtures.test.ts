@@ -105,6 +105,18 @@ describe('cross-link resolution', () => {
 })
 
 describe('persona projections', () => {
+  it('keeps Obsidian shell navigation in the production order and location', () => {
+    expect(populated.shellModel().primaryNavigation.map((item) => item.label)).toEqual([
+      'Home', 'About', 'Lore', 'Departments', 'Records',
+    ])
+    expect(populated.shellModel().managementNavigation.map((item) => item.label)).toEqual([
+      'People', 'Members', 'Roles', 'Folders', 'Departments', 'Document Types', 'Invitations', 'Customize',
+    ])
+    expect(visitor.shellModel().primaryNavigation.map((item) => item.label)).toEqual([
+      'Home', 'About', 'Lore', 'Departments', 'Records',
+    ])
+  })
+
   it('visitor receives no management navigation and no management routes', () => {
     const shell = visitor.shellModel()
     expect(shell.managementNavigation).toEqual([])

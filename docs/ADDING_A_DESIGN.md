@@ -1,131 +1,89 @@
 # Adding a Design to the Lab
 
-This document is the commissioning path for Design #2 and beyond. It assumes
-you have read `docs/CONTRACT_BASELINE.md` (the frozen contract snapshot) and
-can reference `src/designs/contract-probe/` — the Contract Probe Design,
-which is *executable documentation* of every surface.
+The Lab is a production-consumer harness. A Design folder is portable: after
+it passes the Lab gates, the same `src/designs/<key>/` tree is copied unchanged
+into production and discovered from its manifest. The Lab host owns adapters,
+fixtures, fake workspaces, and browser transport outside that folder.
 
-## 1. Start command
-
-```bash
-npm run new-design -- <key> "<Name>"
-```
-
-Example:
+## 1. Scaffold
 
 ```bash
-npm run new-design -- obsidian-lab "Obsidian Lab"
+npm run new-design -- night-harbour "Night Harbour"
 ```
 
-The script copies `src/designs/_template/` to `src/designs/<key>/` and
-renames every identifier (`Template` → `<Name>`, `template` → `<key>`,
-`template.css` → `<key>.css`, …). It validates the key format and refuses to
-overwrite an existing Design.
+The scaffold writes a manifest, versioned config, the current 16-slot
+production tree, Studio editor, thumbnail, and bundled asset directory. The
+tree includes `pages.members` and `pages.management.person`; there is no
+`pages.member` slot. It validates the key format, refuses to overwrite an
+existing Design, and runs discovery.
 
-## 2. Registration (the only required source edit)
+## 2. Discover and check
 
-The template is never registered (it is a copy source only). After copying,
-register the new Design by adding **one import** to `src/designs/index.ts`:
+Do not add a registry import. Discovery scans `design.manifest.json` files and
+generates the catalog and registry:
 
-```ts
-import './obsidian-lab'   // registers the Design (side effect)
+```bash
+npm run design:discover
+npm run design:check
 ```
 
-The import must be placed in `src/designs/index.ts` — the host reads the
-registry and must never import Designs directly (Guardrail 3). Registration
-throws on duplicate keys, so a fresh key is required.
+The production folder is the source oracle for shared contracts. From the Lab
+checkout, run the complete parity gates with an explicit production path:
 
-## 3. What the art agent owns
+```bash
+npm run test:parity -- --production ..\sl-civic-archive
+npm run parity:folder -- --production ..\sl-civic-archive --check-assets
+```
 
-The Design author owns **everything inside `src/designs/<key>/`**:
+## 3. What the Design owns
+
+Everything inside `src/designs/<key>/` is portable Design code:
 
 | File | Purpose |
-| ---- | ------- |
-| `config.ts` | Config contract: `version`, `defaults`, `validate`, `migrate`, `resolveTheme` |
-| `<Name>Shell.tsx` | Renders the supplied `DomainShellModel` |
-| `<Name>Pages.tsx` | One component per required surface slot |
-| `<Name>Studio.tsx` | Studio editor for this Design's config |
-| `<key>.css` | Design-local scoped CSS (all selectors prefixed `<key>-`) |
-| `DESIGN_BRIEF.md` | Visual direction — fill in first |
-| `INTEGRATION_NOTES.md` | Contract coverage log for production handoff |
-| `PAGE_MODEL_PRESSURE.md` | Facts the frozen contract cannot supply |
+| --- | --- |
+| `design.manifest.json` | Installable key, contract version, metadata, thumbnail |
+| `index.ts` | Production `DesignDefinition` and complete slot tree |
+| `config.ts` | Versioned defaults, validation, migration, theme variables |
+| `assets/` | Thumbnail and bundled fonts/images |
+| `*.tsx` / `*.css` | Design-owned Shell, pages, controls, and presentation |
 
-The host (`src/host/`), the workspaces (`src/workspaces/`), the fixtures
-(`src/fixtures/`), and the contract types (`src/contracts/`) are **not** yours
-to change for the sake of a Design. The only exception is the registry import
-in step 2.
+The host (`src/host/`), Lab fixtures (`src/fixtures/`), emulators, and
+contract mirrors are not copied into production. If a surface needs a fact
+that is absent from the production model, record the pressure and keep the
+adaptation in the Lab host until the contract owner resolves it.
 
-## 4. Using scenarios
+## 4. Exercise the contract
 
-The Lab re-seeds its fixture universe per scenario (persona × data state):
-
-- **Personas:** visitor, member, departmentManager, admin
-- **Data states:** populated, empty, stress
-
-Open the **Scenario** tab in the right panel to switch persona/state, toggle
-latency, force a read error, or make the next mutation fail. Designs receive
+Use the Scenario tab to cover `visitor`, `member`, `departmentManager`, and
+`admin` personas with populated, empty, and stress data. Designs receive
 already-authorized Page Models; they must render absence and denial exactly as
-supplied — never re-derive authorization (A07). Use *empty* to verify
-empty-state rendering and *visitor* to verify limited capability rendering.
+supplied and must not re-derive authorization.
 
-## 5. Using Studio
+Use Studio to verify the full config pipeline: saved bank, migration,
+validation, theme resolution, preview update, save, revert, and defaults.
+Use Compare with the same surface, scenario, and viewport to inspect stateful
+behavior and mutation propagation.
 
-The **Studio** tab edits the active Design's config. The host handles the
-full pipeline: saved bank → migration → validation → theme resolution. The
-preview never sees raw config. Each Design keeps its own persisted config
-bank (per-Design saved state), so switching Designs preserves each one's
-settings. Save writes the validated config; validation errors block saving
-and are shown in the panel.
+## 5. Completion checklist
 
-## 6. Using Compare
+- Every required production slot renders a real implementation.
+- Actions are consumed through supplied props or sanctioned host bridges.
+- Empty, loading, error, and unavailable-capability states are visible.
+- Config validates strictly, migrates all supported versions, and emits the
+  complete base token set.
+- `npm run build`, `npm test`, `npm run test:e2e`, and `npm run design:check`
+  pass.
+- `npm run test:parity -- --production <path>` passes.
+- `npm run test:cross-host` records current production-vs-Lab evidence.
 
-**Compare** opens a second pane with a different Design at the same surface.
-Both panes share one fake backend, so mutations in either pane update shared
-state — the fastest way to judge two approaches against identical data.
-Pick a surface with rich data (Records, Document, Work) and switch viewports
-to compare responsiveness.
+## 6. Production handoff
 
-## 7. Contract pressure rule
-
-The Lab contract snapshot is **frozen** (`docs/CONTRACT_BASELINE.md`). If
-your Design genuinely needs a fact the Page Models cannot supply, record it
-in `PAGE_MODEL_PRESSURE.md` (and `docs/CONTRACT_PRESSURE.md` if it is
-Lab-wide) — do **not** patch the snapshot to fit the Design. The contract
-evolves deliberately through the pressure pipeline, not by author fiat.
-
-## 8. Dependency policy
-
-Designs add **no runtime dependencies**. Everything visual comes from
-Design-local CSS + the universal base tokens (`--tenant-*`) resolved from
-your config. If a dependency seems unavoidable, raise it as an architecture
-decision before adding it.
-
-## 9. Completion checklist
-
-- [ ] Every required surface slot renders a real implementation (no
-      `data-stub-surface` remains)
-- [ ] Interactive surfaces consume only their workspace / action-bridge props
-- [ ] Absent actions/capabilities are not rendered as disabled controls
-- [ ] Empty, loading, and error states are visible
-- [ ] Config validates strictly; migration covers all previous versions;
-      theme emits all 10 base tokens
-- [ ] `npm run build` passes
-- [ ] `npm test` passes — the conformance suite validates this Design once
-      registered (slot presence, defaults, smoke renders)
-- [ ] Compared against Contract Probe in Compare mode across viewports
-- [ ] `DESIGN_BRIEF.md`, `INTEGRATION_NOTES.md`, `PAGE_MODEL_PRESSURE.md`
-      are current
-
-## 10. Production handoff
-
-When the Design is commissioned:
-
-1. Ensure `INTEGRATION_NOTES.md` documents every surface it covers and every
-   decision taken.
-2. Hand `PAGE_MODEL_PRESSURE.md` to the contract owner — these are the
-   production contract gaps the Design surfaced.
-3. The production integration adapter maps the fake workspaces the Design
-   consumes to the real shared workspaces (see `docs/CONTRACT_BASELINE.md`
-   and the production repo's workspace contracts).
-4. The Design's config contract (`version`/`validate`/`migrate`) ships
-   unchanged; production persists the same config shape.
+1. Run the Lab gates and review `docs/parity/cross-host/results.json`.
+2. Confirm `npm run parity:folder -- --production <path> --check-assets`.
+3. Copy `src/designs/<key>/` unchanged into production and run production
+   discovery/build checks.
+4. Remove the temporary probe folder and rerun discovery/checks in both hosts.
+5. Use the `production-preview` profile for the acceptance comparison. Do not
+   mask authored text, navigation, classes, styles, or content, and do not edit
+   the portable Design to compensate for Lab-only chrome or fake-data
+   variation in an authoring-only scenario.

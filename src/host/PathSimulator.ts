@@ -69,7 +69,7 @@ export class PathSimulator {
         return { kind: 'surface', surface: 'lore', params: { loreSlug: second } }
       case 'members':
         if (second === undefined) return { kind: 'surface', surface: 'members', params: {} }
-        return { kind: 'surface', surface: 'member', params: { characterId: idOf(second) ?? undefined } }
+        return { kind: 'external', href }
       case 'work':
         return { kind: 'surface', surface: 'work', params: {} }
       case 'review':
