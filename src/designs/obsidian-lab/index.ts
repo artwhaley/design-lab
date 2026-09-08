@@ -7,7 +7,7 @@
 import type { LabDesignDefinition } from '../../contracts'
 import { register } from '../registry'
 import { obsidianConfig, type ObsidianConfig } from './config'
-import { ObsidianShell } from './ObsidianShell'
+import { ObsidianShellAdapter } from './adapters/ShellAdapter'
 import { ObsidianHome } from './ObsidianHome'
 import { ObsidianRecords } from './ObsidianRecords'
 import { ObsidianDocument } from './ObsidianDocument'
@@ -40,7 +40,7 @@ const obsidianLab: LabDesignDefinition<ObsidianConfig> = {
   studio: {
     Editor: ObsidianStudioEditor,
   },
-  Shell: ObsidianShell,
+  Shell: ObsidianShellAdapter,
   pages: {
     home: ObsidianHome,
     records: ObsidianRecords,
