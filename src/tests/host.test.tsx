@@ -71,23 +71,22 @@ describe('Lab host', () => {
     render(<LabApp />)
     expect(screen.getByRole('heading', { name: /loreforge design lab/i })).toBeInTheDocument()
     expect(screen.getByTestId('lab-preview')).toBeInTheDocument()
-    expect(within(screen.getByTestId('lab-preview')).getByTestId('stub-shell')).toBeInTheDocument()
-    expect(within(screen.getByTestId('lab-preview')).getByTestId('stub-home')).toBeInTheDocument()
+    expect(within(screen.getByTestId('lab-preview')).getByTestId('preview-iframe')).toHaveAttribute('src', '/preview.html?instanceId=lab-preview')
   })
 
   it('navigates surfaces from the sidebar without Design-specific branches', () => {
     render(<LabApp />)
     fireEvent.click(screen.getByRole('button', { name: /^records /i }))
-    expect(within(screen.getByTestId('lab-preview')).getByTestId('stub-records')).toBeInTheDocument()
+    expect(within(screen.getByTestId('lab-preview')).getByTestId('preview-iframe')).toHaveAttribute('title', 'stub-one preview')
     fireEvent.click(screen.getByRole('button', { name: /^manage folders /i }))
-    expect(within(screen.getByTestId('lab-preview')).getByTestId('stub-m-folders')).toBeInTheDocument()
+    expect(within(screen.getByTestId('lab-preview')).getByTestId('preview-iframe')).toHaveAttribute('data-preview-instance-id', 'lab-preview')
   })
 
   it('renders both panes in compare mode with the same surface', () => {
     render(<LabApp />)
     fireEvent.click(screen.getByRole('button', { name: 'Compare' }))
     expect(screen.getByTestId('lab-compare')).toBeInTheDocument()
-    expect(within(screen.getByTestId('lab-preview-a')).getByTestId('stub-home')).toBeInTheDocument()
-    expect(within(screen.getByTestId('lab-preview-b')).getByTestId('stub-home')).toBeInTheDocument()
+    expect(within(screen.getByTestId('lab-preview-a')).getByTestId('preview-iframe')).toBeInTheDocument()
+    expect(within(screen.getByTestId('lab-preview-b')).getByTestId('preview-iframe')).toBeInTheDocument()
   })
 })

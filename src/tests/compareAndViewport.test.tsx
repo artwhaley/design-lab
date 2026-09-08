@@ -52,16 +52,16 @@ describe('host compare mode', () => {
     render(<LabApp />)
     fireEvent.click(screen.getByRole('button', { name: 'Compare' }))
     expect(screen.getByTestId('lab-compare')).toBeInTheDocument()
-    expect(within(screen.getByTestId('lab-preview-a')).getByTestId('stub-home')).toBeInTheDocument()
-    expect(within(screen.getByTestId('lab-preview-b')).getByTestId('stub-home')).toBeInTheDocument()
+    expect(within(screen.getByTestId('lab-preview-a')).getByTestId('preview-iframe')).toBeInTheDocument()
+    expect(within(screen.getByTestId('lab-preview-b')).getByTestId('preview-iframe')).toBeInTheDocument()
   })
 
   it('switches the surface for both panes together', () => {
     render(<LabApp />)
     fireEvent.click(screen.getByRole('button', { name: 'Compare' }))
     fireEvent.click(screen.getByRole('button', { name: /^manage invitations /i }))
-    expect(within(screen.getByTestId('lab-preview-a')).getByTestId('stub-m-invitations')).toBeInTheDocument()
-    expect(within(screen.getByTestId('lab-preview-b')).getByTestId('stub-m-invitations')).toBeInTheDocument()
+    expect(within(screen.getByTestId('lab-preview-a')).getByTestId('preview-iframe')).toHaveAttribute('title', 'stub-one preview')
+    expect(within(screen.getByTestId('lab-preview-b')).getByTestId('preview-iframe')).toHaveAttribute('title', 'stub-two preview')
   })
 })
 
@@ -81,10 +81,9 @@ describe('viewport controls', () => {
 })
 
 describe('css isolation', () => {
-  it('contract probe and stub render without global style leakage in the same document', () => {
-    // Both panes mount in one document (no iframe). Scoping is enforced by
-    // rule, so assert the panes are siblings with distinct boundaries.
+  it('keeps Design DOM inside iframe browsing contexts', () => {
     const builder = buildScenario({ persona: 'admin', dataState: 'populated' })
     expect(builder.shellModel().domain.name).toBe('Aster Reach')
+    expect(document.querySelector('.probe-shell')).toBeNull()
   })
 })

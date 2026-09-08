@@ -19,7 +19,8 @@ import { ActionLog, FakeBackend } from '../workspaces'
 import { getDesignDefinition, getDesignDefinitions } from '../designs/registry'
 import { LabChrome } from './LabChrome'
 import { SurfaceNavigator } from './SurfaceNavigator'
-import { PreviewPane, type Viewport } from './PreviewPane'
+import { IframePreviewPane } from './IframePreviewPane'
+import type { Viewport } from './PreviewPane'
 import { PathSimulator, type SurfaceParams } from './PathSimulator'
 import { resolveDesignRuntime } from './designRuntime'
 import { ScenarioPanel } from './ScenarioPanel'
@@ -178,36 +179,37 @@ export function LabApp() {
     const resolved = resolveDesignRuntime(design, activeDraft.raw, activeDraft.savedVersion)
     return resolved
   }, [design, activeDraft.raw, activeDraft.savedVersion])
-  const designRuntime = activeResolution?.runtime ?? null
   const studioValidationErrors = activeResolution?.errors ?? []
-
-  const compareResolution = useMemo(() => {
-    if (!compareDesign) return null
-    const bank = loadBank(compareDesign.key)
-    const raw = bank ? bank.config : compareDesign.config.defaults
-    const resolved = resolveDesignRuntime(compareDesign, raw, bank ? bank.version : null)
-    return resolved.runtime
-  }, [compareDesign])
-  const compareRuntime = compareResolution
 
   const activeSurface = surfaceByKey(surface)
   const routeNote = viaCompat ? `/domain/aster-reach/${viaCompat}` : null
 
-  const previewFrame = (innerDesign: LabDesignDefinition | undefined, innerRuntime: ReturnType<typeof resolveDesignRuntime>['runtime'] | null, testId: string) => {
+  const previewFrame = (innerDesign: LabDesignDefinition | undefined, testId: string) => {
     if (!backend) return <div className="lab-hint" style={{ padding: 24 }}>Scenario initializing…</div>
-    if (!innerDesign || !innerRuntime) return <div className="lab-hint" style={{ padding: 24 }}>Select a registered Design to preview.</div>
+    if (!innerDesign) return <div className="lab-hint" style={{ padding: 24 }}>Select a registered Design to preview.</div>
+    const draft = innerDesign.key === designKey
+      ? activeDraft
+      : (() => {
+          const bank = loadBank(innerDesign.key)
+          return bank
+            ? { raw: bank.config, savedVersion: bank.version }
+            : { raw: innerDesign.config.defaults, savedVersion: null }
+        })()
     return (
-      <PreviewPane
+      <IframePreviewPane
         testId={testId}
-        design={innerDesign}
-        builder={backend.builder}
-        backend={backend}
+        instanceId={testId}
         surface={surface}
         params={params}
         viaCompat={viaCompat}
-        runtime={innerRuntime}
+        designKey={innerDesign.key}
+        scenario={scenario}
+        flags={flags}
+        config={{ raw: draft.raw, savedVersion: draft.savedVersion }}
+        backendSnapshot={backend.snapshot()}
         viewport={viewport}
         onNavigate={handleNavigate}
+        onExternal={(href) => backend.log.append('navigation', 'external', href)}
       />
     )
   }
@@ -238,15 +240,15 @@ export function LabApp() {
                 <div data-testid="lab-compare" style={{ display: 'flex', gap: 16, minHeight: '100%' }}>
                   <div style={{ flex: 1, minWidth: 0, border: '1px solid #333947', borderRadius: 6, overflow: 'hidden' }}>
                     <div style={{ padding: '4px 10px', background: '#23272f', fontSize: 12, color: '#9aa3b2' }}>{design?.name ?? designKey}</div>
-                    <div style={{ height: 'calc(100% - 28px)' }}>{previewFrame(design, designRuntime, 'lab-preview-a')}</div>
+                    <div style={{ height: 'calc(100% - 28px)' }}>{previewFrame(design, 'lab-preview-a')}</div>
                   </div>
                   <div style={{ flex: 1, minWidth: 0, border: '1px solid #333947', borderRadius: 6, overflow: 'hidden' }}>
                     <div style={{ padding: '4px 10px', background: '#23272f', fontSize: 12, color: '#9aa3b2' }}>{compareDesign.name}</div>
-                    <div style={{ height: 'calc(100% - 28px)' }}>{previewFrame(compareDesign, compareRuntime, 'lab-preview-b')}</div>
+                    <div style={{ height: 'calc(100% - 28px)' }}>{previewFrame(compareDesign, 'lab-preview-b')}</div>
                   </div>
                 </div>
               ) : (
-                previewFrame(design, designRuntime, 'lab-preview')
+                previewFrame(design, 'lab-preview')
               )}
             </div>
           </div>

@@ -169,6 +169,23 @@
   background: #fff;
 }
 
+.lab-iframe-preview {
+  width: max-content;
+  min-width: 100%;
+  margin: 0 auto;
+}
+
+.lab-iframe-preview > iframe {
+  max-width: none;
+  margin: 0;
+}
+
+.lab-iframe-error {
+  padding: 10px;
+  color: var(--lab-danger);
+  font-size: 12px;
+}
+
 .lab-right-panel {
   width: 300px;
   flex-shrink: 0;
