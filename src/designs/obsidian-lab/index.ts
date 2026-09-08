@@ -8,14 +8,15 @@ import type { LabDesignDefinition } from '../../contracts'
 import { register } from '../registry'
 import { obsidianConfig, type ObsidianConfig } from './config'
 import { ObsidianShellAdapter } from './adapters/ShellAdapter'
-import { ObsidianHome } from './ObsidianHome'
+import { HomeAdapter } from './adapters/HomeAdapter'
 import { ObsidianRecords } from './ObsidianRecords'
 import { ObsidianDocument } from './ObsidianDocument'
-import { ObsidianAbout } from './ObsidianAbout'
-import { ObsidianLore } from './ObsidianLore'
-import { ObsidianDepartments } from './ObsidianDepartments'
+import { AboutAdapter } from './adapters/AboutAdapter'
+import { LoreAdapter } from './adapters/LoreAdapter'
+import { DepartmentsAdapter } from './adapters/DepartmentsAdapter'
 import { ObsidianDepartmentDetail } from './ObsidianDepartmentDetail'
-import { ObsidianCharacterProfile, ObsidianMembers } from './ObsidianCharacterProfile'
+import { MemberAdapter } from './adapters/MemberAdapter'
+import { MembersAdapter } from './adapters/MembersAdapter'
 import { ObsidianFolderManager } from './ObsidianFolderManager'
 import { ObsidianDocumentTypes } from './ObsidianDocumentTypes'
 import {
@@ -42,15 +43,15 @@ const obsidianLab: LabDesignDefinition<ObsidianConfig> = {
   },
   Shell: ObsidianShellAdapter,
   pages: {
-    home: ObsidianHome,
+    home: HomeAdapter,
     records: ObsidianRecords,
     document: ObsidianDocument,
-    departments: ObsidianDepartments,
+    departments: DepartmentsAdapter,
     department: ObsidianDepartmentDetail,
-    about: ObsidianAbout,
-    lore: ObsidianLore,
-    members: ObsidianMembers,
-    member: ObsidianCharacterProfile,
+    about: AboutAdapter,
+    lore: LoreAdapter,
+    members: MembersAdapter,
+    member: MemberAdapter,
     work: ObsidianWork,
     management: {
       departments: ObsidianDepartmentsManagement,
