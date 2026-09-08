@@ -14,19 +14,17 @@ import { DocumentAdapter } from './adapters/DocumentAdapter'
 import { AboutAdapter } from './adapters/AboutAdapter'
 import { LoreAdapter } from './adapters/LoreAdapter'
 import { DepartmentsAdapter } from './adapters/DepartmentsAdapter'
-import { ObsidianDepartmentDetail } from './ObsidianDepartmentDetail'
+import { DepartmentAdapter } from './adapters/DepartmentAdapter'
 import { MemberAdapter } from './adapters/MemberAdapter'
 import { MembersAdapter } from './adapters/MembersAdapter'
 import { FoldersAdapter } from './adapters/management/FoldersAdapter'
 import { DocumentTypesAdapter } from './adapters/management/DocumentTypesAdapter'
-import {
-  ObsidianDepartmentsManagement,
-  ObsidianInvitationsManagement,
-  ObsidianPeopleManagement,
-  ObsidianPersonManagement,
-  ObsidianRolesManagement,
-  ObsidianWork,
-} from './ObsidianManagement'
+import { WorkAdapter } from './adapters/WorkAdapter'
+import { DepartmentsAdapter as ManagementDepartmentsAdapter } from './adapters/management/DepartmentsAdapter'
+import { RolesAdapter } from './adapters/management/RolesAdapter'
+import { PeopleAdapter } from './adapters/management/PeopleAdapter'
+import { PersonAdapter } from './adapters/management/PersonAdapter'
+import { InvitationsAdapter } from './adapters/management/InvitationsAdapter'
 import { ObsidianStudioEditor } from './Studio'
 
 const obsidianLab: LabDesignDefinition<ObsidianConfig> = {
@@ -47,20 +45,20 @@ const obsidianLab: LabDesignDefinition<ObsidianConfig> = {
     records: RecordsAdapter,
     document: DocumentAdapter,
     departments: DepartmentsAdapter,
-    department: ObsidianDepartmentDetail,
+    department: DepartmentAdapter,
     about: AboutAdapter,
     lore: LoreAdapter,
     members: MembersAdapter,
     member: MemberAdapter,
-    work: ObsidianWork,
+    work: WorkAdapter,
     management: {
-      departments: ObsidianDepartmentsManagement,
+      departments: ManagementDepartmentsAdapter,
       folders: FoldersAdapter,
-      roles: ObsidianRolesManagement,
+      roles: RolesAdapter,
       documentTypes: DocumentTypesAdapter,
-      people: ObsidianPeopleManagement,
-      person: ObsidianPersonManagement,
-      invitations: ObsidianInvitationsManagement,
+      people: PeopleAdapter,
+      person: PersonAdapter,
+      invitations: InvitationsAdapter,
     },
   },
 }

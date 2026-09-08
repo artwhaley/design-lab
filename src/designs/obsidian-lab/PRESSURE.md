@@ -45,3 +45,29 @@
   maps create/duplicate/archive/rename operations where the workspace exposes
   them. Source-only destructive Delete and drag-move operations are not
   translated into unsupported Lab mutations.
+
+## T11 management and department pressure
+
+- Department detail: the Lab `DepartmentPageModel` supplies active membership
+  and department-owned folder names, but no reporting or parent relationship.
+  The frozen Syncfusion chart requires explicit `parentId` edges. The adapter
+  therefore keeps the source directory header, tabs, and panel vocabulary but
+  renders a truthful member directory in the chart region. No parent edges are
+  inferred or added to fixtures. This region remains a visual-waiver candidate
+  for T12/T13; the frozen chart component remains protected and unused on this
+  missing-semantic path.
+
+- Work, Roles, People, Person, and Invitations use source Obsidian CSS/control
+  vocabulary and Lab workspaces for behavior. The frozen generic management
+  component is used where its row/create contract is semantically compatible
+  (Departments); interactive surfaces with materially different action or
+  search contracts use thin adapter extensions rather than duplicating business
+  rules. Workspace capability and mutation methods remain authoritative.
+
+- The frozen generic management component exposes fixed Edit/Archive labels and
+  an uncontrolled local search callback. Roles and invitation requests have
+  assign/approve/deny/revoke semantics, and People search is controlled by the
+  Lab workspace, so those surfaces use source-styled adapter composition to
+  avoid relabeling an unsupported mutation or creating a second search state
+  machine. Unsupported source actions are not silently converted into new
+  business operations.
