@@ -20,7 +20,7 @@ export function RecordsAdapter({ model, runtime, workspace: ws }: RecordsAdapter
   const selectedFolder = ws.folders.selected
   const loadedRecords = ws.results.records
   const pageSize = ws.pageSize.value
-  const page = Math.max(1, Math.ceil(loadedRecords.length / pageSize))
+  const page = Math.max(1, Math.ceil(ws.results.total / pageSize))
 
   const openFolderDialog = (next: Exclude<Dialog, null>, nextParentId = ws.folders.selectedId) => {
     setDraftError(null)
@@ -112,7 +112,7 @@ export function RecordsAdapter({ model, runtime, workspace: ws }: RecordsAdapter
       if (next > page && ws.results.hasMore) ws.results.loadMore()
     },
     records: loadedRecords,
-    resultCount: loadedRecords.length,
+    resultCount: ws.results.total,
     actions,
     folderActions,
     onAction,

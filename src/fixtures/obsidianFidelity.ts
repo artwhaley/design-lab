@@ -96,7 +96,7 @@ function sourceRecords(): Universe['records'] {
     ['Minutes of the autumn assembly', 2, 3, 'submitted', 3, '2026-09-26T12:00:00Z'],
     ['On the keeping of names', 1, 4, 'filed', 1, '2026-09-25T12:00:00Z'],
     ['The return of the Wayfarer', 4, 2, 'draft', 2, '2026-09-24T12:00:00Z'],
-    ['Stewardship of the eastern passage', 2, 1, 'filed', 4, '2026-09-23T12:00:00Z'],
+    ['Stewardship of the eastern passage', 2, 4, 'filed', 4, '2026-09-23T12:00:00Z'],
     ['The first Northwatch agreement', 5, 1, 'deprecated', 1, '2026-09-22T12:00:00Z'],
     ['Soundings beyond the silver shoals', 3, 2, 'filed', 2, '2026-09-21T12:00:00Z'],
     ['Appointments to the winter council', 2, 3, 'filed', 3, '2026-09-20T12:00:00Z'],
