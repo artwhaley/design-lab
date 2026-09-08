@@ -1,0 +1,31 @@
+{
+  "name": "loreforge-design-lab",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Contract emulator and presentation workbench for first-class LoreForge Designs.",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 4173 --strictPort",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "new-design": "node scripts/new-design.mjs"
+  },
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.4",
+    "jsdom": "^26.1.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vitest": "^3.2.4"
+  }
+}
