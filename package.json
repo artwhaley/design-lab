@@ -10,7 +10,8 @@
     "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
     "test": "vitest run",
     "test:watch": "vitest",
-    "new-design": "node scripts/new-design.mjs"
+    "new-design": "node scripts/new-design.mjs",
+    "verify:obsidian-source": "node scripts/verify-obsidian-source-snapshot.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.42.0",
