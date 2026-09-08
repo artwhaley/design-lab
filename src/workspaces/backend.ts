@@ -12,7 +12,7 @@
  */
 import type { Lifecycle } from '../contracts'
 import type { ScenarioBuilder } from '../fixtures/buildScenario'
-import { buildUniverse } from '../fixtures/universe'
+import { buildUniverse, type Universe } from '../fixtures/universe'
 
 export type LogLevel = 'info' | 'error'
 
@@ -24,6 +24,13 @@ export type LabLogEntry = {
   level: LogLevel
   at: number
 }
+
+export type FakeBackendSnapshot = {
+  universe: Universe
+  revision: number
+}
+
+const cloneSerializable = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T
 
 export class ActionLog {
   entries: LabLogEntry[] = []
@@ -43,6 +50,10 @@ export class ActionLog {
   clear(): void {
     this.entries = []
     for (const listener of [...this.listeners]) listener()
+  }
+
+  get revision(): number {
+    return this.counter
   }
 }
 
@@ -67,6 +78,8 @@ export class FakeBackend {
   /** When true, interactive workspaces report loading. */
   loadingOverride = false
 
+  private snapshotRevision = 0
+
   constructor(builder: ScenarioBuilder, log = new ActionLog(), latencyMs = 120) {
     this.builder = builder
     this.log = log
@@ -75,6 +88,21 @@ export class FakeBackend {
 
   get projection() {
     return this.builder.projection
+  }
+
+  /** Return detached, JSON-safe semantic state for preview transport. */
+  snapshot(): FakeBackendSnapshot {
+    this.snapshotRevision = Math.max(this.snapshotRevision, this.log.revision)
+    return {
+      universe: cloneSerializable(this.builder.universe),
+      revision: this.snapshotRevision,
+    }
+  }
+
+  /** Replace only universe facts; persona projection and action log stay local. */
+  hydrate(snapshot: FakeBackendSnapshot): void {
+    this.builder.universe = cloneSerializable(snapshot.universe)
+    this.snapshotRevision = snapshot.revision
   }
 
   async wait(extra = 0): Promise<void> {
