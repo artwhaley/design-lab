@@ -17,7 +17,7 @@ import {
 import { buildScenario, DEFAULT_SPEC, type ScenarioSpec } from '../fixtures'
 import { ActionLog, FakeBackend } from '../workspaces'
 import { getDesignDefinition, getDesignDefinitions } from '../designs/registry'
-import { LabChrome, VIEWPORT_PRESETS, type ViewportPreset } from './LabChrome'
+import { LabChrome } from './LabChrome'
 import { SurfaceNavigator } from './SurfaceNavigator'
 import { PreviewPane, type Viewport } from './PreviewPane'
 import { PathSimulator, type SurfaceParams } from './PathSimulator'
@@ -25,6 +25,7 @@ import { resolveDesignRuntime } from './designRuntime'
 import { ScenarioPanel } from './ScenarioPanel'
 import { ActionLog as ActionLogView } from './ActionLog'
 import { StudioPanel } from './StudioPanel'
+import { ViewportControls } from './ViewportControls'
 import { loadBank, saveBank, type SavedBank } from './configBanks'
 
 export type LabRuntimeFlags = {
@@ -38,7 +39,7 @@ const DEFAULT_FLAGS: LabRuntimeFlags = { latencyMs: 120, failNextMutation: false
 
 export function LabApp() {
   const designs = useMemo(() => getDesignDefinitions(), [])
-  const [panel, setPanel] = useState<'scenario' | 'studio' | 'log'>('scenario')
+  const [panel, setPanel] = useState<'scenario' | 'studio' | 'view' | 'log'>('scenario')
   const [designKey, setDesignKey] = useState<string>(designs[0]?.key ?? '')
   const [compareKey, setCompareKey] = useState<string | null>(null)
   const [surface, setSurface] = useState<SurfaceKey>('home')
@@ -211,11 +212,6 @@ export function LabApp() {
     )
   }
 
-  const viewportPresets: readonly ViewportPreset[] = VIEWPORT_PRESETS
-  const applyViewport = (index: number): void => {
-    setViewport(index >= 0 ? { width: viewportPresets[index].width, height: viewportPresets[index].height, label: viewportPresets[index].label } : null)
-  }
-
   return (
     <div className="lab-chrome">
       <LabChrome
@@ -225,8 +221,6 @@ export function LabApp() {
         onDesignChange={setDesignKey}
         onCompareChange={setCompareKey}
         surface={activeSurface}
-        viewportLabel={viewport?.label ?? 'Fluid'}
-        onViewportChange={applyViewport}
         compareEnabled={designs.length > 1}
         onToggleCompare={() => setCompareKey(compareKey ? null : (designs.find((d) => d.key !== designKey)?.key ?? null))}
         onReset={handleReset}
@@ -261,6 +255,7 @@ export function LabApp() {
             <div className="lab-tabs" role="tablist" aria-label="Lab workbench tabs">
               <button type="button" role="tab" aria-selected={panel === 'scenario'} className={panel === 'scenario' ? 'lab-active' : undefined} onClick={() => setPanel('scenario')}>Scenario</button>
               <button type="button" role="tab" aria-selected={panel === 'studio'} className={panel === 'studio' ? 'lab-active' : undefined} onClick={() => setPanel('studio')}>Studio</button>
+              <button type="button" role="tab" aria-selected={panel === 'view'} className={panel === 'view' ? 'lab-active' : undefined} onClick={() => setPanel('view')}>View</button>
               <button type="button" role="tab" aria-selected={panel === 'log'} className={panel === 'log' ? 'lab-active' : undefined} onClick={() => setPanel('log')}>Log</button>
             </div>
             <div className="lab-panel-body" role="tabpanel">
@@ -272,6 +267,9 @@ export function LabApp() {
                   onFlagsChange={setFlags}
                   onReset={handleReset}
                 />
+              ) : null}
+              {panel === 'view' ? (
+                <ViewportControls viewport={viewport} onChange={setViewport} />
               ) : null}
               {panel === 'studio' && design ? (
                 <StudioPanel

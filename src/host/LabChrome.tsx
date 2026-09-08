@@ -16,6 +16,8 @@ export const VIEWPORT_PRESETS: readonly ViewportPreset[] = [
   { width: 1600, height: 1000, label: 'Wide desktop' },
 ]
 
+export type { ViewportPreset as ViewportPresetType }
+
 type Props = {
   designs: LabDesignDefinition[]
   designKey: string
@@ -23,8 +25,6 @@ type Props = {
   onDesignChange(key: string): void
   onCompareChange(key: string | null): void
   surface: SurfaceDescriptor
-  viewportLabel: string
-  onViewportChange(index: number): void
   compareEnabled: boolean
   onToggleCompare(): void
   onReset(): void
@@ -35,7 +35,7 @@ type Props = {
 export function LabChrome(props: Props) {
   const {
     designs, designKey, compareKey, onDesignChange, onCompareChange,
-    surface, viewportLabel, onViewportChange, compareEnabled, onToggleCompare,
+    surface, compareEnabled, onToggleCompare,
     onReset, onRunDiagnostics, routeNote,
   } = props
 
@@ -66,16 +66,6 @@ export function LabChrome(props: Props) {
           </select>
         </div>
       )}
-
-      <div className="lab-control-group">
-        <label htmlFor="lab-viewport-select">Viewport</label>
-        <select id="lab-viewport-select" value={viewportLabel} onChange={(e) => onViewportChange(VIEWPORT_PRESETS.findIndex((v) => v.label === e.target.value))}>
-          <option value="Fluid">Fluid</option>
-          {VIEWPORT_PRESETS.map((preset) => (
-            <option key={preset.label} value={preset.label}>{preset.label}</option>
-          ))}
-        </select>
-      </div>
 
       <div className="lab-control-group">
         <span className="lab-hint" aria-label="active surface">
