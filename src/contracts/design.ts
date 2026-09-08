@@ -8,6 +8,8 @@
  */
 import type { ComponentType, ReactNode } from 'react'
 
+import type { SurfaceKey } from './surfaces'
+
 import type {
   AboutPageModel,
   DepartmentPageModel,
@@ -129,9 +131,17 @@ export type DesignRuntime<TConfig extends object> = {
 // Shell + page props
 // ---------------------------------------------------------------------------
 
+export type LabRouteContext = {
+  surface: SurfaceKey
+  canonicalPath: string
+  activeNavigationSegment: string | null
+  viaCompat?: 'review' | 'subdomains'
+}
+
 export type LabShellProps<TConfig extends object> = {
   model: DomainShellModel
   runtime: DesignRuntime<TConfig>
+  route: LabRouteContext
   children: ReactNode
 }
 

@@ -14,6 +14,7 @@ import { SharedFunctionalSurface } from './SharedFunctionalSurface'
 import type { PaneBridges } from './WorkspaceFactory'
 import { createWorkspacesForSurface } from './WorkspaceFactory'
 import type { SurfaceParams } from './PathSimulator'
+import { routeContextForSurface } from './routeContext'
 
 export type Viewport = { width: number; height: number; label: string }
 
@@ -83,6 +84,7 @@ export function PreviewPane(props: Props) {
   }
 
   const shellModel = builder.shellModel()
+  const route = routeContextForSurface(effectiveSurface, params, viaCompat, builder.baseUrl)
   const body = renderSurfaceBody(design, builder, effectiveSurface, params, runtime, bridges)
 
   const wrapperStyle: CSSProperties = {
@@ -99,7 +101,7 @@ export function PreviewPane(props: Props) {
 
   return (
     <div data-testid={testId} onClickCapture={handleClickCapture} style={wrapperStyle}>
-      <design.Shell model={shellModel} runtime={runtime as never}>
+      <design.Shell model={shellModel} runtime={runtime as never} route={route}>
         {body}
       </design.Shell>
     </div>
