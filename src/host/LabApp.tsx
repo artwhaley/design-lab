@@ -24,6 +24,8 @@ import { PathSimulator, type SurfaceParams } from './PathSimulator'
 import { resolveDesignRuntime } from './designRuntime'
 import { ScenarioPanel } from './ScenarioPanel'
 import { ActionLog as ActionLogView } from './ActionLog'
+import { StudioPanel } from './StudioPanel'
+import { loadBank, saveBank, type SavedBank } from './configBanks'
 
 export type LabRuntimeFlags = {
   latencyMs: number
@@ -48,6 +50,23 @@ export function LabApp() {
 
   const design: LabDesignDefinition | undefined = getDesignDefinition(designKey)
   const compareDesign: LabDesignDefinition | undefined = compareKey ? getDesignDefinition(compareKey) : undefined
+
+  // --- Per-Design config drafts + saved banks (T08) -------------------------
+  type ConfigDraft = { raw: unknown; savedVersion: number | null; dirty: boolean }
+  const [configDrafts, setConfigDrafts] = useState<Record<string, ConfigDraft>>({})
+
+  useEffect(() => {
+    setConfigDrafts((current) => {
+      if (current[designKey]) return current
+      const bank = loadBank(designKey)
+      const selected = getDesignDefinition(designKey)
+      const fallback: ConfigDraft = { raw: selected?.config.defaults, savedVersion: null, dirty: false }
+      return { ...current, [designKey]: bank ? { raw: bank.config, savedVersion: bank.version, dirty: false } : fallback }
+    })
+  }, [designKey])
+
+  const fallbackDraft: ConfigDraft = { raw: design?.config.defaults, savedVersion: null, dirty: false }
+  const activeDraft = configDrafts[designKey] ?? fallbackDraft
 
   // Backend lifecycle: one ScenarioBuilder + FakeBackend per scenario spec.
   const scenarioKey = `${scenario.persona}:${scenario.dataState}`
@@ -100,6 +119,50 @@ export function LabApp() {
     setParams({})
   }
 
+  // --- Studio lifecycle -----------------------------------------------------
+  const updateDraft = (next: unknown): void => {
+    setConfigDrafts((current) => ({
+      ...current,
+      [designKey]: { ...(current[designKey] ?? fallbackDraft), raw: next, dirty: true },
+    }))
+  }
+
+  const handleSave = (): void => {
+    if (!design) return
+    const resolved = resolveDesignRuntime(design, activeDraft.raw, activeDraft.savedVersion)
+    if (!resolved.runtime) return
+    if (resolved.errors.length > 0) {
+      backendRef.current?.log.append('studio', 'save', 'blocked by validation errors', 'error')
+      return
+    }
+    const bank: SavedBank = { version: design.config.version, config: resolved.runtime.config }
+    saveBank(designKey, bank)
+    setConfigDrafts((current) => ({ ...current, [designKey]: { ...(current[designKey] ?? fallbackDraft), raw: bank.config, savedVersion: bank.version, dirty: false } }))
+    backendRef.current?.log.append('studio', 'save', `${design.key} config v${design.config.version} saved`)
+  }
+
+  const handleRevert = (): void => {
+    const bank = loadBank(designKey)
+    setConfigDrafts((current) => ({
+      ...current,
+      [designKey]: bank
+        ? { raw: bank.config, savedVersion: bank.version, dirty: false }
+        : { ...(current[designKey] ?? fallbackDraft), raw: design?.config.defaults, savedVersion: null, dirty: false },
+    }))
+    backendRef.current?.log.append('studio', 'revert', designKey)
+  }
+
+  const handleRestoreDefaults = (): void => {
+    setConfigDrafts((current) => ({ ...current, [designKey]: { raw: design?.config.defaults, savedVersion: current[designKey]?.savedVersion ?? null, dirty: true } }))
+    backendRef.current?.log.append('studio', 'defaults', designKey)
+  }
+
+  const uploadAsset = async (file: File, purpose: string) => {
+    const url = URL.createObjectURL(file)
+    backendRef.current?.log.append('studio', 'upload', `${purpose}: ${file.name} (preview-only object URL)`)
+    return { url }
+  }
+
   const handleDiagnostics = (): void => {
     const log = backendRef.current?.log
     if (!log) return
@@ -109,17 +172,22 @@ export function LabApp() {
     log.append('diagnostics', 'scenario', `${scenario.persona} / ${scenario.dataState}`)
   }
 
-  const designRuntime = useMemo(() => {
+  const activeResolution = useMemo(() => {
     if (!design) return null
-    const resolved = resolveDesignRuntime(design, design.config.defaults, null)
-    return resolved.runtime
-  }, [design])
+    const resolved = resolveDesignRuntime(design, activeDraft.raw, activeDraft.savedVersion)
+    return resolved
+  }, [design, activeDraft.raw, activeDraft.savedVersion])
+  const designRuntime = activeResolution?.runtime ?? null
+  const studioValidationErrors = activeResolution?.errors ?? []
 
-  const compareRuntime = useMemo(() => {
+  const compareResolution = useMemo(() => {
     if (!compareDesign) return null
-    const resolved = resolveDesignRuntime(compareDesign, compareDesign.config.defaults, null)
+    const bank = loadBank(compareDesign.key)
+    const raw = bank ? bank.config : compareDesign.config.defaults
+    const resolved = resolveDesignRuntime(compareDesign, raw, bank ? bank.version : null)
     return resolved.runtime
   }, [compareDesign])
+  const compareRuntime = compareResolution
 
   const activeSurface = surfaceByKey(surface)
   const routeNote = viaCompat ? `/domain/aster-reach/${viaCompat}` : null
@@ -205,10 +273,24 @@ export function LabApp() {
                   onReset={handleReset}
                 />
               ) : null}
-              {panel === 'studio' ? (
+              {panel === 'studio' && design ? (
+                <StudioPanel
+                  design={design}
+                  draft={activeDraft.raw}
+                  savedVersion={activeDraft.savedVersion}
+                  dirty={activeDraft.dirty}
+                  validationErrors={studioValidationErrors}
+                  domain={backend ? { name: backend.builder.universe.domain.name, motto: backend.builder.universe.domain.motto, logoUrl: backend.builder.universe.domain.logoUrl } : { name: 'Aster Reach', motto: '', logoUrl: null }}
+                  uploadAsset={uploadAsset}
+                  onChange={updateDraft}
+                  onSave={handleSave}
+                  onRevert={handleRevert}
+                  onRestoreDefaults={handleRestoreDefaults}
+                />
+              ) : panel === 'studio' ? (
                 <div>
                   <h3>Studio</h3>
-                  <p className="lab-hint">Per-Design config banks and the Design-owned Studio editor arrive in T08.</p>
+                  <p className="lab-hint">Select a registered Design to customize.</p>
                 </div>
               ) : null}
               {panel === 'log' && backend ? (
