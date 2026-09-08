@@ -131,7 +131,7 @@ export class FakeBackend {
 
   /** Restore the deterministic scenario baseline (new Universe, same spec). */
   reset(): void {
-    this.builder.universe = buildUniverse(this.builder.spec.dataState)
+    this.builder.universe = buildUniverse(this.builder.spec.dataState, this.builder.spec.fixtureProfile)
     this.readError = false
     this.loadingOverride = false
     this.snapshotRevision = 0

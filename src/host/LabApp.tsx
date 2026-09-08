@@ -45,7 +45,10 @@ export function LabApp() {
   const [compareKey, setCompareKey] = useState<string | null>(null)
   const [surface, setSurface] = useState<SurfaceKey>('home')
   const [params, setParams] = useState<SurfaceParams>({})
-  const [scenario, setScenario] = useState<ScenarioSpec>(DEFAULT_SPEC)
+  const [scenario, setScenario] = useState<ScenarioSpec>(() => {
+    const fixtureProfile = new URLSearchParams(window.location.search).get('fixture')
+    return fixtureProfile === 'obsidian-fidelity' ? { ...DEFAULT_SPEC, fixtureProfile } : DEFAULT_SPEC
+  })
   const [flags, setFlags] = useState<LabRuntimeFlags>(DEFAULT_FLAGS)
   const [viewport, setViewport] = useState<Viewport | null>(null)
   const [viaCompat, setViaCompat] = useState<'review' | 'subdomains' | undefined>(undefined)
@@ -73,7 +76,7 @@ export function LabApp() {
   const activeDraft = configDrafts[designKey] ?? fallbackDraft
 
   // Backend lifecycle: one ScenarioBuilder + FakeBackend per scenario spec.
-  const scenarioKey = `${scenario.persona}:${scenario.dataState}`
+  const scenarioKey = `${scenario.persona}:${scenario.dataState}:${scenario.fixtureProfile ?? 'default'}`
   const backendRef = useRef<FakeBackend | null>(null)
   const [backend, setBackend] = useState<FakeBackend | null>(() => null)
   useEffect(() => {

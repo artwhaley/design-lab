@@ -32,10 +32,9 @@ import type {
 import { buildUniverse, type Universe } from './universe'
 import type { RecordEntity } from './records'
 import { managementNavigation, primaryNavigation } from './baseDomain'
-import { DEPARTMENT_VOCABULARY, departmentById } from './departments'
-import { documentTypeName } from './documentTypes'
+import { DEPARTMENT_VOCABULARY } from './departments'
 import { roleById } from './roles'
-import { roleLabels } from './roles'
+import { OBSIDIAN_ABOUT_BODY_HTML, OBSIDIAN_DOCUMENT_BODY_HTML, OBSIDIAN_DOCUMENT_BODY_SOURCE, OBSIDIAN_HOME_WELCOME_HTML } from './obsidianFidelity'
 import type { PersonaKey, ScenarioSpec } from './scenarios'
 
 export type PersonaProjection = {
@@ -167,7 +166,7 @@ function recordCapabilities(projection: PersonaProjection, record: RecordEntity)
   }
 }
 
-export function folderTree(universe: Universe, visibleRecordIds: Set<number>): FolderSummary[] {
+export function folderTree(universe: Universe, visibleRecordIds: Set<number>, includeDescendantCounts = false): FolderSummary[] {
   const byParent = new Map<number | null, FolderSummary[]>()
   const counts = new Map<number, number>()
   for (const record of universe.records) {
@@ -191,10 +190,9 @@ export function folderTree(universe: Universe, visibleRecordIds: Set<number>): F
     return (byParent.get(parentId) ?? []).map((node) => {
       const children = assemble(node.id)
       node.children = children
-      if (node.readableRecordCount === 0) {
-        const descendantCount = children.reduce((sum, child) => sum + child.readableRecordCount, 0)
-        node.readableRecordCount = descendantCount
-      }
+      const descendantCount = children.reduce((sum, child) => sum + child.readableRecordCount, 0)
+      if (includeDescendantCounts) node.readableRecordCount += descendantCount
+      else if (node.readableRecordCount === 0) node.readableRecordCount = descendantCount
       return node
     })
   }
@@ -295,13 +293,13 @@ function memberName(universe: Universe, memberId: number): string {
 function departmentNamesOf(universe: Universe, memberId: number): string[] {
   const member = universe.members.find((m) => m.id === memberId)
   if (!member) return []
-  return member.departmentIds.map((id) => departmentById(id).name)
+  return member.departmentIds.map((id) => universe.departments.find((department) => department.id === id)?.name ?? `Department ${id}`)
 }
 
 function roleLabelsOf(universe: Universe, memberId: number): string[] {
   const member = universe.members.find((m) => m.id === memberId)
   if (!member) return []
-  return roleLabels(member.roleIds)
+  return member.roleIds.map((id) => universe.roles.find((role) => role.id === id)?.name ?? `Role ${id}`)
 }
 
 export class ScenarioBuilder {
@@ -312,8 +310,10 @@ export class ScenarioBuilder {
 
   constructor(spec: ScenarioSpec) {
     this.spec = spec
-    this.universe = buildUniverse(spec.dataState)
-    this.projection = PROJECTIONS[spec.persona]
+    this.universe = buildUniverse(spec.dataState, spec.fixtureProfile)
+    this.projection = spec.fixtureProfile === 'obsidian-fidelity'
+      ? { ...PROJECTIONS[spec.persona], actingCharacterId: spec.persona === 'visitor' ? null : 1, accountName: spec.persona === 'visitor' ? null : 'Morgan', accountEmail: spec.persona === 'visitor' ? null : 'morgan@example.test', administratedDepartmentIds: spec.persona === 'admin' ? [1, 2, 3] : PROJECTIONS[spec.persona].administratedDepartmentIds }
+      : PROJECTIONS[spec.persona]
     this.baseUrl = this.universe.domain.baseUrl
   }
 
@@ -356,17 +356,36 @@ export class ScenarioBuilder {
         bannerUrl: domain.bannerUrl,
         backgroundUrl: domain.backgroundUrl,
       },
-      primaryNavigation: primaryNavigation(projection.persona),
-      managementNavigation: managementNavigation(projection.persona),
+      primaryNavigation: this.spec.fixtureProfile === 'obsidian-fidelity'
+        ? [
+            { label: 'Home', segment: '', href: this.baseUrl },
+            { label: 'About', segment: 'about', href: `${this.baseUrl}/about` },
+            { label: 'Lore', segment: 'lore', href: `${this.baseUrl}/lore` },
+            { label: 'Departments', segment: 'departments', href: `${this.baseUrl}/departments` },
+            { label: 'Records', segment: 'records', href: `${this.baseUrl}/records` },
+          ]
+        : primaryNavigation(projection.persona),
+      managementNavigation: this.spec.fixtureProfile === 'obsidian-fidelity'
+        ? [
+            { label: 'People', segment: 'manage/people', href: `${this.baseUrl}/manage/people` },
+            { label: 'Roles', segment: 'roles', href: `${this.baseUrl}/roles` },
+            { label: 'Folders', segment: 'manage/folders', href: `${this.baseUrl}/manage/folders` },
+            { label: 'Departments', segment: 'manage/departments', href: `${this.baseUrl}/manage/departments` },
+            { label: 'Document types', segment: 'document-types', href: `${this.baseUrl}/document-types` },
+            { label: 'Customize', segment: 'customize', href: `${this.baseUrl}/customize` },
+          ]
+        : managementNavigation(projection.persona),
       operatingContext: {
         platformLabel: 'LoreForge',
-        availableDomains: [
-          { id: 1, slug: 'aster-reach', name: 'Aster Reach' },
-          { id: 2, slug: 'telnus', name: 'Telnus Archive' },
-        ],
+        availableDomains: this.spec.fixtureProfile === 'obsidian-fidelity'
+          ? [{ id: 1, slug: 'aster-reach', name: 'Aster Reach' }]
+          : [
+              { id: 1, slug: 'aster-reach', name: 'Aster Reach' },
+              { id: 2, slug: 'telnus', name: 'Telnus Archive' },
+            ],
         activeDomainId: domain.id,
         availableCharacters: acting
-          ? this.universe.members.filter((m) => m.status === 'active' && projection.persona !== 'visitor').slice(0, 4).map((m) => ({ id: m.id, name: m.name }))
+          ? this.universe.members.filter((m) => m.status === 'active' && projection.persona !== 'visitor').slice(0, this.spec.fixtureProfile === 'obsidian-fidelity' ? 1 : 4).map((m) => ({ id: m.id, name: m.name }))
           : [],
         activeCharacterId: acting?.id ?? null,
         account: projection.accountName ? { name: projection.accountName, email: projection.accountEmail ?? '' } : null,
@@ -385,17 +404,17 @@ export class ScenarioBuilder {
     const recent = this.visibleRecords().slice(0, 5).map((record) => ({
       id: record.id,
       title: record.title,
-      type: record.documentTypeId !== null ? documentTypeName(record.documentTypeId) : 'Unassigned',
+      type: record.documentTypeId !== null ? this.universe.documentTypes.find((type) => type.id === record.documentTypeId)?.name ?? 'Unassigned' : 'Unassigned',
       activity: formatDate(record.updatedAt),
     }))
     return {
       baseUrl: this.baseUrl,
       domain: { name: domain.name, motto: domain.motto },
       welcome: {
-        html: `<h2>Welcome to ${domain.name}</h2><p>${domain.description}</p><p>${domain.descriptionLong}</p>`,
+        html: this.spec.fixtureProfile === 'obsidian-fidelity' ? OBSIDIAN_HOME_WELCOME_HTML : `<h2>Welcome to ${domain.name}</h2><p>${domain.description}</p><p>${domain.descriptionLong}</p>`,
         editHref: this.projection.canManageHome ? `${this.baseUrl}/pages/home/edit` : null,
       },
-      destinations: primaryNavigation(this.projection.persona).filter((item) => item.label !== 'Home'),
+      destinations: this.shellModel().primaryNavigation.filter((item) => item.label !== 'Home'),
       recentRecords: recent,
     }
   }
@@ -410,7 +429,7 @@ export class ScenarioBuilder {
     return {
       baseUrl: this.baseUrl,
       domainSlug: this.universe.domain.slug,
-      folders: folderTree(this.universe, visibleIds),
+      folders: folderTree(this.universe, visibleIds, this.spec.fixtureProfile === 'obsidian-fidelity'),
       totalReadableRecordCount: visible.length,
       records: visible.map((record) => ({
         id: record.id,
@@ -431,7 +450,7 @@ export class ScenarioBuilder {
         actOnRecords: projection.canActOnRecords,
         deleteRecords: projection.canDeleteRecords,
       },
-      vocabulary: { documentSingular: 'Record', documentPlural: 'Records', folderPlural: 'Folders' },
+      vocabulary: { documentSingular: 'Document', documentPlural: 'Documents', folderPlural: 'Folders' },
     }
   }
 
@@ -454,14 +473,21 @@ export class ScenarioBuilder {
       domainSlug: universe.domain.slug,
       recordId: record.id,
       title: record.title,
-      bodyHtml: record.body,
-      bodySource: record.documentTypeId === 9 ? record.body : null,
-      meta: [
-        { label: 'Document type', value: record.documentTypeId !== null ? documentTypeName(record.documentTypeId) : 'Unassigned' },
-        { label: 'Folder', value: folderNameOf(universe, record.folderId) ?? '—' },
-        { label: 'Updated', value: formatDate(record.updatedAt) },
-        { label: 'Department', value: departmentById(record.departmentId).name },
-      ],
+      bodyHtml: this.spec.fixtureProfile === 'obsidian-fidelity' && record.id === 1 ? OBSIDIAN_DOCUMENT_BODY_HTML : record.body,
+      bodySource: this.spec.fixtureProfile === 'obsidian-fidelity' && record.id === 1 ? OBSIDIAN_DOCUMENT_BODY_SOURCE : record.documentTypeId === 9 ? record.body : null,
+      meta: this.spec.fixtureProfile === 'obsidian-fidelity' && record.id === 1
+        ? [
+            { label: 'Document type', value: 'Accord' },
+            { label: 'Collection', value: 'Foundations' },
+            { label: 'Filed', value: 'September 7, 2026' },
+            { label: 'Prepared by', value: 'Elara Voss' },
+          ]
+        : [
+            { label: 'Document type', value: record.documentTypeId !== null ? universe.documentTypes.find((type) => type.id === record.documentTypeId)?.name ?? 'Unassigned' : 'Unassigned' },
+            { label: 'Folder', value: folderNameOf(universe, record.folderId) ?? '—' },
+            { label: 'Updated', value: formatDate(record.updatedAt) },
+            { label: 'Department', value: universe.departments.find((department) => department.id === record.departmentId)?.name ?? 'Unknown department' },
+          ],
       lifecycle: record.lifecycle,
       locked: record.locked,
       isSuperseded: supersededBy !== null,
@@ -469,8 +495,8 @@ export class ScenarioBuilder {
         supersededBy: supersededBy ? { id: supersededBy.id, title: supersededBy.title, createdLabel: formatDate(supersededBy.updatedAt), preparedByLabel: memberName(universe, supersededBy.preparedByMemberId) } : null,
         supersedes: supersedes ? { id: supersedes.id, title: supersedes.title } : null,
       },
-      concerns: record.concerns,
-      tags: record.tags,
+      concerns: this.spec.fixtureProfile === 'obsidian-fidelity' && record.id === 1 ? [{ name: 'The Northwatch Council', relationshipLabel: 'Adopting body' }, { name: 'Outer Islands', relationshipLabel: 'Signatory' }] : record.concerns,
+      tags: this.spec.fixtureProfile === 'obsidian-fidelity' && record.id === 1 ? ['Foundations', 'Common ground', 'Governance'] : record.tags,
       preparedByLabel: memberName(universe, record.preparedByMemberId),
       capabilities: {
         edit: caps.edit,
@@ -501,7 +527,9 @@ export class ScenarioBuilder {
       name: d.name,
       slug: d.slug,
       description: d.description,
-      memberCount: this.universe.members.filter((m) => m.status === 'active' && m.departmentIds.includes(d.id)).length,
+      memberCount: this.spec.fixtureProfile === 'obsidian-fidelity'
+        ? [7, 3, 5][this.universe.departments.findIndex((department) => department.id === d.id)] ?? 0
+        : this.universe.members.filter((m) => m.status === 'active' && m.departmentIds.includes(d.id)).length,
     }))
     return {
       baseUrl: this.baseUrl,
@@ -546,7 +574,7 @@ export class ScenarioBuilder {
   aboutModel(): AboutPageModel {
     return {
       baseUrl: this.baseUrl,
-      bodyHtml: `<h2>About ${this.universe.domain.name}</h2><p>${this.universe.domain.descriptionLong}</p><p>The archive charter is simple: public histories are public, registry records are guarded, and the past is annotated, never edited.</p>`,
+      bodyHtml: this.spec.fixtureProfile === 'obsidian-fidelity' ? OBSIDIAN_ABOUT_BODY_HTML : `<h2>About ${this.universe.domain.name}</h2><p>${this.universe.domain.descriptionLong}</p><p>The archive charter is simple: public histories are public, registry records are guarded, and the past is annotated, never edited.</p>`,
       editHref: this.projection.canManageHome ? `${this.baseUrl}/pages/about/edit` : null,
       destinations: [
         { label: 'Departments', segment: 'departments', href: `${this.baseUrl}/departments` },
@@ -568,10 +596,17 @@ export class ScenarioBuilder {
     return {
       baseUrl: this.baseUrl,
       entries,
-      destinations: [
-        { label: 'About', segment: 'about', href: `${this.baseUrl}/about` },
-        { label: 'Members', segment: 'members', href: `${this.baseUrl}/members` },
-      ],
+      destinations: this.spec.fixtureProfile === 'obsidian-fidelity'
+        ? [
+            { label: 'About', segment: 'about', href: `${this.baseUrl}/about` },
+            { label: 'Lore', segment: 'lore', href: `${this.baseUrl}/lore` },
+            { label: 'Departments', segment: 'departments', href: `${this.baseUrl}/departments` },
+            { label: 'Records', segment: 'records', href: `${this.baseUrl}/records` },
+          ]
+        : [
+            { label: 'About', segment: 'about', href: `${this.baseUrl}/about` },
+            { label: 'Members', segment: 'members', href: `${this.baseUrl}/members` },
+          ],
     }
   }
 
@@ -609,7 +644,10 @@ export class ScenarioBuilder {
         displayName: member.displayName,
         avatarUrl: member.avatarUrl,
       },
-      departments: member.departmentIds.map((id) => ({ id, name: departmentById(id).name, href: `${this.baseUrl}/departments/${departmentById(id).slug}` })),
+        departments: member.departmentIds.map((id) => {
+          const department = this.universe.departments.find((item) => item.id === id)
+          return { id, name: department?.name ?? `Department ${id}`, href: `${this.baseUrl}/departments/${department?.slug ?? id}` }
+        }),
       roleLabels: roleLabelsOf(this.universe, member.id),
       preparedRecords: prepared,
       profileContactHref: this.projection.persona === 'admin' ? `${this.baseUrl}/manage/people/${member.id}` : null,

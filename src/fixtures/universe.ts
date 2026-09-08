@@ -7,7 +7,8 @@ import { MEMBERS, stressMemberName, type MemberEntity } from './members'
 import { buildRecords, stressTitles, SUPERSESSION_EDGES, type RecordEntity } from './records'
 import { ROLES, type RoleEntity } from './roles'
 import type { SupersessionEdge } from '../contracts'
-import type { DataStateKey } from './scenarios'
+import type { DataStateKey, FixtureProfileKey } from './scenarios'
+import { applyObsidianFidelityProfile } from './obsidianFidelity'
 import {
   BASE_URL,
   DOMAIN_BACKGROUND_URL,
@@ -97,7 +98,7 @@ function emptyUniverse(base: Universe): Universe {
 }
 
 /** Build a fresh deterministic Universe for a data state (never shared across scenarios). */
-export function buildUniverse(dataState: DataStateKey): Universe {
+export function buildUniverse(dataState: DataStateKey, fixtureProfile: FixtureProfileKey = 'default'): Universe {
   const base: Universe = {
     domain: {
       id: 1,
@@ -124,7 +125,8 @@ export function buildUniverse(dataState: DataStateKey): Universe {
     claimTargets: cloneArray(CLAIM_TARGETS),
     supersessionEdges: cloneArray(SUPERSESSION_EDGES),
   }
-  if (dataState === 'empty') return emptyUniverse(base)
-  if (dataState === 'stress') return stressUniverse(base)
-  return base
+  const profiled = fixtureProfile === 'obsidian-fidelity' ? applyObsidianFidelityProfile(base) : base
+  if (dataState === 'empty') return emptyUniverse(profiled)
+  if (dataState === 'stress') return stressUniverse(profiled)
+  return profiled
 }

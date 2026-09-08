@@ -120,7 +120,8 @@ function isSurfaceParams(value: unknown): value is SurfaceParams {
 function isScenarioSpec(value: unknown): value is ScenarioSpec {
   if (!isRecord(value)) return false
   return (value.persona === 'visitor' || value.persona === 'member' || value.persona === 'departmentManager' || value.persona === 'admin') &&
-    (value.dataState === 'populated' || value.dataState === 'empty' || value.dataState === 'stress')
+    (value.dataState === 'populated' || value.dataState === 'empty' || value.dataState === 'stress') &&
+    (value.fixtureProfile === undefined || value.fixtureProfile === 'default' || value.fixtureProfile === 'obsidian-fidelity')
 }
 
 function isRuntimeFlags(value: unknown): value is LabRuntimeFlags {

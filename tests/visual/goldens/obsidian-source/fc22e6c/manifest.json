@@ -1,0 +1,301 @@
+{
+  "sourceSha": "fc22e6c7db7da05b6166e2f126c5e6c9e6a20223",
+  "sourceOrigin": "http://127.0.0.1:3066",
+  "browser": "Chrome 151.0.7922.138",
+  "reducedMotion": true,
+  "waitFor": [
+    "networkidle",
+    "document.fonts.ready",
+    "250ms settle"
+  ],
+  "captures": [
+    {
+      "file": "desktop-1440x1000/home.png",
+      "sha256": "4ca4f6725cf79c181a9481405704dda13cddd1beeee81f5787213b9ed1956931",
+      "route": "/domain/aster-reach",
+      "state": "default",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach"
+    },
+    {
+      "file": "desktop-1440x1000/records.png",
+      "sha256": "d63afaa42bcb8e1361f08b2ec9954c7ad27fed1081a9d015a3da45de5c4d9be9",
+      "route": "/domain/aster-reach/records",
+      "state": "default",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/records"
+    },
+    {
+      "file": "desktop-1440x1000/document.png",
+      "sha256": "f7f08c88b1965cffb3d1b3286581c8e85e5cd8c284164aa92dd66eab7763de08",
+      "route": "/domain/aster-reach/documents/1",
+      "state": "default",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/documents/1"
+    },
+    {
+      "file": "desktop-1440x1000/departments.png",
+      "sha256": "1b3ec2fca6ce58b900740555afc182519921e86d360e6a270fc8a3e23c797af5",
+      "route": "/domain/aster-reach/departments",
+      "state": "default",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/departments"
+    },
+    {
+      "file": "desktop-1440x1000/department-detail.png",
+      "sha256": "e9c64cbc47e3d3c7f54ddd5f256b31b02f86bdc8712da9d0ba19e662c1687c0a",
+      "route": "/domain/aster-reach/departments/northwatch-council",
+      "state": "default",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/departments/northwatch-council"
+    },
+    {
+      "file": "desktop-1440x1000/about.png",
+      "sha256": "81fe14dfff4220612be73d0f2ccb959a1c6491b443673d5ea965bc60ffb0cef6",
+      "route": "/domain/aster-reach/about",
+      "state": "default",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/about"
+    },
+    {
+      "file": "desktop-1440x1000/lore.png",
+      "sha256": "c9428c8e4e4137d8f0aab1376e38e3627fce169272043d1ecdf33bf771da66c8",
+      "route": "/domain/aster-reach/lore",
+      "state": "default",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/lore"
+    },
+    {
+      "file": "desktop-1440x1000/lore-detail.png",
+      "sha256": "2ee2275bf3ae21f0effdff541ed5dad8c7d06f566bc664b60a11f9469ab39890",
+      "route": "/domain/aster-reach/lore/northwatch",
+      "state": "default",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/lore/northwatch"
+    },
+    {
+      "file": "desktop-1440x1000/character-profile.png",
+      "sha256": "6ac3dd6df19e8837e883556ff9fa1bffb0681ab08c514be9f5c81f0b5f79137a",
+      "route": "/domain/aster-reach/characters/elara",
+      "state": "default",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/characters/elara"
+    },
+    {
+      "file": "desktop-1440x1000/folders.png",
+      "sha256": "2686052d19bf6688351a24316b0a155a30a0ba47b2b3bba410e0f995cf9f6bff",
+      "route": "/domain/aster-reach/manage/folders",
+      "state": "default",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/manage/folders"
+    },
+    {
+      "file": "desktop-1440x1000/document-types.png",
+      "sha256": "46ec21518397b9415ea5909b2c770535dc2342f018d2301b0c00b6b72e708696",
+      "route": "/domain/aster-reach/document-types",
+      "state": "default",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/document-types"
+    },
+    {
+      "file": "desktop-1440x1000/roles.png",
+      "sha256": "e78144c0f8413c23295e0a301b4a466e1cfb8dd2d97f1e3a34aa4833b67e604d",
+      "route": "/domain/aster-reach/roles",
+      "state": "default",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/roles"
+    },
+    {
+      "file": "desktop-1440x1000/people.png",
+      "sha256": "95a9e8a17f7358b95df9735cf72938d082cd56ab91b53de5a6bd4c51038ae9c4",
+      "route": "/domain/aster-reach/manage/people",
+      "state": "default",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/manage/people"
+    },
+    {
+      "file": "desktop-1440x1000/work.png",
+      "sha256": "f713385037fc71cbb6a7652d18ebb57e7cad8b9bae1c3b9d6b27a9292cafbdc0",
+      "route": "/domain/aster-reach/work",
+      "state": "default",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/work"
+    },
+    {
+      "file": "desktop-1440x1000/home-visitor.png",
+      "sha256": "e2223d74c1a089a26144dc94cea150fc16ee4c02904f6c5928c0e14e3a3a8879",
+      "route": "/domain/aster-reach",
+      "state": "visitor",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach?fixture=visitor"
+    },
+    {
+      "file": "desktop-1440x1000/records-visitor.png",
+      "sha256": "17421788f1b2bad45404d58fc23ec3eb81ea3bea5e4a0a325b1be4d2c51a0668",
+      "route": "/domain/aster-reach/records",
+      "state": "visitor",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/records?fixture=visitor"
+    },
+    {
+      "file": "desktop-1440x1000/home-empty.png",
+      "sha256": "cefc50da6608713d0cb63e77968a6dcb3b18eb8cdd0be0d59e66ed148426a743",
+      "route": "/domain/aster-reach",
+      "state": "empty",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach?fixture=empty"
+    },
+    {
+      "file": "desktop-1440x1000/records-empty.png",
+      "sha256": "4ea789cf22d06fd21a0fcda646db28c6e35a19b001e6b7f4cc510da40649f9be",
+      "route": "/domain/aster-reach/records",
+      "state": "empty",
+      "viewport": "1440x1000",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/records?fixture=empty"
+    },
+    {
+      "file": "mobile-390x844/home.png",
+      "sha256": "af917318afb5b10520850f26c098eac2b301adce4a2f6fef46ed9cfa9c25aeed",
+      "route": "/domain/aster-reach",
+      "state": "default",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach"
+    },
+    {
+      "file": "mobile-390x844/records.png",
+      "sha256": "fc78dd9a180d2a24e2f0e0cbf3dc3968bfe90eca862f83d824bd1cf28495fb25",
+      "route": "/domain/aster-reach/records",
+      "state": "default",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/records"
+    },
+    {
+      "file": "mobile-390x844/document.png",
+      "sha256": "d40a7d74b2dd12649487d54ff78f7c543a8dcd3041bf727d780020e4e1b67371",
+      "route": "/domain/aster-reach/documents/1",
+      "state": "default",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/documents/1"
+    },
+    {
+      "file": "mobile-390x844/departments.png",
+      "sha256": "c07cc8412bb25a92b0a33ea8e705f8f1769585bcb82694e0b91e651e41bbe702",
+      "route": "/domain/aster-reach/departments",
+      "state": "default",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/departments"
+    },
+    {
+      "file": "mobile-390x844/department-detail.png",
+      "sha256": "71148ab0c7516cb1c544056277fd51cf812a252300fc218c422fd7e7e08824ad",
+      "route": "/domain/aster-reach/departments/northwatch-council",
+      "state": "default",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/departments/northwatch-council"
+    },
+    {
+      "file": "mobile-390x844/about.png",
+      "sha256": "18c63e2204f980319a10e3e9ffc6284762cbbc5cb9068dd024cedd5d3cec5f08",
+      "route": "/domain/aster-reach/about",
+      "state": "default",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/about"
+    },
+    {
+      "file": "mobile-390x844/lore.png",
+      "sha256": "c239b419d35215d28dffab07fc4f8e2b324c72c812a5468448d3f6cd00f57440",
+      "route": "/domain/aster-reach/lore",
+      "state": "default",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/lore"
+    },
+    {
+      "file": "mobile-390x844/lore-detail.png",
+      "sha256": "5c140a2f46dfb7ea2ee96de2fea6c4f9977e14ee6afd6394c05c2d3c77e78151",
+      "route": "/domain/aster-reach/lore/northwatch",
+      "state": "default",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/lore/northwatch"
+    },
+    {
+      "file": "mobile-390x844/character-profile.png",
+      "sha256": "20600f47de86522647c894d74312f37ab8690f2dda85b9a5b4392267456f7e00",
+      "route": "/domain/aster-reach/characters/elara",
+      "state": "default",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/characters/elara"
+    },
+    {
+      "file": "mobile-390x844/folders.png",
+      "sha256": "73dc13f9402638f10824304841a5ea6281c28098737a9a8daa65bed498d1d73e",
+      "route": "/domain/aster-reach/manage/folders",
+      "state": "default",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/manage/folders"
+    },
+    {
+      "file": "mobile-390x844/document-types.png",
+      "sha256": "889d45d97acc02a700462183aff37bc23e7e6252fb64d5483b2691ff3cab08e5",
+      "route": "/domain/aster-reach/document-types",
+      "state": "default",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/document-types"
+    },
+    {
+      "file": "mobile-390x844/roles.png",
+      "sha256": "dd3fcde42b0441cb9c3dfe57a44be33482e1c7dd5206a02c72dff2030b6384c4",
+      "route": "/domain/aster-reach/roles",
+      "state": "default",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/roles"
+    },
+    {
+      "file": "mobile-390x844/people.png",
+      "sha256": "98f1974d97ce0fb144872374bd0dc06ec813905960ca6b656df0d93d7df162da",
+      "route": "/domain/aster-reach/manage/people",
+      "state": "default",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/manage/people"
+    },
+    {
+      "file": "mobile-390x844/work.png",
+      "sha256": "f85b283bb9bcd4a269b0a41138d1bb57ec898d347af83034efe306983b76c434",
+      "route": "/domain/aster-reach/work",
+      "state": "default",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/work"
+    },
+    {
+      "file": "mobile-390x844/home-visitor.png",
+      "sha256": "f7cdb9741c5b5ed5d8424d16422ee52c9aca32ab86f257cac7d3f40e83fa1bd9",
+      "route": "/domain/aster-reach",
+      "state": "visitor",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach?fixture=visitor"
+    },
+    {
+      "file": "mobile-390x844/records-visitor.png",
+      "sha256": "f504d913e789bf07783bff86a781881abe411b1265436f474c8ea8f98a95b98d",
+      "route": "/domain/aster-reach/records",
+      "state": "visitor",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/records?fixture=visitor"
+    },
+    {
+      "file": "mobile-390x844/home-empty.png",
+      "sha256": "96306756514b38ca8c93c819ee40dbee6e882a92e7d080107c983e4be5b1392e",
+      "route": "/domain/aster-reach",
+      "state": "empty",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach?fixture=empty"
+    },
+    {
+      "file": "mobile-390x844/records-empty.png",
+      "sha256": "206740a06352b842e74faef4d1e80a033a5bcd090c0917cd30f45cec2f6b2e05",
+      "route": "/domain/aster-reach/records",
+      "state": "empty",
+      "viewport": "390x844",
+      "url": "http://127.0.0.1:3066/domain/aster-reach/records?fixture=empty"
+    }
+  ]
+}
