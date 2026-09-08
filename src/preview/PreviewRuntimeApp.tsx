@@ -51,6 +51,7 @@ class PreviewErrorBoundary extends Component<{ children: ReactNode; onError(erro
 export function PreviewRuntimeApp({ instanceId: explicitInstanceId }: Props) {
   const instanceId = useMemo(() => getInstanceId(explicitInstanceId), [explicitInstanceId])
   const [state, setState] = useState<PreviewState | null>(null)
+  const [obsidianEnvironmentReady, setObsidianEnvironmentReady] = useState(false)
   const [backendEpoch, setBackendEpoch] = useState(0)
   const backendRef = useRef<FakeBackend | null>(null)
 
@@ -85,6 +86,19 @@ export function PreviewRuntimeApp({ instanceId: explicitInstanceId }: Props) {
     postPreviewMessage({ protocol: PREVIEW_PROTOCOL_VERSION, instanceId, type: 'preview:ready' })
     return () => window.removeEventListener('message', onMessage)
   }, [instanceId, reportError])
+
+  useEffect(() => {
+    let cancelled = false
+    if (state?.designKey !== 'obsidian-lab') {
+      setObsidianEnvironmentReady(true)
+      return () => { cancelled = true }
+    }
+    setObsidianEnvironmentReady(false)
+    void import('../designs/obsidian-lab/previewEnvironment')
+      .then(() => { if (!cancelled) setObsidianEnvironmentReady(true) })
+      .catch((error: unknown) => { if (!cancelled) reportError(error instanceof Error ? error : String(error)) })
+    return () => { cancelled = true }
+  }, [reportError, state?.designKey])
 
   const bundle = useMemo<RuntimeBundle | null>(() => {
     if (!state) return null
@@ -133,6 +147,9 @@ export function PreviewRuntimeApp({ instanceId: explicitInstanceId }: Props) {
   }, [instanceId])
 
   if (!state) return <div data-testid="preview-waiting" className="preview-waiting">Waiting for Lab host…</div>
+  if (state.designKey === 'obsidian-lab' && !obsidianEnvironmentReady) {
+    return <div data-testid="preview-environment-loading" className="preview-waiting">Loading Obsidian preview environment…</div>
+  }
   if (!bundle) {
     reportError(`Unknown Design: ${state.designKey}`)
     return <div data-testid="preview-error" className="preview-error"><strong>Design preview unavailable</strong><span>Unknown Design: {state.designKey}</span></div>
