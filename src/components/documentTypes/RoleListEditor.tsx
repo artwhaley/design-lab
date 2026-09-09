@@ -7,12 +7,15 @@ import type { InspectorRole } from '@/lib/documents/typeTree'
 import styles from './TypeTree.module.css'
 
 /**
- * P08X-T04: one cell of the lifecycle table — a role list with chips and an
+ * P08X-T04: one cell of the lifecycle table â€” a role list with chips and an
  * add-role popover. `title` carries the human-readable definition of the
- * permission column for hovertext.
+ * permission column for hovertext. `labelHidden` suppresses the visible
+ * label when the table header already names the column (still screen-reader
+ * accessible through the header cell).
  */
-export function RoleListEditor({ label, title, roles, selected, onChange }: {
+export function RoleListEditor({ label, labelHidden, title, roles, selected, onChange }: {
   label: string
+  labelHidden?: boolean
   title: string
   roles: InspectorRole[]
   selected: number[]
@@ -43,19 +46,19 @@ export function RoleListEditor({ label, title, roles, selected, onChange }: {
 
   return <>
     <div className={styles.roleEditor}>
-      <span title={title}>{label}</span>
+      {labelHidden ? null : <span title={title}>{label}</span>}
       <div className={styles.roleChips}>
         {selected.map((id) => {
           const role = byId.get(id)
           return <span key={id} className={`${styles.roleChip} ${role?.active === false ? styles.roleInactive : ''}`} title={role ? role.name : `Role #${id}`}>
             {role?.name ?? `Role #${id}`}
-            <button type="button" aria-label={`Remove ${role?.name ?? `role ${id}`} from ${label}`} onClick={(event) => { event.stopPropagation(); toggle(id) }}>×</button>
+            <button type="button" aria-label={`Remove ${role?.name ?? `role ${id}`} from ${label}`} onClick={(event) => { event.stopPropagation(); toggle(id) }}>Ã—</button>
           </span>
         })}
         <button
           type="button"
           className={styles.addRole}
-          title={`Add roles to ${label} — ${title}`}
+          title={`Add roles to ${label} â€” ${title}`}
           onClick={(event) => {
             event.stopPropagation()
             const rect = event.currentTarget.getBoundingClientRect()
@@ -69,7 +72,7 @@ export function RoleListEditor({ label, title, roles, selected, onChange }: {
     {open && anchor ? <div className={styles.rolePopover} style={{ left: anchor.x, top: anchor.y }} onClick={(event) => event.stopPropagation()} role="menu" aria-label={`${label} roles`}>
       <input
         type="search"
-        placeholder="Filter roles…"
+        placeholder="Filter rolesâ€¦"
         value={query}
         autoFocus
         onChange={(event) => setQuery(event.target.value)}
@@ -77,7 +80,7 @@ export function RoleListEditor({ label, title, roles, selected, onChange }: {
       />
       {filtered.length === 0 ? <p style={{ margin: '.3rem .45rem', color: 'var(--tenant-muted-text)', fontSize: '.74rem' }}>No roles match.</p> : null}
       {filtered.map((role) => (
-        <label key={role.id} role="menuitemcheckbox" aria-checked={selected.includes(role.id)} title={`${role.name} — grant this role ${label.toLowerCase()}`}>
+        <label key={role.id} role="menuitemcheckbox" aria-checked={selected.includes(role.id)} title={`${role.name} â€” grant this role ${label.toLowerCase()}`}>
           <input type="checkbox" checked={selected.includes(role.id)} onChange={() => toggle(role.id)} />
           {role.name}
         </label>

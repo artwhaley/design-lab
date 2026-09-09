@@ -13,6 +13,13 @@ export type DesignCatalogEntry = {
 
 export const DESIGN_CATALOG: readonly DesignCatalogEntry[] = [
   {
+    key: "civic",
+    status: "first-class",
+    name: "Civic",
+    description: "A classic institutional portal: composed masthead, clear directory, structured record grid.",
+    thumbnail: "/design-assets/civic/thumbnail.svg",
+  },
+  {
     key: "obsidian",
     status: "first-class",
     name: "Obsidian",
@@ -38,6 +45,7 @@ export const DESIGN_CATALOG: readonly DesignCatalogEntry[] = [
 export const DESIGN_CATALOG_KEYS: readonly DesignKey[] = DESIGN_CATALOG.map((entry) => entry.key)
 
 export const FIRST_CLASS_DESIGNS: readonly DesignKey[] = [
+  "civic",
   "obsidian",
   "atelier",
   "contract-probe",

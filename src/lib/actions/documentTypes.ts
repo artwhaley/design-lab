@@ -1,6 +1,6 @@
 import { invokeLabAction, duplicateTypeAction as duplicate, setActiveTypeAction as setActive } from '@/lib/design/hostActionBridges'
 import type { Lifecycle } from '@/lib/documents/lifecycle'
-export type LifecycleStageConfigInput = { stage: Lifecycle; enabled?: boolean; allowOnCreation?: boolean; folderId?: number|null; privateDraftsAllowed?: boolean; readRoleIds?: number[]; writeRoleIds?: number[]; editOthersRoleIds?: number[]; manageRoleIds?: number[] }
+export type LifecycleStageConfigInput = { stage: Lifecycle; enabled?: boolean; allowOnCreation?: boolean; folderId?: number|null; readRoleIds?: number[]; writeRoleIds?: number[]; editOthersRoleIds?: number[]; manageRoleIds?: number[] }
 export type TypeTreeActionResult = { ok:boolean; error?:string; typeId?:number; templateId?:number }
 export type TypeInput = { domainSlug:string; typeId?:number|string; name?:string; description?:string|null; active?:boolean; departmentId?:number|null; typeFolderId?:number|null; templateSelection?:'blank'|'markdown'|'form'; lifecycleStages?:LifecycleStageConfigInput[] }
 export async function createTypeAction(input:TypeInput & {name:string}):Promise<TypeTreeActionResult>{return invokeLabAction({kind:'saveType',args:input})}

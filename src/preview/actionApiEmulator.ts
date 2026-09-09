@@ -146,6 +146,26 @@ function dispatchMutation(backend: FakeBackend, path: string, body: FormData): M
       }
       throw new Error(`Unsupported /api/role-assignments action: ${value(body, 'action') || '(missing)'}`)
     }
+    case '/api/domain-memberships': {
+      if (!(backend.projection.canOpenPeople && backend.projection.canManageRoles)) return { ok: false, error: 'Access denied.' }
+      const characterId = requireId(body, 'characterId')
+      const member = backend.builder.universe.members.find((candidate) => candidate.id === characterId)
+      if (!member) throw new Error('Unknown character.')
+      const action = value(body, 'action')
+      if (action === 'remove') {
+        member.status = 'inactive'
+        member.roleIds = []
+        member.departmentIds = []
+      } else {
+        // add / (no action): (re)activate Domain membership. Role and
+        // department assignments start clean, matching production semantics.
+        member.status = 'active'
+        member.roleIds = []
+        member.departmentIds = []
+      }
+      backend.log.append('memberships', action === 'remove' ? 'remove' : 'add', String(characterId))
+      return { ok: true }
+    }
     case '/api/invitations/revoke': return backend.revokeInvitation(requireId(body, 'invitationId'))
     case '/api/invitations/join-decision': {
       const id = requireId(body, 'requestId')

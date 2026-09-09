@@ -12,6 +12,7 @@
     "/api/character-claims",
     "/api/invitations/revoke",
     "/api/invitations/join-decision",
+    "/api/domain-memberships",
     "/api/records-search"
   ],
   "packages": [
@@ -52,11 +53,6 @@
         {
           "file": "src/designs/atelier/config.ts",
           "specifier": "@/lib/design/validate",
-          "kind": "generic-host-import"
-        },
-        {
-          "file": "src/designs/atelier/config.ts",
-          "specifier": "@/lib/theme/fonts",
           "kind": "generic-host-import"
         },
         {
@@ -143,6 +139,11 @@
           "file": "src/designs/atelier/workspaces.tsx",
           "specifier": "@/lib/page-models/common",
           "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/workspaces.tsx",
+          "specifier": "@/lib/records/presentation/operations",
+          "kind": "generic-host-import"
         }
       ],
       "genericHostImports": [],
@@ -160,6 +161,10 @@
           "specifier": "next/link"
         },
         {
+          "file": "src/designs/atelier/AtelierStudio.tsx",
+          "specifier": "react"
+        },
+        {
           "file": "src/designs/atelier/primitives.tsx",
           "specifier": "react"
         },
@@ -173,6 +178,325 @@
       "assetRefsOutsideSanctionedNamespaces": [],
       "staticApiEndpoints": [],
       "testFilesExcluded": [],
+      "errors": []
+    },
+    {
+      "key": "civic",
+      "manifest": {
+        "manifestVersion": 1,
+        "designContractVersion": 1,
+        "entry": "./index.ts",
+        "status": "first-class"
+      },
+      "importsOutsideFolder": [
+        {
+          "file": "src/designs/civic/CivicDocument.tsx",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/CivicDocument.tsx",
+          "specifier": "@/lib/documents/presentation/actions",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/CivicDocument.tsx",
+          "specifier": "@/lib/page-models/document",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/CivicHome.tsx",
+          "specifier": "@/lib/page-models/home",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/CivicHome.tsx",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/CivicRecords.tsx",
+          "specifier": "@/lib/page-models/records",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/CivicRecords.tsx",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/CivicShell.tsx",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/CivicShell.tsx",
+          "specifier": "@/components/platform/OperatingContext",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/ExplorerBody.tsx",
+          "specifier": "@/components/functional/records/recordActions",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/ExplorerBody.tsx",
+          "specifier": "@/lib/page-models/common",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/ExplorerBody.tsx",
+          "specifier": "@/lib/page-models/records",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/ExplorerBody.tsx",
+          "specifier": "@/lib/records/presentation/operations",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/ExplorerBody.tsx",
+          "specifier": "@/lib/records/workspace/useRecordsWorkspace",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/config.ts",
+          "specifier": "@/lib/theme/fonts",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/config.ts",
+          "specifier": "@/lib/theme/color",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/config.ts",
+          "specifier": "@/lib/design/contracts",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/config.ts",
+          "specifier": "@/lib/design/validate",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/index.ts",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "@/components/functional/folders/useFolderManagementWorkspace",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "@/components/functional/people/usePeopleManagementWorkspace",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "@/components/functional/roles/useRoleManagementWorkspace",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "@/components/functional/document-types/useDocumentTypesManagementWorkspace",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "@/components/people/PersonAccessTrees",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "@/components/documentTypes/TypeInspector",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "@/lib/design/hostActionBridges",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "@/lib/page-models/members",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "@/lib/page-models/management/folders",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "@/lib/page-models/management/roles",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "@/lib/page-models/management/documentTypes",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "@/lib/page-models/management/people",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "@/lib/page-models/management/invitations",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "@/lib/page-models/management/departments",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "@/lib/documents/typeTree",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/studio/CivicStudioEditor.tsx",
+          "specifier": "@/lib/design/contracts",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/studio/fields.tsx",
+          "specifier": "@/lib/design/contracts",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/thin.tsx",
+          "specifier": "@/lib/page-models/info",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/thin.tsx",
+          "specifier": "@/lib/page-models/departments",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/civic/thin.tsx",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        }
+      ],
+      "genericHostImports": [],
+      "npmImports": [
+        {
+          "file": "src/designs/civic/CivicShell.tsx",
+          "specifier": "react"
+        },
+        {
+          "file": "src/designs/civic/CivicShell.tsx",
+          "specifier": "next/navigation"
+        },
+        {
+          "file": "src/designs/civic/CivicShell.tsx",
+          "specifier": "next/link"
+        },
+        {
+          "file": "src/designs/civic/DocumentPaper.tsx",
+          "specifier": "react"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "next/link"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "react"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "next/navigation"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "specifier": "react-arborist"
+        }
+      ],
+      "crossDesignImports": [],
+      "boundaryEscapes": [],
+      "assetRefsOutsideSanctionedNamespaces": [],
+      "staticApiEndpoints": [
+        {
+          "file": "src/designs/civic/ExplorerBody.tsx",
+          "endpoint": "/api/folders"
+        },
+        {
+          "file": "src/designs/civic/ExplorerBody.tsx",
+          "endpoint": "/api/folders"
+        },
+        {
+          "file": "src/designs/civic/ExplorerBody.tsx",
+          "endpoint": "/api/folders"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "endpoint": "/api/domain-memberships"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "endpoint": "/api/domain-memberships"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "endpoint": "/api/departments"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "endpoint": "/api/departments"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "endpoint": "/api/departments"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "endpoint": "/api/domain-memberships"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "endpoint": "/api/invitations/join-decision"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "endpoint": "/api/invitations/join-decision"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "endpoint": "/api/character-claims"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "endpoint": "/api/character-claims"
+        },
+        {
+          "file": "src/designs/civic/operational.tsx",
+          "endpoint": "/api/invitations/revoke"
+        }
+      ],
+      "testFilesExcluded": [
+        "src/designs/civic/civic.design.test.tsx",
+        "src/designs/civic/config.design.test.ts",
+        "src/designs/civic/document.design.test.tsx",
+        "src/designs/civic/home.design.test.tsx",
+        "src/designs/civic/records.design.test.tsx"
+      ],
       "errors": []
     },
     {

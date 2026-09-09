@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
 import { PathSimulator } from '../host/PathSimulator'
 import { LabApp } from '../host/LabApp'
+import { getDesignDefinitions } from '@/lib/design/generated/registry'
 
 describe('path simulator', () => {
   const simulator = new PathSimulator('/domain/aster-reach')
@@ -69,7 +70,7 @@ describe('Lab host', () => {
   it('navigates surfaces from the sidebar without Design-specific branches', () => {
     render(<LabApp />)
     fireEvent.click(screen.getByRole('button', { name: /^records /i }))
-    expect(within(screen.getByTestId('lab-preview')).getByTestId('preview-iframe')).toHaveAttribute('title', 'obsidian preview')
+    expect(within(screen.getByTestId('lab-preview')).getByTestId('preview-iframe')).toHaveAttribute('title', `${getDesignDefinitions()[0].key} preview`)
     fireEvent.click(screen.getByRole('button', { name: /^manage folders /i }))
     expect(within(screen.getByTestId('lab-preview')).getByTestId('preview-iframe')).toHaveAttribute('data-preview-instance-id', 'lab-preview')
   })
@@ -79,7 +80,7 @@ describe('Lab host', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Compare' }))
     fireEvent.change(screen.getByLabelText('Compare'), { target: { value: 'contract-probe' } })
     expect(screen.getByTestId('lab-compare')).toBeInTheDocument()
-    expect(within(screen.getByTestId('lab-preview-a')).getByTestId('preview-iframe')).toHaveAttribute('title', 'obsidian preview')
+    expect(within(screen.getByTestId('lab-preview-a')).getByTestId('preview-iframe')).toHaveAttribute('title', `${getDesignDefinitions()[0].key} preview`)
     expect(within(screen.getByTestId('lab-preview-b')).getByTestId('preview-iframe')).toHaveAttribute('title', 'contract-probe preview')
   })
 })

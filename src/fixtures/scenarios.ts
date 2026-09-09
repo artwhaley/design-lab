@@ -27,7 +27,12 @@ export const DATA_STATE_LABELS: Record<DataStateKey, string> = {
   stress: 'Stress',
 }
 
-export const DEFAULT_SPEC: ScenarioSpec = { persona: 'admin', dataState: 'populated' }
+/**
+ * The Lab opens on the production fixture oracle so a dropped-in Design is
+ * immediately comparable with the production parity surface. Authors can
+ * still opt into the richer Lab-only fixture profiles through the URL.
+ */
+export const DEFAULT_SPEC: ScenarioSpec = { persona: 'admin', dataState: 'populated', fixtureProfile: 'production-preview' }
 
 export const OBSIDIAN_FIDELITY_SPEC: ScenarioSpec = {
   persona: 'admin',

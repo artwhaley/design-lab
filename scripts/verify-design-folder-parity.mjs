@@ -14,6 +14,13 @@ function requiredPath(name) {
   return resolve(value)
 }
 
+function argValue(name, fallback = null) {
+  const index = process.argv.indexOf(name)
+  const value = index >= 0 ? process.argv[index + 1] : null
+  if (value && !value.startsWith('--')) return value
+  return fallback
+}
+
 function digest(file) {
   return createHash('sha256').update(readFileSync(file)).digest('hex')
 }
@@ -54,27 +61,31 @@ function compareAssetMaterialization(label, sourceRoot, materializedRoot) {
 try {
   const productionRoot = requiredPath('--production')
   const labRoot = resolve(process.cwd())
-  const productionDesign = join(productionRoot, 'src', 'designs', 'obsidian')
-  const labDesign = join(labRoot, 'src', 'designs', 'obsidian')
+  // Any discovered Design folder can be checked; obsidian remains the default
+  // for backward-compatible invocations.
+  const designKey = argValue('--design', 'obsidian')
+  if (!/^[a-z][a-z0-9-]*$/.test(designKey)) throw new Error(`Invalid design key: ${designKey}`)
+  const productionDesign = join(productionRoot, 'src', 'designs', designKey)
+  const labDesign = join(labRoot, 'src', 'designs', designKey)
   const differences = [
-    ...compareTrees('Obsidian folder', productionDesign, labDesign),
+    ...compareTrees(`${designKey} folder`, productionDesign, labDesign),
   ]
 
   if (process.argv.includes('--check-assets')) {
     const productionAssets = join(productionDesign, 'assets')
-    differences.push(...compareAssetMaterialization('Lab bundled assets', productionAssets, join(labRoot, 'public', 'design-assets', 'obsidian')))
-    const productionMaterialized = join(productionRoot, 'public', 'design-assets', 'obsidian')
+    differences.push(...compareAssetMaterialization('Lab bundled assets', productionAssets, join(labRoot, 'public', 'design-assets', designKey)))
+    const productionMaterialized = join(productionRoot, 'public', 'design-assets', designKey)
     if (existsSync(productionMaterialized)) differences.push(...compareAssetMaterialization('Production bundled assets', productionAssets, productionMaterialized))
   }
 
   const count = filesUnder(productionDesign).size
   if (count === 0) {
-    fail('Obsidian folder is empty or missing — an empty folder must never pass parity (0-file false pass)')
+    fail(`${designKey} folder is empty or missing — an empty folder must never pass parity (0-file false pass)`)
   } else if (differences.length) {
     differences.forEach((difference) => console.error(`- ${difference}`))
     fail(`${differences.length} difference(s) found`)
   } else {
-    console.log(`[design parity] Obsidian source parity: PASS (${count} files)`)
+    console.log(`[design parity] ${designKey} source parity: PASS (${count} files)`)
     if (process.argv.includes('--check-assets')) console.log('[design parity] bundled asset materialization: PASS')
   }
 } catch (error) {

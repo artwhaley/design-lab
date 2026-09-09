@@ -67,8 +67,7 @@ try {
   if (JSON.stringify(productionManifest) !== JSON.stringify(labManifest)) differences.push('Obsidian manifest JSON differs')
 
   if (existsSync(join(labRoot, 'src', 'designs', 'obsidian-lab'))) differences.push('obsolete src/designs/obsidian-lab directory still exists')
-  const indexSource = readFileSync(join(labRoot, 'src', 'designs', 'index.ts'), 'utf8')
-  if (indexSource.includes('obsidian-lab')) differences.push('obsolete obsidian-lab registration remains')
+  if (existsSync(join(labRoot, 'src', 'designs', 'index.ts'))) differences.push('obsolete src/designs/index.ts hand-maintained registry still exists')
   const registrySource = readFileSync(join(labRoot, 'src', 'lib', 'design', 'generated', 'registry.ts'), 'utf8')
   if (!registrySource.includes("@/designs/obsidian")) differences.push('generated registry does not import production Obsidian')
   if (registrySource.includes('obsidian-lab')) differences.push('generated registry references obsolete obsidian-lab')

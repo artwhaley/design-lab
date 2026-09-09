@@ -31,6 +31,10 @@ const field = (label: string) => (
   </div>
 )
 
+const button = (label: string) => (
+  <span key={label} style={{ padding: '6px 14px', border: '1px solid var(--tenant-surface-border, #ddd)', borderRadius: 4, background: 'var(--tenant-surface-bg, #fff)', fontSize: 13 }}>{label}</span>
+)
+
 const toolbar = (
   <div style={{ display: 'flex', gap: 8, margin: '12px 0', flexWrap: 'wrap' }}>
     {['Save', 'Preview', 'Insert', 'Format'].map((label) => (
@@ -39,9 +43,9 @@ const toolbar = (
   </div>
 )
 
-function contentRegion() {
+function contentRegion(minHeight = 240) {
   return (
-    <div style={{ border: '1px solid var(--tenant-surface-border, #ddd)', borderRadius: 6, background: 'var(--tenant-surface-bg, #fff)', minHeight: 240, padding: 16, marginTop: 12 }}>
+    <div style={{ border: '1px solid var(--tenant-surface-border, #ddd)', borderRadius: 6, background: 'var(--tenant-surface-bg, #fff)', minHeight, padding: 16, marginTop: 12 }}>
       <p style={{ color: 'var(--tenant-muted-text, #888)', fontSize: 13 }}>
         Shared tool content region. This is a deliberate placeholder so the Design Shell can be checked for theme
         compatibility, spacing, overflow, and coexistence with shared editor geometry.
@@ -54,8 +58,15 @@ export function SharedFunctionalSurface({ surface, baseUrl }: Props) {
   switch (surface) {
     case 'shared.forms':
       return (
-        <PlaceholderShell title="Forms — list / builder / fill">
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>{field('Form name')}{field('Template')}{field('Visibility')}</div>
+        <PlaceholderShell title="Forms — type-first list / studio / fill">
+          {/* The Document Type is fixed context on Form Studio screens: reached
+              from Document Types, never re-selected. Folders and permissions
+              come from the Type — no availability selector on the form. */}
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', marginBottom: 4 }}>
+            <span style={{ fontSize: 12, color: 'var(--tenant-muted-text, #888)' }}>Document Type (fixed):</span>
+            {button('Tax Assessment')}
+          </div>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>{field('Form name')}{field('Base template (optional)')}</div>
           {toolbar}
           {contentRegion()}
           <p className="lab-hint" style={{ marginTop: 8 }}>Route family: {baseUrl}/forms · shared form engine placeholder</p>
@@ -63,7 +74,15 @@ export function SharedFunctionalSurface({ surface, baseUrl }: Props) {
       )
     case 'shared.templates':
       return (
-        <PlaceholderShell title="Markdown Templates — list / editor / new">
+        <PlaceholderShell title="Markdown Templates — type-first list / editor / new">
+          {/* The Document Type is fixed context on template screens: reached from
+              Document Types, never re-selected. The editor body is square (at
+              least as tall as wide, even when empty). */}
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', marginBottom: 4 }}>
+            <span style={{ fontSize: 12, color: 'var(--tenant-muted-text, #888)' }}>Document Type (fixed):</span>
+            {button('Survey Report')}
+          </div>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>{field('Template name (is the title)')}{field('Base template (optional)')}</div>
           {toolbar}
           <div style={{ display: 'flex', gap: 16 }}>
             <div style={{ width: 220, border: '1px solid var(--tenant-surface-border, #ddd)', borderRadius: 6, padding: 8 }}>
@@ -71,7 +90,7 @@ export function SharedFunctionalSurface({ surface, baseUrl }: Props) {
                 <div key={t} style={{ padding: '6px 8px', borderRadius: 4, background: 'var(--tenant-surface-bg, #fff)', marginBottom: 4, fontSize: 13 }}>{t}</div>
               ))}
             </div>
-            <div style={{ flex: 1 }}>{contentRegion()}</div>
+            <div style={{ flex: 1 }}>{contentRegion(480)}</div>
           </div>
         </PlaceholderShell>
       )

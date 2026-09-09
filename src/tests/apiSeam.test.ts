@@ -18,6 +18,7 @@ const SEAM = [
   { path: '/api/character-claims', body: { claimId: '1', decision: 'denied' } },
   { path: '/api/invitations/revoke', body: { invitationId: '1' } },
   { path: '/api/invitations/join-decision', body: { requestId: '1', decision: 'denied' } },
+  { path: '/api/domain-memberships', body: { characterId: '2', action: 'remove' } },
 ]
 
 let uninstall: (() => void) | null = null

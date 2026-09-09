@@ -98,7 +98,9 @@ export function LabApp() {
     }
   }, [flags])
 
-  const simulator = useMemo(() => new PathSimulator('/domain/aster-reach'), [])
+  const simulator = useMemo(() => new PathSimulator(
+    scenario.fixtureProfile === 'production-preview' ? '/design-parity' : '/domain/aster-reach',
+  ), [scenario.fixtureProfile])
 
   const handleNavigate = (href: string): void => {
     const backendNow = backendRef.current
@@ -134,7 +136,9 @@ export function LabApp() {
   const updateDraft = (next: unknown): void => {
     setConfigDrafts((current) => ({
       ...current,
-      [designKey]: { ...(current[designKey] ?? fallbackDraft), raw: next, dirty: true },
+      // Editors emit the current schema, even when opened from an older bank.
+      // Retaining the bank version here re-migrates (and overwrites) live edits.
+      [designKey]: { raw: next, savedVersion: design?.config.version ?? null, dirty: true },
     }))
   }
 
@@ -163,7 +167,7 @@ export function LabApp() {
   }
 
   const handleRestoreDefaults = (): void => {
-    setConfigDrafts((current) => ({ ...current, [designKey]: { raw: design?.config.defaults, savedVersion: current[designKey]?.savedVersion ?? null, dirty: true } }))
+    setConfigDrafts((current) => ({ ...current, [designKey]: { raw: design?.config.defaults, savedVersion: design?.config.version ?? null, dirty: true } }))
     backendRef.current?.log.append('studio', 'defaults', designKey)
   }
 
@@ -306,7 +310,7 @@ export function LabApp() {
               {panel === 'studio' && design ? (
                 <StudioPanel
                   design={design}
-                  draft={activeDraft.raw}
+                  draft={activeDraft.dirty ? activeDraft.raw : activeResolution?.runtime.config ?? activeDraft.raw}
                   savedVersion={activeDraft.savedVersion}
                   dirty={activeDraft.dirty}
                   validationErrors={studioValidationErrors}

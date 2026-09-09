@@ -7,6 +7,7 @@ import { ActionLog, FakeBackend, RecordsWorkspaceImpl } from '../workspaces'
 import { LabApp } from '../host/LabApp'
 import { ViewportControls } from '../host/ViewportControls'
 import { clearAllBanks, saveBank } from '../host/configBanks'
+import { getDesignDefinitions } from '@/lib/design/generated/registry'
 
 describe('compare mode shares semantic state', () => {
   it('two workspace instances over one backend reflect a shared mutation', async () => {
@@ -79,7 +80,7 @@ describe('host compare mode', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Compare' }))
     fireEvent.change(screen.getByLabelText('Compare'), { target: { value: 'contract-probe' } })
     fireEvent.click(screen.getByRole('button', { name: /^manage invitations /i }))
-    expect(within(screen.getByTestId('lab-preview-a')).getByTestId('preview-iframe')).toHaveAttribute('title', 'obsidian preview')
+    expect(within(screen.getByTestId('lab-preview-a')).getByTestId('preview-iframe')).toHaveAttribute('title', `${getDesignDefinitions()[0].key} preview`)
     expect(within(screen.getByTestId('lab-preview-b')).getByTestId('preview-iframe')).toHaveAttribute('title', 'contract-probe preview')
   })
 })

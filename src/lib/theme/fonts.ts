@@ -9,3 +9,10 @@ export const FONT_STACKS: Record<string, string> = {
 }
 
 export const resolveFontStack = (key: string): string => FONT_STACKS[key] ?? FONT_STACKS.verdana
+
+// Shared layout vocabulary consumed by portable Designs such as Civic.
+export const CONTENT_WIDTHS = {
+  narrow: { label: 'Narrow (focused reading)', shell: 'min(900px, calc(100% - 3rem))' },
+  standard: { label: 'Standard', shell: 'min(1200px, calc(100% - 3rem))' },
+  wide: { label: 'Wide', shell: 'min(1400px, calc(100% - 3rem))' },
+} as const

@@ -15,18 +15,18 @@ export function AtelierShell({ model, theme, designConfig, children }: DesignShe
     <OperatingContext model={model} />
     <div className={s.layout}>
       <aside className={s.rail}>
-        <a className={s.identity} href={model.routes.baseUrl}>
+        <a className={s.identity} href={model.routes.baseUrl} aria-label={`${model.domain.name} Domain home`}>
           {model.domain.logoUrl ? <img src={model.domain.logoUrl} alt="" /> : <span className={s.monogram} aria-hidden="true">{model.domain.name.slice(0, 1)}</span>}
           <span>{model.domain.name}</span>
         </a>
         {model.domain.motto && <p className={s.motto}>{model.domain.motto}</p>}
         <details className={s.navigation} open><summary>Navigation <span aria-hidden="true">＋</span></summary>
-          <nav aria-label="Primary navigation">{links.map((link, i) => <a href={link.href} key={link.href} aria-current={pathname === link.href ? 'page' : undefined}><span>{String(i + 1).padStart(2, '0')}</span>{link.label}<i aria-hidden="true">↗</i></a>)}</nav>
-          {model.managementNavigation.length > 0 && <details className={s.management}><summary>Manage domain</summary><nav aria-label="Domain management">{model.managementNavigation.map(link => <a href={link.href} key={link.href}>{link.label}<i aria-hidden="true">↗</i></a>)}</nav></details>}
+          <nav aria-label="Primary navigation">{links.map((link) => <a href={link.href} key={link.href} aria-current={pathname === link.href ? 'page' : undefined}>{link.label}</a>)}</nav>
+          {model.managementNavigation.length > 0 && <details className={s.management}><summary>Manage domain</summary><nav aria-label="Domain management">{model.managementNavigation.map(link => <a href={link.href} key={link.href}>{link.label}</a>)}</nav></details>}
         </details>
-        <div className={s.railFoot}><span>ATELIER</span><span>Edition 01</span><Link href="/">Loreforge dashboard ↗</Link></div>
+        <div className={s.railFoot}><Link href="/">Loreforge dashboard</Link></div>
       </aside>
-      <div className={s.canvas}><main id="atelier-content" className={s.content} tabIndex={-1}>{children}</main><footer className={s.footer}><span>{model.domain.name}</span><span>Atelier / Loreforge</span><a href={model.routes.baseUrl}>Back to home ↑</a></footer></div>
+      <div className={s.canvas}><main id="atelier-content" className={s.content} tabIndex={-1}>{children}</main><footer className={s.footer}><span>{model.domain.name}</span><a href={model.routes.baseUrl}>Back to home</a></footer></div>
     </div>
   </div>
 }

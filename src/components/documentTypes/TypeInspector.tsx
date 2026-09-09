@@ -15,16 +15,9 @@ import styles from './TypeTree.module.css'
 
 const KIND_LABELS: Record<TemplateSelection, string> = { blank: 'Blank Document', markdown: 'Markdown Template', form: 'Form Template' }
 const KIND_DESCRIPTIONS: Record<TemplateSelection, string> = {
-  blank: 'Blank Document — authors start from an empty page; no template is attached.',
-  markdown: 'Markdown Template — authors start from the composed Markdown body template.',
-  form: 'Form Template — authors fill the structured form built in the Form Studio.',
-}
-
-const STAGE_DESCRIPTIONS: Record<Lifecycle, string> = {
-  draft: 'Draft — work in progress. Writers create and edit their own drafts; with permission, others review them.',
-  submitted: 'Submitted — awaits review before filing.',
-  filed: 'Filed — the live record of the archive.',
-  deprecated: 'Deprecated — superseded or retired; kept for provenance, not in active use.',
+  blank: 'Blank Document â€” authors start from an empty page; no template is attached.',
+  markdown: 'Markdown Template â€” authors start from the composed Markdown body template.',
+  form: 'Form Template â€” authors fill the structured form built in the Form Studio.',
 }
 
 const ROLE_DEFINITIONS: Array<{ key: 'readRoleIds' | 'writeRoleIds' | 'editOthersRoleIds' | 'manageRoleIds'; label: string; title: string }> = [
@@ -38,14 +31,13 @@ type StageDraft = {
   enabled: boolean
   allowOnCreation: boolean
   folderId: number | null
-  privateDraftsAllowed: boolean
   readRoleIds: number[]
   writeRoleIds: number[]
   editOthersRoleIds: number[]
   manageRoleIds: number[]
 }
 
-const emptyStage = (): StageDraft => ({ enabled: false, allowOnCreation: false, folderId: null, privateDraftsAllowed: false, readRoleIds: [], writeRoleIds: [], editOthersRoleIds: [], manageRoleIds: [] })
+const emptyStage = (): StageDraft => ({ enabled: false, allowOnCreation: false, folderId: null, readRoleIds: [], writeRoleIds: [], editOthersRoleIds: [], manageRoleIds: [] })
 
 /** Matches the T02 seed defaults so an unconfigured row round-trips stably. */
 function seedStage(stage: Lifecycle): StageDraft {
@@ -53,7 +45,6 @@ function seedStage(stage: Lifecycle): StageDraft {
     enabled: stage === 'draft' || stage === 'filed',
     allowOnCreation: stage === 'draft',
     folderId: null,
-    privateDraftsAllowed: stage === 'draft',
     readRoleIds: [], writeRoleIds: [], editOthersRoleIds: [], manageRoleIds: [],
   }
 }
@@ -64,7 +55,6 @@ function rowToDraft(row: LifecycleStageRowShape | null | undefined, stage: Lifec
     enabled: Boolean(row.enabled),
     allowOnCreation: Boolean(row.allowOnCreation),
     folderId: stageFolderId(row),
-    privateDraftsAllowed: Boolean(row.privateDraftsAllowed),
     readRoleIds: stageRoleIds(row, 'readRoles'),
     writeRoleIds: stageRoleIds(row, 'writeRoles'),
     editOthersRoleIds: stageRoleIds(row, 'editOthersRoles'),
@@ -143,7 +133,6 @@ export function TypeInspector({ domainSlug, mode, leaf, departments, typeFolders
       enabled: draft.enabled,
       allowOnCreation: draft.allowOnCreation,
       folderId: draft.folderId,
-      privateDraftsAllowed: draft.privateDraftsAllowed,
       readRoleIds: draft.readRoleIds,
       writeRoleIds: draft.writeRoleIds,
       editOthersRoleIds: draft.editOthersRoleIds,
@@ -154,9 +143,9 @@ export function TypeInspector({ domainSlug, mode, leaf, departments, typeFolders
   const save = async () => {
     const trimmed = name.trim()
     if (!trimmed) { setNotice('Give the Document Type a name.'); return }
-    if (departmentId == null) { setNotice('Choose a Department — Document Types never live in Unassigned by choice.'); return }
+    if (departmentId == null) { setNotice('Choose a Department â€” Document Types never live in Unassigned by choice.'); return }
     const lifecycleStages = stagesToConfig()
-    if (!lifecycleStages.some((stage) => stage.enabled)) { setNotice('Enable at least one lifecycle stage — a Document Type needs somewhere for its records to live.'); return }
+    if (!lifecycleStages.some((stage) => stage.enabled)) { setNotice('Enable at least one lifecycle stage â€” a Document Type needs somewhere for its records to live.'); return }
     if (!isEdit) {
       const result = await createTypeAction({ domainSlug, name: trimmed, description, active, departmentId, typeFolderId, templateSelection, lifecycleStages })
       if (result.ok && result.typeId) onCreated(result.typeId)
@@ -188,38 +177,33 @@ export function TypeInspector({ domainSlug, mode, leaf, departments, typeFolders
   const constructed = leaf?.constructedTemplates ?? { markdown: null, form: null }
   const chosenTemplate = templateSelection === 'markdown' ? constructed.markdown : templateSelection === 'form' ? constructed.form : null
 
-  return <section className={styles.inspectorForm} aria-label={isEdit ? `Document Type inspector — ${leaf?.name ?? ''}` : 'New Document Type'}>
+  return <section className={styles.inspectorForm} aria-label={isEdit ? `Document Type inspector â€” ${leaf?.name ?? ''}` : 'New Document Type'}>
     <div className={styles.inspectorSection}>
       <div className={styles.identityHeader}>
         <h3>{isEdit ? 'Document Type' : 'New Document Type'}</h3>
-        <span className={active ? `${styles.badge} ${styles.badgeActive}` : `${styles.badge} ${styles.badgeInactive}`} title={active ? 'Active — available for new documents.' : 'Inactive — not offered for new documents, still editable.'}>{active ? 'Active' : 'Inactive'}</span>
+        <span className={active ? `${styles.badge} ${styles.badgeActive}` : `${styles.badge} ${styles.badgeInactive}`} title={active ? 'Active â€” available for new documents.' : 'Inactive â€” not offered for new documents, still editable.'}>{active ? 'Active' : 'Inactive'}</span>
       </div>
       <div className={styles.field}>
         <label>Name</label>
-        <input type="text" value={name} onChange={(event) => setName(event.target.value)} required placeholder="e.g. Deed of Transfer" title="The Document Type name — shown on the tree line card and offered on the create-document screen." />
+        <input type="text" value={name} onChange={(event) => setName(event.target.value)} required placeholder="e.g. Deed of Transfer" title="The Document Type name â€” shown on the tree line card and offered on the create-document screen." />
       </div>
       <div className={styles.field}>
         <label>Description</label>
-        <textarea value={description ?? ''} onChange={(event) => setDescription(event.target.value)} title="What this Document Type is for — shown as hovertext on the tree line card." placeholder="What is this Type for?" />
+        <textarea value={description ?? ''} onChange={(event) => setDescription(event.target.value)} title="What this Document Type is for â€” shown as hovertext on the tree line card." placeholder="What is this Type for?" />
       </div>
       <label className={styles.checkRow} title="Inactive Types stay editable and visible, but greyed out with an (inactive) suffix and not offered for new documents.">
         <input type="checkbox" checked={active} onChange={(event) => setActive(event.target.checked)} />
         Active
-        <small>— inactive Types stay editable but aren\u2019t offered for new documents.</small>
+        <small>â€” inactive Types stay editable but aren\u2019t offered for new documents.</small>
       </label>
-    </div>
-
-    <div className={styles.inspectorSection}>
-      <h3>Placement</h3>
-      <p>Which Department this Type belongs to, and the optional manual subfolder beneath it. Unassigned is never a choice — it only collects Types whose Department was archived.</p>
       <div className={styles.field}>
         <label>Department</label>
         <select
           value={departmentId == null ? '' : String(departmentId)}
           onChange={(event) => { const id = event.target.value === '' ? null : Number(event.target.value); setDepartmentId(id); if (id !== departmentId) setTypeFolderId(null) }}
-          title="The Department root this Type hangs under. Required — a Type always belongs to a Department."
+          title="The Department root this Type hangs under. Required â€” a Type always belongs to a Department."
         >
-          <option value="" disabled>— Choose a Department —</option>
+          <option value="" disabled>â€” Choose a Department â€”</option>
           {activeDepartments.map((department) => <option key={department.id} value={department.id}>{department.name}</option>)}
         </select>
       </div>
@@ -230,7 +214,7 @@ export function TypeInspector({ domainSlug, mode, leaf, departments, typeFolders
           onChange={(event) => setTypeFolderId(event.target.value === '' ? null : Number(event.target.value))}
           title="Optional manual navigation subfolder under the Department. Create subfolders from the tree\u2019s right-click menu."
         >
-          <option value="">— None (Department root) —</option>
+          <option value="">â€” None (Department root) â€”</option>
           {folderOptions.map((folder) => <option key={folder.id} value={folder.id}>{'\u00b7 '.repeat(folder.depth)}{folder.name}</option>)}
         </select>
       </div> : null}
@@ -238,7 +222,7 @@ export function TypeInspector({ domainSlug, mode, leaf, departments, typeFolders
 
     <div className={styles.inspectorSection}>
       <h3>Template</h3>
-      <p>Blank needs nothing. A Markdown or Form template is composed once and stays saved even if you switch Type kinds for a while — switching back brings it back.</p>
+      <p>Blank needs nothing. A Markdown or Form template is composed once and stays saved even if you switch Type kinds for a while â€” switching back brings it back.</p>
       <div className={styles.segmented} role="group" aria-label="Template type">
         {(Object.keys(KIND_LABELS) as TemplateSelection[]).map((selection) => (
           <button
@@ -251,54 +235,53 @@ export function TypeInspector({ domainSlug, mode, leaf, departments, typeFolders
           >{KIND_LABELS[selection]}</button>
         ))}
       </div>
-      {templateSelection === 'blank' ? <p className={styles.templateLinkRow} title="Blank Document — no template is attached. Constructed templates you made earlier are kept and will return if you switch back.">Blank Document — no template attached. Any templates built earlier are kept and return if you switch back.</p> : null}
+      {templateSelection === 'blank' ? <p className={styles.templateLinkRow} title="Blank Document â€” no template is attached. Constructed templates you made earlier are kept and will return if you switch back.">Blank Document â€” no template attached. Any templates built earlier are kept and return if you switch back.</p> : null}
       {templateSelection !== 'blank' ? <div className={styles.templateLinkRow}>
         {chosenTemplate ? <>
-          <span title={`The constructed ${KIND_LABELS[templateSelection]} for this Type — editing it does not affect any other Type or template.`}>
+          <span title={`The constructed ${KIND_LABELS[templateSelection]} for this Type â€” editing it does not affect any other Type or template.`}>
             {templateSelection === 'form' ? 'Form Template' : 'Markdown Template'}: <Link href={`/domain/${domainSlug}/${templateSelection === 'form' ? 'forms' : 'templates'}/${chosenTemplate.id}/edit`} title={`Open ${chosenTemplate.name} in the ${templateSelection === 'form' ? 'Form Studio' : 'template editor'}.`}>{chosenTemplate.name}</Link>
           </span>
         </> : isEdit ? <>
           <span>No {KIND_LABELS[templateSelection]} exists yet.</span>
           <button type="button" title={`Create the default ${KIND_LABELS[templateSelection]} for this Type and open it for editing.`} onClick={() => void scaffold(templateSelection === 'form' ? 'form' : 'markdown')}>Create {KIND_LABELS[templateSelection]}</button>
-        </> : <span>Created Types get a fresh {KIND_LABELS[templateSelection]} — build it after saving.</span>}
+        </> : <span>Created Types get a fresh {KIND_LABELS[templateSelection]} â€” build it after saving.</span>}
       </div> : null}
     </div>
 
     <div className={styles.inspectorSection}>
       <h3>Lifecycle</h3>
-      <p>Each row is one stage of a document\u2019s life. Check a stage to make it part of this Type\u2019s lifecycle; the rest of the row then configures it. Some Types file straight into their home folder (only Filed enabled); others walk the full path.</p>
       <div style={{ overflowX: 'auto' }}>
-        <div className={styles.lifecycleTable}>
+        <div className={styles.lifecycleTable} role="table" aria-label="Lifecycle stages">
+          <div className={styles.stageHeader} role="row">
+            <span className={styles.stageHeadCell} role="columnheader">Stage</span>
+            <span role="columnheader" title="When on, the create-document screen can start a record in this stage (subject to the actor\u2019s stage permission). If several stages allow creation, the creator gets a dropdown defaulting to the latest stage they may set.">On creation</span>
+            <span role="columnheader" title="The folder documents at this stage live in. Click to open the folder navigator; transitions into this stage move records here automatically.">Folder</span>
+            {ROLE_DEFINITIONS.map((roleDef) => <span key={roleDef.key} role="columnheader" title={roleDef.title}>{roleDef.label}</span>)}
+          </div>
           {LIFECYCLE_STAGES.map((stage) => {
             const draft = stageDrafts[stage]
-            return <div key={stage} className={draft.enabled ? styles.stageRow : `${styles.stageRow} ${styles.stageRowDisabled}`} data-stage={stage}>
-              <div className={styles.stageHead}>
-                <label className={styles.checkRow} title={`${STAGE_DESCRIPTIONS[stage]} Check to make ${LIFECYCLE_STAGE_LABELS[stage]} part of this Type\u2019s lifecycle; unchecking disables the rest of this row.`}>
+            return <div key={stage} className={draft.enabled ? styles.stageRow : `${styles.stageRow} ${styles.stageRowDisabled}`} data-stage={stage} role="row">
+              <div className={styles.stageHeadCell} role="rowheader">
+                <label className={styles.checkRow} title={`Check to make ${LIFECYCLE_STAGE_LABELS[stage]} part of this Type\u2019s lifecycle; unchecking disables the rest of this row.`}>
                   <input type="checkbox" checked={draft.enabled} disabled={busy} onChange={(event) => setStage(stage, { enabled: event.target.checked })} />
                   <span className={styles.stageTitle}>{LIFECYCLE_STAGE_LABELS[stage]}</span>
                 </label>
-                {stage === 'draft' ? <label className={styles.checkRow} title="When on, creators choose private or public draft at creation. Private drafts are visible only to the creating Character; public drafts are visible to anyone with read permission over the Type.">
-                  <input type="checkbox" checked={draft.privateDraftsAllowed} disabled={busy || !draft.enabled} onChange={(event) => setStage(stage, { privateDraftsAllowed: event.target.checked })} />
-                  <small>Private drafts allowed</small>
-                </label> : null}
-                <span className={styles.stageDesc}>{STAGE_DESCRIPTIONS[stage]}</span>
               </div>
               <div className={styles.stageCell}>
-                <span>Allow on creation</span>
                 <label className={styles.checkRow} title="When on, the create-document screen can start a record in this stage (subject to the actor\u2019s stage permission). If several stages allow creation, the creator gets a dropdown defaulting to the latest stage they may set.">
                   <input type="checkbox" checked={draft.allowOnCreation} disabled={busy || !draft.enabled} onChange={(event) => setStage(stage, { allowOnCreation: event.target.checked })} />
+                  <span className={styles.srOnly}>Allow on creation</span>
                 </label>
               </div>
               <div className={styles.stageCell}>
-                <span>Stage folder</span>
                 <button type="button" className={draft.folderId == null ? `${styles.folderButton} ${styles.folderButtonEmpty}` : styles.folderButton} disabled={busy || !draft.enabled} title="The folder documents at this stage live in. Click to open the folder navigator; transitions into this stage move records here automatically." onClick={() => setFolderPickerStage(stage)}>
                   {folderNameOf(folders, draft.folderId) ?? '\u2014 none \u2014'}
                 </button>
               </div>
               {ROLE_DEFINITIONS.map((roleDef) => (
                 <div className={styles.stageCell} key={roleDef.key}>
-                  <span title={roleDef.title}>{roleDef.label}</span>
                   <RoleListEditor
+                    labelHidden
                     label=""
                     title={roleDef.title}
                     roles={roles}
@@ -324,8 +307,8 @@ export function TypeInspector({ domainSlug, mode, leaf, departments, typeFolders
     {notice ? <p className={styles.notice} role="alert">{notice}</p> : null}
     <div className={styles.saveBar}>
       <button type="button" className={styles.primary} disabled={busy} title="Save this Document Type and its lifecycle configuration." onClick={() => void save()}>{isEdit ? 'Save Type' : 'Create Type'}</button>
-      {isEdit ? <button type="button" className={styles.secondary} disabled={busy} title="Copy this Type with its own independent copies of its templates and lifecycle configuration — the copy gets a (copyN) name and selects it here." onClick={() => void duplicate()}>Duplicate Type</button> : null}
-      {isEdit ? <span className={styles.popupNote}>Changes apply to the Type immediately — new documents and transitions use them.</span> : null}
+      {isEdit ? <button type="button" className={styles.secondary} disabled={busy} title="Copy this Type with its own independent copies of its templates and lifecycle configuration â€” the copy gets a (copyN) name and selects it here." onClick={() => void duplicate()}>Duplicate Type</button> : null}
+      {isEdit ? <span className={styles.popupNote}>Changes apply to the Type immediately â€” new documents and transitions use them.</span> : null}
       <span className={styles.spacer} />
       {onCancel ? <button type="button" className={styles.secondary} disabled={busy} onClick={onCancel}>Cancel</button> : null}
     </div>
