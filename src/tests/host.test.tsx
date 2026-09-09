@@ -2,8 +2,6 @@ import { fireEvent, render, screen, within } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
 import { PathSimulator } from '../host/PathSimulator'
-import { clearRegistry, registerDesign } from '../designs/registry'
-import { makeStubDesign } from './helpers/stubDesign'
 import { LabApp } from '../host/LabApp'
 
 describe('path simulator', () => {
@@ -60,12 +58,6 @@ describe('path simulator', () => {
 })
 
 describe('Lab host', () => {
-  beforeEach(() => {
-    clearRegistry()
-    registerDesign(makeStubDesign('stub-one', 'Stub One'))
-    registerDesign(makeStubDesign('stub-two', 'Stub Two'))
-  })
-  afterEach(() => clearRegistry())
 
   it('boots and renders the selected design shell + home surface', () => {
     render(<LabApp />)
@@ -77,7 +69,7 @@ describe('Lab host', () => {
   it('navigates surfaces from the sidebar without Design-specific branches', () => {
     render(<LabApp />)
     fireEvent.click(screen.getByRole('button', { name: /^records /i }))
-    expect(within(screen.getByTestId('lab-preview')).getByTestId('preview-iframe')).toHaveAttribute('title', 'stub-one preview')
+    expect(within(screen.getByTestId('lab-preview')).getByTestId('preview-iframe')).toHaveAttribute('title', 'obsidian preview')
     fireEvent.click(screen.getByRole('button', { name: /^manage folders /i }))
     expect(within(screen.getByTestId('lab-preview')).getByTestId('preview-iframe')).toHaveAttribute('data-preview-instance-id', 'lab-preview')
   })
@@ -85,8 +77,9 @@ describe('Lab host', () => {
   it('renders both panes in compare mode with the same surface', () => {
     render(<LabApp />)
     fireEvent.click(screen.getByRole('button', { name: 'Compare' }))
+    fireEvent.change(screen.getByLabelText('Compare'), { target: { value: 'contract-probe' } })
     expect(screen.getByTestId('lab-compare')).toBeInTheDocument()
-    expect(within(screen.getByTestId('lab-preview-a')).getByTestId('preview-iframe')).toBeInTheDocument()
-    expect(within(screen.getByTestId('lab-preview-b')).getByTestId('preview-iframe')).toBeInTheDocument()
+    expect(within(screen.getByTestId('lab-preview-a')).getByTestId('preview-iframe')).toHaveAttribute('title', 'obsidian preview')
+    expect(within(screen.getByTestId('lab-preview-b')).getByTestId('preview-iframe')).toHaveAttribute('title', 'contract-probe preview')
   })
 })

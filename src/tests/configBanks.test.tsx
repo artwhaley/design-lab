@@ -1,9 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import type { DesignConfigContract, LabDesignDefinition } from '../contracts'
+import type { DesignConfigContract } from '../contracts'
 import { resolveCssVars } from '../contracts'
-import { resolveDesignRuntime } from '../host/designRuntime'
+import type { DesignDefinition } from '@/lib/design/types'
+import { resolveProductionRuntime } from '../host/productionRuntime'
 import { clearAllBanks, loadBank, saveBank } from '../host/configBanks'
 import { StudioPanel } from '../host/StudioPanel'
 import { makeStubDesign, stubConfig } from './helpers/stubDesign'
@@ -30,7 +31,7 @@ describe('config banks', () => {
 describe('runtime resolution', () => {
   it('defaults validate and resolve base theme tokens', () => {
     const design = makeStubDesign('stub-one', 'Stub One')
-    const resolved = resolveDesignRuntime(design, design.config.defaults, null)
+    const resolved = resolveProductionRuntime(design, design.config.defaults, null)
     expect(resolved.errors).toEqual([])
     const vars = resolveCssVars(resolved.runtime.theme)
     expect(vars['--tenant-accent']).toBe('#336699')
@@ -39,7 +40,7 @@ describe('runtime resolution', () => {
 
   it('rejects invalid drafts with errors instead of accepting them', () => {
     const design = makeStubDesign('stub-one', 'Stub One')
-    const resolved = resolveDesignRuntime(design, { accent: 42 }, null)
+    const resolved = resolveProductionRuntime(design, { accent: 42 }, null)
     expect(resolved.errors.length).toBeGreaterThan(0)
   })
 
@@ -61,8 +62,8 @@ describe('runtime resolution', () => {
       },
       resolveTheme: (config) => ({ ...stubConfig.resolveTheme(config) }),
     }
-    const design: LabDesignDefinition<{ accent: string }> = { ...makeStubDesign('mig', 'Mig'), config: migrating }
-    const resolved = resolveDesignRuntime(design, { oldInk: '#abcdef' }, 1)
+    const design: DesignDefinition<{ accent: string }> = { ...makeStubDesign('mig', 'Mig'), config: migrating }
+    const resolved = resolveProductionRuntime(design, { oldInk: '#abcdef' }, 1)
     expect(resolved.errors).toEqual([])
     expect(resolved.runtime.config.accent).toBe('#abcdef')
     expect(resolved.runtime.cssVars['--tenant-accent']).toBe('#abcdef')

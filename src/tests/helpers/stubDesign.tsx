@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react'
 
-import type { DesignConfigContract, LabDesignDefinition } from '../../contracts'
+import type { DesignKey, DesignDefinition } from '@/lib/design/types'
+import type { DesignConfigContract } from '../../contracts'
 
 const stub: ComponentType<any> = () => <div data-testid="stub-page">stub page</div>
 
@@ -26,13 +27,18 @@ export const stubConfig: DesignConfigContract<StubConfig> = {
   }),
 }
 
-export function makeStubDesign(key: string, name: string): LabDesignDefinition<StubConfig> {
+/**
+ * Minimal production-shaped Design fixture for host/chrome unit tests. This is
+ * test scaffolding only — it exists to boot the Lab host chrome quickly and is
+ * never registered globally or treated as an authoring contract.
+ */
+export function makeStubDesign(key: string, name: string): DesignDefinition<StubConfig> {
   return {
-    key,
+    key: key as DesignKey,
     status: 'first-class',
     name,
     description: 'stub design for host tests',
-    preview: { thumbnail: '/media/lab-fixtures/probe.svg' },
+    preview: { thumbnail: '/design-assets/stub/thumbnail.svg' },
     config: stubConfig,
     studio: { Editor: stub },
     Shell: ({ children }) => <div data-testid="stub-shell">{children}</div>,
@@ -45,7 +51,6 @@ export function makeStubDesign(key: string, name: string): LabDesignDefinition<S
       about: () => <div data-testid="stub-about">about</div>,
       lore: () => <div data-testid="stub-lore">lore</div>,
       members: () => <div data-testid="stub-members">members</div>,
-      member: () => <div data-testid="stub-member">member</div>,
       work: () => <div data-testid="stub-work">work</div>,
       management: {
         departments: () => <div data-testid="stub-m-departments">m-departments</div>,

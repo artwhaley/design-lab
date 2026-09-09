@@ -2,8 +2,12 @@
  * Finite Lab surface catalog (03_CONTRACT_AND_SURFACE_MATRIX.md). The host
  * navigates this list; the path simulator maps fixture hrefs onto it. There is
  * deliberately no router dependency (A08).
+ *
+ * This module stays pure (no `@/lib` imports): conformance helpers take the
+ * minimal structural slice of a Design they need (`pages`), so the contract
+ * oracle never depends on host modules.
  */
-import type { LabDesignDefinition } from './design'
+
 
 export type ClassASurfaceKey =
   | 'home'
@@ -22,6 +26,8 @@ export type ClassASurfaceKey =
   | 'management.people'
   | 'management.person'
   | 'management.invitations'
+  /** Optional design-owned surface — NOT a required Class A slot (see DesignDefinition.pages.characterProfile). */
+  | 'character-profile'
 
 export type ClassBSurfaceKey =
   | 'shared.forms'
@@ -46,6 +52,7 @@ export type SurfaceDescriptor = {
   routeFamily: string
   /** Dotted path into design.pages for Class A surfaces. */
   designSlot?: string
+  optional?: boolean
   /** Which fake workspace/action bridge this surface consumes. */
   bridge?: 'records' | 'document' | 'work' | 'folders' | 'roles' | 'documentTypes' | 'people' | 'person' | 'departments' | 'invitations'
   /** Primary navigation segment that should be presented as active. */
@@ -53,6 +60,7 @@ export type SurfaceDescriptor = {
 }
 
 export const SURFACE_CATALOG: readonly SurfaceDescriptor[] = [
+  { key: 'character-profile', label: 'Character profile', kind: 'classA', routeFamily: '/domain/[slug]/characters/[id]', designSlot: 'pages.characterProfile', optional: true, navigationSegment: 'members' },
   { key: 'home', label: 'Home', kind: 'classA', routeFamily: '/domain/[slug]', designSlot: 'pages.home', navigationSegment: null },
   { key: 'records', label: 'Records', kind: 'classA', routeFamily: '/domain/[slug]/records', designSlot: 'pages.records', bridge: 'records', navigationSegment: 'records' },
   { key: 'document', label: 'Document', kind: 'classA', routeFamily: '/domain/[slug]/documents/[id]', designSlot: 'pages.document', bridge: 'document', navigationSegment: 'records' },
@@ -84,7 +92,7 @@ export const SURFACE_CATALOG: readonly SurfaceDescriptor[] = [
   { key: 'external', label: 'External / global', kind: 'external', routeFamily: '(global routes)', navigationSegment: null },
 ]
 
-export const CLASS_A_KEYS: readonly ClassASurfaceKey[] = SURFACE_CATALOG.filter((s) => s.kind === 'classA').map((s) => s.key as ClassASurfaceKey)
+export const CLASS_A_KEYS: readonly ClassASurfaceKey[] = SURFACE_CATALOG.filter((s) => s.kind === 'classA' && !s.optional).map((s) => s.key as ClassASurfaceKey)
 export const CLASS_B_KEYS: readonly ClassBSurfaceKey[] = SURFACE_CATALOG.filter((s) => s.kind === 'classB').map((s) => s.key as ClassBSurfaceKey)
 export const COMPAT_KEYS: readonly CompatSurfaceKey[] = SURFACE_CATALOG.filter((s) => s.kind === 'compatibility').map((s) => s.key as CompatSurfaceKey)
 
@@ -118,7 +126,10 @@ export const REQUIRED_DESIGN_SLOTS: readonly string[] = [
   'management.invitations',
 ]
 
-function slotAt(design: LabDesignDefinition, dotted: string): unknown {
+/** Minimal structural slice of a Design that slot conformance needs. */
+type DesignLike = { pages: object }
+
+function slotAt(design: DesignLike, dotted: string): unknown {
   return dotted.split('.').reduce<unknown>((value, part) => {
     if (value == null || typeof value !== 'object') return undefined
     return (value as Record<string, unknown>)[part]
@@ -126,6 +137,6 @@ function slotAt(design: LabDesignDefinition, dotted: string): unknown {
 }
 
 /** Returns the dotted keys of required slots a design is missing. */
-export function missingRequiredSlots(design: LabDesignDefinition): string[] {
+export function missingRequiredSlots(design: DesignLike): string[] {
   return REQUIRED_DESIGN_SLOTS.filter((slot) => typeof slotAt(design, slot) !== 'function')
 }

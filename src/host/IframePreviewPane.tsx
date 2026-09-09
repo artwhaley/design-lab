@@ -4,7 +4,7 @@ import type { CSSProperties } from 'react'
 import type { SurfaceKey } from '../contracts'
 import type { ScenarioSpec } from '../fixtures'
 import type { FakeBackendSnapshot } from '../workspaces'
-import type { Viewport } from './PreviewPane'
+import type { Viewport } from './viewport'
 import type { LabRuntimeFlags } from './LabApp'
 import type { SurfaceParams } from './PathSimulator'
 import {

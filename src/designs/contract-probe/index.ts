@@ -1,10 +1,14 @@
 /**
- * Contract Probe — the Lab's executable documentation of the design contract
- * (T10). Renders every Class-A surface from the supplied Page Models and
- * workspaces, nothing more. Conformance tests drive it end to end.
+ * Contract Probe — the Lab's executable documentation of the portable Design
+ * contract (T10). Renders every Class-A surface from the supplied Page Models
+ * and workspaces, nothing more. Conformance tests drive it end to end.
+ *
+ * This fixture implements the same production `DesignDefinition` contract as
+ * a real first-class Design (16 Class A slots, no `member`). It is discovered
+ * from its manifest like any other Design; it is a Lab conformance fixture and
+ * is not intended to be installed into production.
  */
-import type { LabDesignDefinition } from '../../contracts'
-import { register } from '../registry'
+import type { DesignDefinition } from '@/lib/design/types'
 import { probeConfig } from './config'
 import { ProbeShell } from './ProbeShell'
 import { ProbeStudioEditor } from './ProbeStudio'
@@ -14,7 +18,6 @@ import {
   ProbeDepartments,
   ProbeHome,
   ProbeLore,
-  ProbeMember,
   ProbeMembers,
 } from './ProbePages'
 import {
@@ -29,13 +32,13 @@ import {
 } from './ProbeManagement'
 import { ProbeDocument, ProbeRecords } from './ProbeRecords'
 
-const contractProbe: LabDesignDefinition<import('./config').ProbeConfigV1> = {
+export const contractProbe: DesignDefinition<import('./config').ProbeConfigV1> = {
   key: 'contract-probe',
   status: 'first-class',
   name: 'Contract Probe',
-  description: 'Executable documentation of the Lab design contract: every surface, model field, and workspace operation rendered plainly.',
+  description: 'Lab conformance fixture — renders every required surface plainly from its Page Models. Not intended for production installation.',
   preview: {
-    thumbnail: '/media/lab-fixtures/aster-reach-seal.svg',
+    thumbnail: '/design-assets/contract-probe/thumbnail.svg',
   },
   config: probeConfig,
   studio: {
@@ -51,7 +54,6 @@ const contractProbe: LabDesignDefinition<import('./config').ProbeConfigV1> = {
     about: ProbeAbout,
     lore: ProbeLore,
     members: ProbeMembers,
-    member: ProbeMember,
     work: ProbeWork,
     management: {
       departments: ProbeDepartmentsManagement,
@@ -65,4 +67,4 @@ const contractProbe: LabDesignDefinition<import('./config').ProbeConfigV1> = {
   },
 }
 
-register(contractProbe)
+export default contractProbe

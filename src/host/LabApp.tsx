@@ -20,7 +20,7 @@ import { getDesignDefinition, getDesignDefinitions } from '@/lib/design/generate
 import { LabChrome } from './LabChrome'
 import { SurfaceNavigator } from './SurfaceNavigator'
 import { IframePreviewPane } from './IframePreviewPane'
-import type { Viewport } from './PreviewPane'
+import type { Viewport } from './viewport'
 import { PathSimulator, type SurfaceParams } from './PathSimulator'
 import { resolveProductionRuntime } from './productionRuntime'
 import { ScenarioPanel } from './ScenarioPanel'

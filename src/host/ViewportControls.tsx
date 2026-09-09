@@ -5,7 +5,7 @@
  */
 import { useState } from 'react'
 import { VIEWPORT_PRESETS } from './LabChrome'
-import type { Viewport } from './PreviewPane'
+import type { Viewport } from './viewport'
 
 type Props = {
   viewport: Viewport | null

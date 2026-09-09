@@ -1,3 +1,2 @@
-import type { PermissionState } from '@/components/people/PersonAccessTrees'
-
-export type TypeStateMap = Record<string, Record<string, PermissionState>>
+export { TypePermissionGrid, ORDINARY_TYPE_CAPABILITIES, ADVANCED_TYPE_CAPABILITIES } from './TypePermissionGridView'
+export type { TypeStateMap } from './TypePermissionGridView'

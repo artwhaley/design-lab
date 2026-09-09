@@ -70,6 +70,11 @@ export class PathSimulator {
       case 'members':
         if (second === undefined) return { kind: 'surface', surface: 'members', params: {} }
         return { kind: 'external', href }
+      case 'characters': {
+        const characterId = idOf(second)
+        if (characterId === null) return { kind: 'external', href }
+        return { kind: 'surface', surface: 'character-profile', params: { characterId } }
+      }
       case 'work':
         return { kind: 'surface', surface: 'work', params: {} }
       case 'review':

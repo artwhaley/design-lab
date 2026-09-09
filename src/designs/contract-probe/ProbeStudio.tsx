@@ -1,11 +1,12 @@
 /**
  * Contract Probe Studio editor — edits the three config fields through the
- * supplied `onChange`; the host validates + persists on save.
+ * supplied `onChange`; the host validates + persists on save. Typed against
+ * the production `DesignStudioEditorProps` contract, not a Lab-only type.
  */
-import type { LabStudioEditorProps } from '../../contracts'
+import type { DesignStudioEditorProps } from '@/lib/design/contracts'
 import type { ProbeConfigV1 } from './config'
 
-export function ProbeStudioEditor({ value, onChange, domain }: LabStudioEditorProps<ProbeConfigV1>) {
+export function ProbeStudioEditor({ value, onChange, domain }: DesignStudioEditorProps<ProbeConfigV1>) {
   return (
     <div className="probe-studio">
       <h3>Contract Probe settings</h3>

@@ -35,7 +35,6 @@ writeFileSync(join(targetDir, 'design.manifest.json'), `${JSON.stringify({
   manifestVersion: 1,
   designContractVersion: 1,
   key,
-  sortOrder: 100,
   name,
   status: 'first-class',
   description,
@@ -63,7 +62,8 @@ export const ${configName}: DesignDefinition<${configType}>['config'] = {
 }
 `)
 
-writeFileSync(join(targetDir, 'index.ts'), `import { createElement, type ChangeEvent, type ReactNode } from 'react'
+writeFileSync(join(targetDir, 'index.ts'), `'use client'
+import { createElement, type ChangeEvent, type ReactNode } from 'react'
 import type { DesignDefinition } from '@/lib/design/types'
 import type { DesignStudioEditorProps } from '@/lib/design/contracts'
 import { ${configName}, type ${configType} } from './config'
@@ -73,7 +73,7 @@ function Page({ title }: { title: string }) { return createElement('section', nu
 function Studio({ value, onChange }: DesignStudioEditorProps<${configType}>) { return createElement('label', null, 'Accent', createElement('input', { value: value.accent, onChange: (event: ChangeEvent<HTMLInputElement>) => onChange({ ...value, accent: event.target.value }) })) }
 const studio: { Editor: typeof Studio } = { Editor: Studio }
 
-const design: DesignDefinition<${configType}> = {
+export const design: DesignDefinition<${configType}> = {
   key: '${key}', status: 'first-class', name: '${safeName}', description: '${description}',
   preview: { thumbnail: '/design-assets/${key}/thumbnail.svg' }, config: ${configName}, studio,
   Shell,
@@ -89,9 +89,6 @@ export default design
 `)
 
 writeFileSync(join(assetsDir, 'thumbnail.svg'), `<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360"><rect width="640" height="360" fill="#183027"/><text x="32" y="190" fill="#8ab8a1" font-family="sans-serif" font-size="32">${name}</text></svg>\n`)
-const sourceAtmosphere = join(root, 'src', 'designs', 'obsidian', 'assets', 'atmosphere.png')
-if (!existsSync(sourceAtmosphere)) fail('Obsidian bundled atmosphere source is required to scaffold a default image.')
-cpSync(sourceAtmosphere, join(assetsDir, 'atmosphere.png'))
 
 execFileSync(process.execPath, [join(root, 'scripts', 'discover-designs.mjs')], { cwd: root, stdio: 'inherit' })
 console.log(`✅ Created and discovered src/designs/${key}/. Copy this folder unchanged to production after Lab validation.`)

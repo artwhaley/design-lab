@@ -1,28 +1,25 @@
 /**
- * Contract Probe — static Class-A pages (no workspace bridge). Each surface
- * renders every field of its Page Model, plainly labeled, so the contract is
- * readable in the preview and any missing fact is visible immediately.
+ * Contract Probe — static Class-A pages. Each surface renders every field of
+ * its Page Model, plainly labeled, so the contract is readable in the preview
+ * and any missing fact is visible immediately. Typed against the real
+ * production Page Models (`@/lib/page-models/*`) with production-shaped props
+ * (model fields spread + `DesignVariantProps` + `DesignConfigProps`).
  */
-import type {
-  AboutPageModel,
-  DepartmentPageModel,
-  DepartmentsPageModel,
-  HomePageModel,
-  LorePageModel,
-  MemberPageModel,
-  MembersPageModel,
-} from '../../contracts'
-import type { LabPageProps } from '../../contracts'
-import type { ProbeConfigV1 } from './config'
-import { DebugId, EmptyState, Field, Section, Tag } from './shared'
+import type { AboutPageModel } from '@/lib/page-models/info'
+import type { DepartmentPageModel, DepartmentsPageModel } from '@/lib/page-models/departments'
+import type { HomePageModel } from '@/lib/page-models/home'
+import type { LorePageModel } from '@/lib/page-models/info'
+import type { MembersPageModel } from '@/lib/page-models/members'
+import type { ProbePageProps } from './probeTypes'
+import { EmptyState, Field, Section, Tag } from './shared'
 
-type Props<TModel> = LabPageProps<TModel, ProbeConfigV1>
+type Props<TModel> = ProbePageProps<TModel>
 
-export function ProbeHome({ model, runtime }: Props<HomePageModel>) {
-  const { domain, welcome, destinations, recentRecords } = model
+export function ProbeHome(props: Props<HomePageModel>) {
+  const { domain, welcome, destinations, recentRecords, designConfig } = props
   return (
     <div className="probe-page">
-      <Section title={`Welcome to ${domain.name}`} hint={runtime.config.density === 'compact' ? 'compact density active' : undefined}>
+      <Section title={`Welcome to ${domain.name}`} hint={designConfig.density === 'compact' ? 'compact density active' : undefined}>
         {welcome.html ? (
           <div className="probe-html" dangerouslySetInnerHTML={{ __html: welcome.html }} />
         ) : (
@@ -67,47 +64,51 @@ export function ProbeHome({ model, runtime }: Props<HomePageModel>) {
   )
 }
 
-export function ProbeDepartments({ model }: Props<DepartmentsPageModel>) {
+export function ProbeDepartments(props: Props<DepartmentsPageModel>) {
+  const { baseUrl, domainName, departments, manageHref, vocabulary, designConfig } = props
   return (
     <div className="probe-page">
-      <Section title={`${model.domainName} departments`} hint={`Vocabulary: ${model.vocabulary.subdomainSingular} / ${model.vocabulary.subdomainPlural}`}>
-        {model.departments.length === 0 ? (
+      <Section title={`${domainName} departments`} hint={`Vocabulary: ${vocabulary.subdomainSingular} / ${vocabulary.subdomainPlural}`}>
+        {departments.length === 0 ? (
           <EmptyState title="No departments" />
         ) : (
           <div className="probe-grid">
-            {model.departments.map((d) => (
+            {departments.map((d) => (
               <div key={d.id} className="probe-card">
                 <Field label="Name" value={d.name} />
                 <Field label="Description" value={d.description} />
                 <Field label="Members" value={d.memberCount} />
-                <a href={`${model.baseUrl}/departments/${d.slug}`}>Open department</a>
+                <a href={`${baseUrl}/departments/${d.slug}`}>Open department</a>
               </div>
             ))}
           </div>
         )}
-        {model.manageHref ? <p><a href={model.manageHref}>Manage departments</a></p> : null}
+        {manageHref ? <p><a href={manageHref}>Manage departments</a></p> : null}
       </Section>
     </div>
   )
 }
 
-export function ProbeDepartment({ model }: Props<DepartmentPageModel>) {
+export function ProbeDepartment(props: Props<DepartmentPageModel>) {
+  const { name, description, members, folderNames, manageHref, vocabulary, destinations, designConfig } = props
   return (
     <div className="probe-page">
-      <Section title={model.name}>
-        <Field label="Description" value={model.description} />
-        <Field label={model.vocabulary.memberPlural} value={model.members.length} />
-        <Field label={model.vocabulary.folderPlural} value={model.folderNames.join(', ') || '—'} />
+      <Section title={name}>
+        <Field label="Description" value={description} />
+        <Field label={vocabulary.memberPlural} value={members.length} />
+        <Field label={vocabulary.folderPlural} value={folderNames.join(', ') || '—'} />
+        {manageHref ? <p><a href={manageHref}>Manage</a></p> : null}
       </Section>
 
-      <Section title={model.vocabulary.memberPlural}>
-        {model.members.length === 0 ? (
-          <EmptyState title={`No ${model.vocabulary.memberPlural.toLowerCase()}`} />
+      <Section title={vocabulary.memberPlural}>
+        {members.length === 0 ? (
+          <EmptyState title={`No ${vocabulary.memberPlural.toLowerCase()}`} />
         ) : (
           <ul className="probe-list">
-            {model.members.map((m) => (
+            {members.map((m) => (
               <li key={m.id}>
-                {m.profileHref ? <a href={m.profileHref}>{m.name}</a> : m.name}
+                {m.name}
+                {m.role ? <Tag>{m.role}</Tag> : null}
               </li>
             ))}
           </ul>
@@ -115,7 +116,7 @@ export function ProbeDepartment({ model }: Props<DepartmentPageModel>) {
       </Section>
 
       <Section title="Destinations">
-        {model.destinations.map((d) => (
+        {destinations.map((d) => (
           <a key={d.segment} className="probe-card" href={d.href}>{d.label}</a>
         ))}
       </Section>
@@ -123,32 +124,34 @@ export function ProbeDepartment({ model }: Props<DepartmentPageModel>) {
   )
 }
 
-export function ProbeAbout({ model }: Props<AboutPageModel>) {
+export function ProbeAbout(props: Props<AboutPageModel>) {
+  const { bodyHtml, editHref, designConfig } = props
   return (
     <div className="probe-page">
       <Section title="About">
-        {model.bodyHtml ? (
-          <div className="probe-html" dangerouslySetInnerHTML={{ __html: model.bodyHtml }} />
+        {bodyHtml ? (
+          <div className="probe-html" dangerouslySetInnerHTML={{ __html: bodyHtml }} />
         ) : (
           <EmptyState title="No about content supplied" />
         )}
-        {model.editHref ? <p><a href={model.editHref}>Edit this page</a></p> : null}
+        {editHref ? <p><a href={editHref}>Edit this page</a></p> : null}
       </Section>
     </div>
   )
 }
 
-export function ProbeLore({ model }: Props<LorePageModel>) {
+export function ProbeLore(props: Props<LorePageModel>) {
+  const { entries, designConfig } = props
   return (
     <div className="probe-page">
-      <Section title="Lore index" hint={`${model.entries.length} entries`}>
-        {model.entries.length === 0 ? (
+      <Section title="Lore index" hint={`${entries.length} entries`}>
+        {entries.length === 0 ? (
           <EmptyState title="No lore entries" />
         ) : (
           <div className="probe-grid">
-            {model.entries.map((entry) => (
-              <div key={entry.id} className="probe-card">
-                <Field label="Group" value={<Tag>{entry.group}</Tag>} />
+            {entries.map((entry) => (
+              <div key={entry.slug} className="probe-card">
+                {entry.group ? <Field label="Group" value={<Tag>{entry.group}</Tag>} /> : null}
                 <Field label="Title" value={entry.title} />
                 <Field label="Summary" value={entry.summary} />
                 <Field label="Revision" value={entry.revisionLabel} />
@@ -162,22 +165,24 @@ export function ProbeLore({ model }: Props<LorePageModel>) {
   )
 }
 
-export function ProbeMembers({ model }: Props<MembersPageModel>) {
+export function ProbeMembers(props: Props<MembersPageModel>) {
+  const { rows, status, vocabulary, designConfig } = props
   return (
     <div className="probe-page">
-      <Section title="Members directory">
-        {model.status ? <p className="probe-status">{model.status.message}</p> : null}
-        {model.rows.length === 0 ? (
-          <EmptyState title="No members visible" />
+      <Section title={`${vocabulary.memberPlural} directory`} hint={`Vocabulary: ${vocabulary.domainSingular} / ${vocabulary.subdomainPlural} / ${vocabulary.rolePlural}`}>
+        {status ? <p className="probe-status">{status.message}</p> : null}
+        {rows.length === 0 ? (
+          <EmptyState title={`No ${vocabulary.memberPlural.toLowerCase()} visible`} />
         ) : (
           <table className="probe-table">
             <thead>
-              <tr><th>Name</th><th>Departments</th><th>Roles</th></tr>
+              <tr><th>Name</th><th>Status</th><th>Departments</th><th>Roles</th></tr>
             </thead>
             <tbody>
-              {model.rows.map((row) => (
-                <tr key={row.characterId}>
-                  <td>{row.profileHref ? <a href={row.profileHref}>{row.name}</a> : row.name}</td>
+              {rows.map((row) => (
+                <tr key={row.membershipId}>
+                  <td>{row.name}{row.localDisplayName ? ` (${row.localDisplayName})` : null}</td>
+                  <td>{row.membershipStatus}</td>
                   <td>{row.departments.join(', ') || '—'}</td>
                   <td>{row.roles.join(', ') || '—'}</td>
                 </tr>
@@ -186,48 +191,6 @@ export function ProbeMembers({ model }: Props<MembersPageModel>) {
           </table>
         )}
       </Section>
-    </div>
-  )
-}
-
-export function ProbeMember({ model }: Props<MemberPageModel>) {
-  return (
-    <div className="probe-page">
-      <Section title={model.character.displayName ?? model.character.name}>
-        <DebugId id={model.character.id} enabled={false} />
-        {model.character.avatarUrl ? <img className="probe-avatar" src={model.character.avatarUrl} alt="" /> : null}
-        {model.status ? <p className="probe-status">{model.status.message}</p> : null}
-      </Section>
-
-      <Section title="Departments">
-        {model.departments.length === 0 ? (
-          <EmptyState title="No departments" />
-        ) : (
-          <ul className="probe-list">
-            {model.departments.map((d) => (
-              <li key={d.id}><a href={d.href}>{d.name}</a></li>
-            ))}
-          </ul>
-        )}
-      </Section>
-
-      <Section title="Roles">
-        {model.roleLabels.length === 0 ? <EmptyState title="No roles" /> : <ul className="probe-list">{model.roleLabels.map((r) => <li key={r}>{r}</li>)}</ul>}
-      </Section>
-
-      <Section title="Prepared records">
-        {model.preparedRecords.length === 0 ? (
-          <EmptyState title="No prepared records" />
-        ) : (
-          <ul className="probe-list">
-            {model.preparedRecords.map((r) => (
-              <li key={r.id}><a href={r.href}>{r.title}</a> <span className="probe-muted">· {r.preparedAtLabel}</span></li>
-            ))}
-          </ul>
-        )}
-      </Section>
-
-      {model.profileContactHref ? <p><a href={model.profileContactHref}>View profile contact</a></p> : null}
     </div>
   )
 }

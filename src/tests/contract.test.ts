@@ -3,6 +3,7 @@ import { join } from 'node:path'
 import type { ComponentType } from 'react'
 import { describe, expect, it } from 'vitest'
 
+import type { DesignKey, DesignDefinition } from '@/lib/design/types'
 import type { DesignConfigContract } from '../contracts'
 
 import {
@@ -15,9 +16,8 @@ import {
   missingRequiredSlots,
   resolveCssVars,
   surfaceByKey,
-  type LabDesignDefinition,
 } from '../contracts'
-import { clearRegistry, getDesignDefinition, registerDesign } from '../designs/registry'
+import { getDesignDefinition } from '@/lib/design/generated/registry'
 
 const stub: ComponentType<any> = () => null
 
@@ -41,13 +41,13 @@ const stubConfig: DesignConfigContract<{ accent: string }> = {
   }),
 }
 
-function fullDesign(): LabDesignDefinition {
+function fullDesign(): DesignDefinition {
   return {
-    key: 'test-design',
+    key: 'test-design' as DesignKey,
     status: 'first-class',
     name: 'Test Design',
     description: 'contract test fixture',
-    preview: { thumbnail: '/media/lab-fixtures/probe.svg' },
+    preview: { thumbnail: '/design-assets/test-design/thumbnail.svg' },
     config: stubConfig,
     studio: { Editor: stub },
     Shell: stub,
@@ -60,7 +60,6 @@ function fullDesign(): LabDesignDefinition {
       about: stub,
       lore: stub,
       members: stub,
-      member: stub,
       work: stub,
       management: {
         departments: stub,
@@ -113,21 +112,19 @@ describe('surface catalog', () => {
   })
 })
 
-describe('registry', () => {
-  it('rejects duplicate keys', () => {
-    clearRegistry()
-    const design = fullDesign()
-    registerDesign(design)
-    expect(getDesignDefinition('test-design')?.name).toBe('Test Design')
-    expect(() => registerDesign(design)).toThrow(/Duplicate Design key/)
-    clearRegistry()
+describe('generated registry', () => {
+  it('resolves discovered designs and rejects unknown keys', () => {
+    expect(getDesignDefinition('obsidian')?.key).toBe('obsidian')
+    expect(getDesignDefinition('contract-probe')?.key).toBe('contract-probe')
+    expect(getDesignDefinition('nope')).toBeUndefined()
   })
 
-  it('rejects non-first-class status', () => {
-    clearRegistry()
-    const design = { ...fullDesign(), status: 'compatibility' } as unknown as LabDesignDefinition
-    expect(() => registerDesign(design)).toThrow(/first-class/)
-    clearRegistry()
+  it('exposes every discovered design with no invented member slot', () => {
+    for (const definition of [getDesignDefinition('obsidian'), getDesignDefinition('contract-probe')]) {
+      expect(definition).toBeTruthy()
+      expect('member' in (definition?.pages ?? {})).toBe(false)
+      expect(Object.keys(definition?.pages ?? {})).toEqual(expect.arrayContaining(REQUIRED_DESIGN_SLOTS.filter((slot) => !slot.includes('management.'))))
+    }
   })
 })
 
@@ -149,22 +146,22 @@ describe('requiredness', () => {
           // invitations omitted
         },
       },
-    } as unknown as LabDesignDefinition
+    } as unknown as DesignDefinition
     const missing = missingRequiredSlots(incomplete)
     expect(missing).toContain('work')
     expect(missing).toContain('management.invitations')
   })
 
-  it('required slots are type-enforced on LabDesignDefinition', () => {
+  it('required slots are type-enforced on DesignDefinition', () => {
     const design = fullDesign()
-    const incomplete: LabDesignDefinition = {
+    const incomplete: DesignDefinition = {
       ...design,
       pages: {
         ...design.pages,
         management: {
           departments: stub, folders: stub, documentTypes: stub,
           people: stub, person: stub, invitations: stub,
-          // @ts-expect-error — management.roles is required for a first-class Lab Design
+          // @ts-expect-error — management.roles is required for a first-class Design
           roles: undefined,
         },
       },

@@ -1,0 +1,12 @@
+{
+  "manifestVersion": 1,
+  "designContractVersion": 1,
+  "key": "contract-probe",
+  "name": "Contract Probe",
+  "status": "first-class",
+  "description": "Lab conformance fixture — renders every required surface plainly from its Page Models. Not intended for production installation.",
+  "entry": "./index.ts",
+  "preview": {
+    "thumbnail": "assets/thumbnail.svg"
+  }
+}

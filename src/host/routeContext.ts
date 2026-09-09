@@ -12,6 +12,7 @@ export function activeNavigationSegmentForSurface(
 ): string | null {
   if (viaCompat === 'review' || surface === 'compat.review') return 'work'
   if (viaCompat === 'subdomains' || surface === 'compat.subdomains') return 'departments'
+  if (surface === 'character-profile') return 'members'
   return surfaceByKey(surface).navigationSegment ?? null
 }
 
@@ -34,6 +35,7 @@ export function canonicalPathForSurface(
     case 'about': return `${base}/about`
     case 'lore': return params.loreSlug ? `${base}/lore/${segment(params.loreSlug)}` : `${base}/lore`
     case 'members': return `${base}/members`
+    case 'character-profile': return `${base}/characters/${segment(params.characterId ?? 1)}`
     case 'work': return `${base}/work`
     case 'management.departments': return `${base}/manage/departments`
     case 'management.folders': return `${base}/manage/folders`

@@ -1,0 +1,151 @@
+{
+  "fixtureSource": "production/src/lib/design/fixtures.ts",
+  "surface": "department",
+  "surfaceKey": "department",
+  "pathname": "/design-parity/department",
+  "shell": {
+    "domain": {
+      "id": 0,
+      "slug": "preview-domain",
+      "name": "Preview Domain",
+      "motto": "A world worth remembering",
+      "logoUrl": null,
+      "bannerUrl": null,
+      "backgroundUrl": null
+    },
+    "primaryNavigation": [
+      {
+        "label": "Home",
+        "segment": "",
+        "href": "/design-parity"
+      },
+      {
+        "label": "About",
+        "segment": "about",
+        "href": "/design-parity/about"
+      },
+      {
+        "label": "Lore",
+        "segment": "lore",
+        "href": "/design-parity/lore"
+      },
+      {
+        "label": "Departments",
+        "segment": "departments",
+        "href": "/design-parity/departments"
+      },
+      {
+        "label": "Records",
+        "segment": "records",
+        "href": "/design-parity/records"
+      }
+    ],
+    "managementNavigation": [
+      {
+        "label": "People",
+        "segment": "manage/people",
+        "href": "/design-parity/manage/people"
+      },
+      {
+        "label": "Members",
+        "segment": "members",
+        "href": "/design-parity/members"
+      },
+      {
+        "label": "Roles",
+        "segment": "roles",
+        "href": "/design-parity/roles"
+      },
+      {
+        "label": "Folders",
+        "segment": "manage/folders",
+        "href": "/design-parity/manage/folders"
+      },
+      {
+        "label": "Departments",
+        "segment": "manage/departments",
+        "href": "/design-parity/manage/departments"
+      },
+      {
+        "label": "Document Types",
+        "segment": "document-types",
+        "href": "/design-parity/document-types"
+      },
+      {
+        "label": "Invitations",
+        "segment": "manage/invitations",
+        "href": "/design-parity/manage/invitations"
+      },
+      {
+        "label": "Customize",
+        "segment": "customize",
+        "href": "/design-parity/customize"
+      }
+    ],
+    "operatingContext": {
+      "platformLabel": "Loreforge",
+      "availableDomains": [],
+      "activeDomainId": 0,
+      "availableCharacters": [],
+      "activeCharacterId": null,
+      "account": null
+    },
+    "routes": {
+      "baseUrl": "/design-parity",
+      "workUrl": "/design-parity/work"
+    }
+  },
+  "page": {
+    "baseUrl": "/design-parity",
+    "domainSlug": "preview-domain",
+    "name": "Harbor Commission",
+    "description": "Oversees the docks and ship registries.",
+    "members": [
+      {
+        "id": 1,
+        "name": "Elias Vane"
+      },
+      {
+        "id": 2,
+        "name": "Mira Sable"
+      }
+    ],
+    "folderNames": [
+      "Dock Ledgers",
+      "Ship Registries"
+    ],
+    "manageHref": "/design-parity/manage/people",
+    "vocabulary": {
+      "subdomainSingular": "Department",
+      "subdomainPlural": "Departments",
+      "folderPlural": "Folders",
+      "memberPlural": "Participants"
+    },
+    "destinations": []
+  },
+  "config": {
+    "paper": "ivory",
+    "accent": "#924c38",
+    "typography": "editorial",
+    "density": "comfortable",
+    "ruleWeight": 1
+  },
+  "theme": {
+    "--tenant-primary": "#292b28",
+    "--tenant-secondary": "#ded8c9",
+    "--tenant-accent": "#924c38",
+    "--tenant-page-bg": "#f1ecdf",
+    "--tenant-surface-bg": "#faf7ef",
+    "--tenant-surface-border": "#b6b0a2",
+    "--tenant-text-on-primary": "#faf7ef",
+    "--tenant-heading-font": "Georgia, 'Times New Roman', Times, serif",
+    "--tenant-body-font": "Tahoma, Verdana, Geneva, sans-serif",
+    "--tenant-muted-text": "#676359",
+    "--atelier-paper": "#f1ecdf",
+    "--atelier-ink": "#292b28",
+    "--atelier-accent": "#924c38",
+    "--atelier-heading": "Georgia, 'Times New Roman', Times, serif",
+    "--atelier-rule": "1px",
+    "--atelier-row": "20px"
+  }
+}

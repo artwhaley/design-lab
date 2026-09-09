@@ -1,0 +1,812 @@
+{
+  "schemaVersion": 2,
+  "sourceRoot": "src/designs",
+  "sanctionedAssetNamespaces": [
+    "/media/<stored-file>",
+    "/design-assets/<key>/<relative-path>"
+  ],
+  "authorizedApiSeam": [
+    "/api/folders",
+    "/api/departments",
+    "/api/role-assignments",
+    "/api/character-claims",
+    "/api/invitations/revoke",
+    "/api/invitations/join-decision",
+    "/api/records-search"
+  ],
+  "packages": [
+    {
+      "key": "atelier",
+      "manifest": {
+        "manifestVersion": 1,
+        "designContractVersion": 1,
+        "entry": "./index.ts",
+        "status": "first-class"
+      },
+      "importsOutsideFolder": [
+        {
+          "file": "src/designs/atelier/AtelierShell.tsx",
+          "specifier": "@/components/platform/OperatingContext",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/AtelierShell.tsx",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/AtelierStudio.tsx",
+          "specifier": "@/lib/design/contracts",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/config.ts",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/config.ts",
+          "specifier": "@/lib/design/contracts",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/config.ts",
+          "specifier": "@/lib/design/validate",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/config.ts",
+          "specifier": "@/lib/theme/fonts",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/index.ts",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/public.tsx",
+          "specifier": "@/lib/page-models/home",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/public.tsx",
+          "specifier": "@/lib/page-models/info",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/public.tsx",
+          "specifier": "@/lib/page-models/departments",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/public.tsx",
+          "specifier": "@/lib/page-models/characterProfile",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/public.tsx",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/public.tsx",
+          "specifier": "@/lib/documents/presentation/actions",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/workspaces.tsx",
+          "specifier": "@/lib/page-models/records",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/workspaces.tsx",
+          "specifier": "@/lib/page-models/members",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/workspaces.tsx",
+          "specifier": "@/lib/page-models/management/departments",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/workspaces.tsx",
+          "specifier": "@/lib/page-models/management/folders",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/workspaces.tsx",
+          "specifier": "@/lib/page-models/management/roles",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/workspaces.tsx",
+          "specifier": "@/lib/page-models/management/documentTypes",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/workspaces.tsx",
+          "specifier": "@/lib/page-models/management/people",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/workspaces.tsx",
+          "specifier": "@/lib/page-models/management/invitations",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/workspaces.tsx",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/atelier/workspaces.tsx",
+          "specifier": "@/lib/page-models/common",
+          "kind": "generic-host-import"
+        }
+      ],
+      "genericHostImports": [],
+      "npmImports": [
+        {
+          "file": "src/designs/atelier/AtelierShell.tsx",
+          "specifier": "react"
+        },
+        {
+          "file": "src/designs/atelier/AtelierShell.tsx",
+          "specifier": "next/navigation"
+        },
+        {
+          "file": "src/designs/atelier/AtelierShell.tsx",
+          "specifier": "next/link"
+        },
+        {
+          "file": "src/designs/atelier/primitives.tsx",
+          "specifier": "react"
+        },
+        {
+          "file": "src/designs/atelier/workspaces.tsx",
+          "specifier": "react"
+        }
+      ],
+      "crossDesignImports": [],
+      "boundaryEscapes": [],
+      "assetRefsOutsideSanctionedNamespaces": [],
+      "staticApiEndpoints": [],
+      "testFilesExcluded": [],
+      "errors": []
+    },
+    {
+      "key": "contract-probe",
+      "manifest": {
+        "manifestVersion": 1,
+        "designContractVersion": 1,
+        "entry": "./index.ts",
+        "status": "first-class"
+      },
+      "importsOutsideFolder": [
+        {
+          "file": "src/designs/contract-probe/ProbeManagement.tsx",
+          "specifier": "@/lib/page-models/management/work",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbeManagement.tsx",
+          "specifier": "@/lib/page-models/management/departments",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbeManagement.tsx",
+          "specifier": "@/lib/page-models/management/folders",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbeManagement.tsx",
+          "specifier": "@/lib/page-models/management/roles",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbeManagement.tsx",
+          "specifier": "@/lib/page-models/management/documentTypes",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbeManagement.tsx",
+          "specifier": "@/lib/page-models/management/people",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbeManagement.tsx",
+          "specifier": "@/lib/page-models/management/invitations",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbeManagement.tsx",
+          "specifier": "@/components/functional/folders/useFolderManagementWorkspace",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbeManagement.tsx",
+          "specifier": "@/lib/documents/typeTree",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbePages.tsx",
+          "specifier": "@/lib/page-models/info",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbePages.tsx",
+          "specifier": "@/lib/page-models/departments",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbePages.tsx",
+          "specifier": "@/lib/page-models/home",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbePages.tsx",
+          "specifier": "@/lib/page-models/info",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbePages.tsx",
+          "specifier": "@/lib/page-models/members",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbeRecords.tsx",
+          "specifier": "@/lib/page-models/records",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbeRecords.tsx",
+          "specifier": "@/lib/page-models/common",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbeRecords.tsx",
+          "specifier": "@/lib/page-models/document",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbeRecords.tsx",
+          "specifier": "@/lib/records/workspace/useRecordsWorkspace",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/ProbeStudio.tsx",
+          "specifier": "@/lib/design/contracts",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/config.ts",
+          "specifier": "@/lib/design/contracts",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/index.ts",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/contract-probe/probeTypes.ts",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        }
+      ],
+      "genericHostImports": [],
+      "npmImports": [
+        {
+          "file": "src/designs/contract-probe/ProbeManagement.tsx",
+          "specifier": "react"
+        },
+        {
+          "file": "src/designs/contract-probe/shared.tsx",
+          "specifier": "react"
+        }
+      ],
+      "crossDesignImports": [],
+      "boundaryEscapes": [],
+      "assetRefsOutsideSanctionedNamespaces": [],
+      "staticApiEndpoints": [],
+      "testFilesExcluded": [],
+      "errors": []
+    },
+    {
+      "key": "obsidian",
+      "manifest": {
+        "manifestVersion": 1,
+        "designContractVersion": 1,
+        "entry": "./index.ts",
+        "status": "first-class"
+      },
+      "importsOutsideFolder": [
+        {
+          "file": "src/designs/obsidian/Navigation.tsx",
+          "specifier": "@/lib/page-models/shell",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianAbout.tsx",
+          "specifier": "@/lib/page-models/info",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianCharacterProfile.tsx",
+          "specifier": "@/lib/page-models/management/people",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianDepartmentDetail.tsx",
+          "specifier": "@/lib/page-models/departments",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianDepartments.tsx",
+          "specifier": "@/lib/page-models/departments",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianDocument.tsx",
+          "specifier": "@/lib/page-models/document",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianDocument.tsx",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianDocumentTypes.tsx",
+          "specifier": "@/lib/design/hostActionBridges",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianDocumentTypes.tsx",
+          "specifier": "@/lib/documents/typeTree",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianDocumentTypes.tsx",
+          "specifier": "@/lib/page-models/management/documentTypes",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianDocumentTypes.tsx",
+          "specifier": "@/components/functional/document-types/useDocumentTypesManagementWorkspace",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianDocumentTypes.tsx",
+          "specifier": "@/components/documentTypes/TypeInspector",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianFolderManager.tsx",
+          "specifier": "@/lib/page-models/management/folders",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianFolderManager.tsx",
+          "specifier": "@/components/functional/folders/useFolderManagementWorkspace",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianHome.tsx",
+          "specifier": "@/lib/page-models/home",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianManagement.tsx",
+          "specifier": "@/lib/page-models/shell",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianMembersDirectory.tsx",
+          "specifier": "@/lib/page-models/members",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "specifier": "@/components/functional/people/usePeopleManagementWorkspace",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "specifier": "@/components/functional/roles/useRoleManagementWorkspace",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "specifier": "@/components/people/PersonAccessTrees",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "specifier": "@/lib/page-models/management/departments",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "specifier": "@/lib/page-models/management/invitations",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "specifier": "@/lib/page-models/management/people",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "specifier": "@/lib/page-models/management/roles",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "specifier": "@/lib/design/hostActionBridges",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianPublicCharacterProfile.tsx",
+          "specifier": "@/lib/page-models/characterProfile",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianPublicCharacterProfile.tsx",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianRecords.tsx",
+          "specifier": "@/lib/page-models/records",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianRecords.tsx",
+          "specifier": "@/lib/page-models/common",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianRecords.tsx",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianRecords.tsx",
+          "specifier": "@/lib/records/workspace/useRecordsWorkspace",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianRecords.tsx",
+          "specifier": "@/components/functional/records/recordActions",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianShell.tsx",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianShell.tsx",
+          "specifier": "@/components/platform/OperatingContext",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/config.ts",
+          "specifier": "@/lib/theme/fonts",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/config.ts",
+          "specifier": "@/lib/theme/color",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/config.ts",
+          "specifier": "@/lib/design/assets",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/config.ts",
+          "specifier": "@/lib/design/contracts",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/config.ts",
+          "specifier": "@/lib/design/validate",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/index.ts",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/operational.tsx",
+          "specifier": "@/lib/page-models/members",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/operational.tsx",
+          "specifier": "@/lib/page-models/management/folders",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/operational.tsx",
+          "specifier": "@/lib/page-models/management/roles",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/operational.tsx",
+          "specifier": "@/lib/page-models/management/documentTypes",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/operational.tsx",
+          "specifier": "@/lib/page-models/management/people",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/operational.tsx",
+          "specifier": "@/lib/page-models/management/invitations",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/operational.tsx",
+          "specifier": "@/lib/page-models/management/departments",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/operational.tsx",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/studio/ObsidianStudioEditor.tsx",
+          "specifier": "@/lib/design/contracts",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/thin.tsx",
+          "specifier": "@/lib/page-models/info",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/thin.tsx",
+          "specifier": "@/lib/page-models/departments",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/thin.tsx",
+          "specifier": "@/lib/page-models/home",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/thin.tsx",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/thin.tsx",
+          "specifier": "@/lib/design/assets",
+          "kind": "generic-host-import"
+        },
+        {
+          "file": "src/designs/obsidian/thin.tsx",
+          "specifier": "@/lib/design/types",
+          "kind": "generic-host-import"
+        }
+      ],
+      "genericHostImports": [
+        {
+          "file": "src/designs/obsidian/ObsidianCharacterProfile.tsx",
+          "specifier": "../shared/operational/bodies",
+          "kind": "shared-host-support"
+        },
+        {
+          "file": "src/designs/obsidian/studio/ObsidianStudioEditor.tsx",
+          "specifier": "../../shared/studio/fields",
+          "kind": "shared-host-support"
+        }
+      ],
+      "npmImports": [
+        {
+          "file": "src/designs/obsidian/DocumentActionMenu.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/DocumentActions.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/Navigation.tsx",
+          "specifier": "react"
+        },
+        {
+          "file": "src/designs/obsidian/Navigation.tsx",
+          "specifier": "next/navigation"
+        },
+        {
+          "file": "src/designs/obsidian/Navigation.tsx",
+          "specifier": "radix-ui"
+        },
+        {
+          "file": "src/designs/obsidian/Navigation.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianAbout.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianDepartmentDetail.tsx",
+          "specifier": "react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianDepartmentDetail.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianDepartments.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianDocument.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianDocumentTypes.tsx",
+          "specifier": "react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianDocumentTypes.tsx",
+          "specifier": "next/navigation"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianDocumentTypes.tsx",
+          "specifier": "react-arborist"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianDocumentTypes.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianFolderManager.tsx",
+          "specifier": "react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianFolderManager.tsx",
+          "specifier": "react-arborist"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianFolderManager.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianHome.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianLore.tsx",
+          "specifier": "react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianLore.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianMembersDirectory.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "specifier": "react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "specifier": "next/navigation"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianPublicCharacterProfile.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianRecords.tsx",
+          "specifier": "react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianRecords.tsx",
+          "specifier": "next/navigation"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianRecords.tsx",
+          "specifier": "radix-ui"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianRecords.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianShell.tsx",
+          "specifier": "next/link"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianShell.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/ReadingSurface.tsx",
+          "specifier": "radix-ui"
+        },
+        {
+          "file": "src/designs/obsidian/ReadingSurface.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/ReadingSurface.tsx",
+          "specifier": "react"
+        },
+        {
+          "file": "src/designs/obsidian/config.ts",
+          "specifier": "react"
+        },
+        {
+          "file": "src/designs/obsidian/controls.tsx",
+          "specifier": "radix-ui"
+        },
+        {
+          "file": "src/designs/obsidian/controls.tsx",
+          "specifier": "lucide-react"
+        },
+        {
+          "file": "src/designs/obsidian/controls.tsx",
+          "specifier": "react"
+        }
+      ],
+      "crossDesignImports": [],
+      "boundaryEscapes": [],
+      "assetRefsOutsideSanctionedNamespaces": [],
+      "staticApiEndpoints": [
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "endpoint": "/api/departments"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "endpoint": "/api/departments"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "endpoint": "/api/role-assignments"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "endpoint": "/api/invitations/revoke"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "endpoint": "/api/invitations/join-decision"
+        },
+        {
+          "file": "src/designs/obsidian/ObsidianOperationalSurfaces.tsx",
+          "endpoint": "/api/character-claims"
+        }
+      ],
+      "testFilesExcluded": [
+        "src/designs/obsidian/config.design.test.ts"
+      ],
+      "errors": []
+    }
+  ],
+  "errors": []
+}

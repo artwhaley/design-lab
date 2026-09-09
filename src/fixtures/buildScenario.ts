@@ -845,7 +845,7 @@ export class ScenarioBuilder {
         }),
     }))
     const typeAccess = universe.documentTypes.map((t) => {
-      const heldRoles = member.roleIds.map(roleById)
+        const heldRoles = universe.roles.filter(role => member.roleIds.includes(role.id))
       const anyCreate = heldRoles.some((r) => r.typeCreate)
       const anyEdit = heldRoles.some((r) => r.typeEdit)
       const source = heldRoles.length > 0 ? 'Role-derived' : 'None'

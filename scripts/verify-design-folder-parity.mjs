@@ -67,11 +67,13 @@ try {
     if (existsSync(productionMaterialized)) differences.push(...compareAssetMaterialization('Production bundled assets', productionAssets, productionMaterialized))
   }
 
-  if (differences.length) {
+  const count = filesUnder(productionDesign).size
+  if (count === 0) {
+    fail('Obsidian folder is empty or missing — an empty folder must never pass parity (0-file false pass)')
+  } else if (differences.length) {
     differences.forEach((difference) => console.error(`- ${difference}`))
     fail(`${differences.length} difference(s) found`)
   } else {
-    const count = filesUnder(productionDesign).size
     console.log(`[design parity] Obsidian source parity: PASS (${count} files)`)
     if (process.argv.includes('--check-assets')) console.log('[design parity] bundled asset materialization: PASS')
   }

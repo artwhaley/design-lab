@@ -1,0 +1,2134 @@
+{
+  "generatedAt": "2026-09-08T23:28:10.616Z",
+  "browser": {
+    "engine": "Chromium",
+    "version": "151.0.7922.138",
+    "executable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "deviceScaleFactor": 1,
+    "locale": "en-US",
+    "timezone": "UTC",
+    "reducedMotion": false
+  },
+  "production": {
+    "origin": "http://127.0.0.1:3055",
+    "root": "C:\\Users\\artwh\\Downloads\\loreforge2\\sl-civic-archive",
+    "head": "10030c5b41f39e7c924650232d072536d33e5938"
+  },
+  "lab": {
+    "origin": "http://127.0.0.1:4175",
+    "root": "C:\\Users\\artwh\\Downloads\\loreforge2\\design-lab",
+    "head": "944bcab32278e0b585fe70f2999f8e954a91bc8a"
+  },
+  "design": {
+    "key": "obsidian",
+    "fixture": "production-preview",
+    "folderTreeHash": "ad7d7a08b7c375710a13cb3c7d9886d1d467cec7b92fb4de46e39cce2872f18d"
+  },
+  "thresholds": {
+    "changedPixelRatio": 0.005,
+    "dom": "exact after the explicit runtime-noise normalization listed below",
+    "domNormalization": [
+      "CSS module scopes are matched by Lab Vite production-shaped namespaces; authored classes remain part of the comparison.",
+      "DOM attributes are sorted and inline-style serialization is canonicalized (including 0px to 0); authored text, classes, and values remain part of the comparison.",
+      "Only generated runtime noise is normalized: React hydration attributes and nonce, React useId names, Radix focus tabindex, React server-action hidden scaffolding/placeholders, and react-arborist draggable/scroll markers."
+    ]
+  },
+  "surfaces": [
+    {
+      "key": "home",
+      "slug": "home"
+    },
+    {
+      "key": "records",
+      "slug": "records"
+    },
+    {
+      "key": "document",
+      "slug": "document"
+    },
+    {
+      "key": "departments",
+      "slug": "departments"
+    },
+    {
+      "key": "department",
+      "slug": "department"
+    },
+    {
+      "key": "about",
+      "slug": "about"
+    },
+    {
+      "key": "lore",
+      "slug": "lore"
+    },
+    {
+      "key": "members",
+      "slug": "members"
+    },
+    {
+      "key": "work",
+      "slug": "work"
+    },
+    {
+      "key": "character-profile",
+      "slug": "character-profile"
+    },
+    {
+      "key": "management.departments",
+      "slug": "management-departments"
+    },
+    {
+      "key": "management.folders",
+      "slug": "management-folders"
+    },
+    {
+      "key": "management.roles",
+      "slug": "management-roles"
+    },
+    {
+      "key": "management.documentTypes",
+      "slug": "management-document-types"
+    },
+    {
+      "key": "management.people",
+      "slug": "management-people"
+    },
+    {
+      "key": "management.person",
+      "slug": "management-person"
+    },
+    {
+      "key": "management.invitations",
+      "slug": "management-invitations"
+    }
+  ],
+  "viewports": [
+    {
+      "name": "desktop-1440x1000",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "name": "compact-1024x900",
+      "width": 1024,
+      "height": 900
+    },
+    {
+      "name": "mobile-390x844",
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "results": [
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "home",
+      "productionUrl": "http://127.0.0.1:3055/design-parity?design=obsidian",
+      "labSurface": "home",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 298,
+        "lab": 298
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {
+          "/design-assets/obsidian/atmosphere.png": "b2edb204796fac09cd7d9063b7c79b3982f39b83d00009e0f1a9205ec8257bf3"
+        },
+        "lab": {
+          "/design-assets/obsidian/atmosphere.png": "b2edb204796fac09cd7d9063b7c79b3982f39b83d00009e0f1a9205ec8257bf3"
+        },
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "records",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/records?design=obsidian",
+      "labSurface": "records",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 397,
+        "lab": 397
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "document",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/document?design=obsidian",
+      "labSurface": "document",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 231,
+        "lab": 231
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "departments",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/departments?design=obsidian",
+      "labSurface": "departments",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 199,
+        "lab": 199
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "department",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/department?design=obsidian",
+      "labSurface": "department",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 169,
+        "lab": 169
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "about",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/about?design=obsidian",
+      "labSurface": "about",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 152,
+        "lab": 152
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "lore",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/lore?design=obsidian",
+      "labSurface": "lore",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 148,
+        "lab": 148
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "members",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/members?design=obsidian",
+      "labSurface": "members",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 154,
+        "lab": 154
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "work",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/work?design=obsidian",
+      "labSurface": "work",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 200,
+        "lab": 200
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "character-profile",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/character-profile?design=obsidian",
+      "labSurface": "character-profile",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 186,
+        "lab": 186
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "management.departments",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-departments?design=obsidian",
+      "labSurface": "management-departments",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 184,
+        "lab": 184
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "management.folders",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-folders?design=obsidian",
+      "labSurface": "management-folders",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 189,
+        "lab": 189
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "management.roles",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-roles?design=obsidian",
+      "labSurface": "management-roles",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 183,
+        "lab": 183
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "management.documentTypes",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-document-types?design=obsidian",
+      "labSurface": "management-document-types",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 211,
+        "lab": 211
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "management.people",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-people?design=obsidian",
+      "labSurface": "management-people",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 168,
+        "lab": 168
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "management.person",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-person?design=obsidian",
+      "labSurface": "management-person",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 335,
+        "lab": 335
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "management.invitations",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-invitations?design=obsidian",
+      "labSurface": "management-invitations",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 207,
+        "lab": 207
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "home",
+      "productionUrl": "http://127.0.0.1:3055/design-parity?design=obsidian",
+      "labSurface": "home",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 298,
+        "lab": 298
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {
+          "/design-assets/obsidian/atmosphere.png": "b2edb204796fac09cd7d9063b7c79b3982f39b83d00009e0f1a9205ec8257bf3"
+        },
+        "lab": {
+          "/design-assets/obsidian/atmosphere.png": "b2edb204796fac09cd7d9063b7c79b3982f39b83d00009e0f1a9205ec8257bf3"
+        },
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "records",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/records?design=obsidian",
+      "labSurface": "records",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 397,
+        "lab": 397
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "document",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/document?design=obsidian",
+      "labSurface": "document",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 231,
+        "lab": 231
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "departments",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/departments?design=obsidian",
+      "labSurface": "departments",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 199,
+        "lab": 199
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "department",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/department?design=obsidian",
+      "labSurface": "department",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 169,
+        "lab": 169
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "about",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/about?design=obsidian",
+      "labSurface": "about",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 152,
+        "lab": 152
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "lore",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/lore?design=obsidian",
+      "labSurface": "lore",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 148,
+        "lab": 148
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "members",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/members?design=obsidian",
+      "labSurface": "members",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 154,
+        "lab": 154
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "work",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/work?design=obsidian",
+      "labSurface": "work",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 200,
+        "lab": 200
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "character-profile",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/character-profile?design=obsidian",
+      "labSurface": "character-profile",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 186,
+        "lab": 186
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "management.departments",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-departments?design=obsidian",
+      "labSurface": "management-departments",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 184,
+        "lab": 184
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "management.folders",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-folders?design=obsidian",
+      "labSurface": "management-folders",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 189,
+        "lab": 189
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "management.roles",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-roles?design=obsidian",
+      "labSurface": "management-roles",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 183,
+        "lab": 183
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "management.documentTypes",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-document-types?design=obsidian",
+      "labSurface": "management-document-types",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 211,
+        "lab": 211
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "management.people",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-people?design=obsidian",
+      "labSurface": "management-people",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 168,
+        "lab": 168
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "management.person",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-person?design=obsidian",
+      "labSurface": "management-person",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 335,
+        "lab": 335
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "management.invitations",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-invitations?design=obsidian",
+      "labSurface": "management-invitations",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 207,
+        "lab": 207
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "home",
+      "productionUrl": "http://127.0.0.1:3055/design-parity?design=obsidian",
+      "labSurface": "home",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 298,
+        "lab": 298
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {
+          "/design-assets/obsidian/atmosphere.png": "b2edb204796fac09cd7d9063b7c79b3982f39b83d00009e0f1a9205ec8257bf3"
+        },
+        "lab": {
+          "/design-assets/obsidian/atmosphere.png": "b2edb204796fac09cd7d9063b7c79b3982f39b83d00009e0f1a9205ec8257bf3"
+        },
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "records",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/records?design=obsidian",
+      "labSurface": "records",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 397,
+        "lab": 397
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "document",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/document?design=obsidian",
+      "labSurface": "document",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 231,
+        "lab": 231
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "departments",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/departments?design=obsidian",
+      "labSurface": "departments",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 199,
+        "lab": 199
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "department",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/department?design=obsidian",
+      "labSurface": "department",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 169,
+        "lab": 169
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "about",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/about?design=obsidian",
+      "labSurface": "about",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 152,
+        "lab": 152
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "lore",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/lore?design=obsidian",
+      "labSurface": "lore",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 148,
+        "lab": 148
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "members",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/members?design=obsidian",
+      "labSurface": "members",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 154,
+        "lab": 154
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "work",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/work?design=obsidian",
+      "labSurface": "work",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 200,
+        "lab": 200
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "character-profile",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/character-profile?design=obsidian",
+      "labSurface": "character-profile",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 186,
+        "lab": 186
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "management.departments",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-departments?design=obsidian",
+      "labSurface": "management-departments",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 184,
+        "lab": 184
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "management.folders",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-folders?design=obsidian",
+      "labSurface": "management-folders",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 189,
+        "lab": 189
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "management.roles",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-roles?design=obsidian",
+      "labSurface": "management-roles",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 183,
+        "lab": 183
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "management.documentTypes",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-document-types?design=obsidian",
+      "labSurface": "management-document-types",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 211,
+        "lab": 211
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "management.people",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-people?design=obsidian",
+      "labSurface": "management-people",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 168,
+        "lab": 168
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "management.person",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-person?design=obsidian",
+      "labSurface": "management-person",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 335,
+        "lab": 335
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "management.invitations",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-invitations?design=obsidian",
+      "labSurface": "management-invitations",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 207,
+        "lab": 207
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        },
+        "lab": {
+          "manrope": true,
+          "instrument": false,
+          "headingFamily": "\"Manrope Variable\", sans-serif",
+          "bodyFamily": "\"Manrope Variable\", sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    }
+  ],
+  "summary": {
+    "cases": 51,
+    "failures": 0,
+    "maxChangedPixelRatio": 0,
+    "domMismatches": 0,
+    "inputMismatches": 0,
+    "assetMismatches": 0
+  }
+}

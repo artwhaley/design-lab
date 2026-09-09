@@ -318,11 +318,11 @@ export class FakeBackend {
     return Math.max(0, ...this.builder.universe.roles.map((r) => r.id)) + 1
   }
 
-  createRole(input: { name: string; departmentId: number }): MutationResult {
+  createRole(input: { name: string; departmentId: number; parentRoleId?: number | null }): MutationResult {
     if (!this.projection.canManageRoles) return this.denied('roles', 'create')
     if (!this.projection.administratedDepartmentIds.includes(input.departmentId)) return this.denied('roles', 'create')
     const id = this.nextRoleId()
-    this.builder.universe.roles.push({ id, name: input.name.trim(), departmentId: input.departmentId, parentRoleId: null, folderRead: 'inherit', folderWrite: 'inherit', typeCreate: false, typeEdit: false })
+    this.builder.universe.roles.push({ id, name: input.name.trim(), departmentId: input.departmentId, parentRoleId: input.parentRoleId ?? null, folderRead: 'inherit', folderWrite: 'inherit', typeCreate: false, typeEdit: false })
     this.log.append('roles', 'create', `created "${input.name.trim()}"`)
     return { ok: true, message: 'Role created.' }
   }

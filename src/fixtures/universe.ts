@@ -37,6 +37,7 @@ export type DomainFacts = {
 }
 
 export type Universe = {
+  permissionRules?: Record<string, Record<string, import('@/components/people/PersonAccessTrees').PermissionState>>
   domain: DomainFacts
   departments: DepartmentEntity[]
   members: MemberEntity[]

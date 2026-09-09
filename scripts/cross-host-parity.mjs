@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto'
 import { execFileSync } from 'node:child_process'
+import { existsSync } from 'node:fs'
 import { mkdir, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { chromium } from 'playwright'
@@ -7,12 +8,24 @@ import { PNG } from 'pngjs'
 import pixelmatch from 'pixelmatch'
 import { JSDOM } from 'jsdom'
 
+const designKey = process.env.PARITY_DESIGN ?? 'obsidian'
+if (!/^[a-z][a-z0-9-]*$/.test(designKey)) throw new Error('Invalid PARITY_DESIGN')
 const productionOrigin = process.env.LOREFORGE_PRODUCTION_URL ?? 'http://127.0.0.1:3055'
 const labOrigin = process.env.LOREFORGE_LAB_URL ?? 'http://127.0.0.1:4174'
 const productionRoot = path.resolve(process.env.LOREFORGE_PRODUCTION_ROOT ?? '../sl-civic-archive')
-const outputRoot = path.resolve('docs', 'parity', 'cross-host')
-const reviewRoot = path.resolve('docs', 'parity', 'parity-review')
-const browserExecutable = process.env.OBSIDIAN_CAPTURE_BROWSER ?? 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+const outputRoot = path.resolve('docs', 'parity', 'cross-host', designKey)
+const reviewRoot = path.resolve('docs', 'parity', 'parity-review', designKey)
+function resolveBrowserExecutable() {
+  const explicit = process.env.OBSIDIAN_CAPTURE_BROWSER
+  if (explicit) return explicit
+  const candidates = process.platform === 'win32'
+    ? ['C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe', 'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe']
+    : process.platform === 'darwin'
+      ? ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge']
+      : ['/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser', '/usr/bin/microsoft-edge']
+  return candidates.find((candidate) => existsSync(candidate)) ?? null
+}
+const browserExecutable = resolveBrowserExecutable()
 const pixelThreshold = 0.005
 
 const cases = [
@@ -25,6 +38,7 @@ const cases = [
   ['lore', 'lore', 'Lore'],
   ['members', 'members', 'Members'],
   ['work', 'work', 'Work'],
+  ['character-profile', 'character-profile', 'Character profile'],
   ['management.departments', 'management-departments', 'Manage Departments'],
   ['management.folders', 'management-folders', 'Manage Folders'],
   ['management.roles', 'management-roles', 'Manage Roles'],
@@ -70,6 +84,17 @@ function formatDom(html) {
   const voidElements = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'])
   const escapeText = (value) => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
   const escapeAttribute = (value) => escapeText(value).replaceAll('"', '&quot;')
+
+  // CSS-module class tokens carry a build-time hash that legitimately differs
+  // between hosts (Next vs Vite). Strip the hash so the DOM comparison is over
+  // semantics: `{fileBase}-module__{hash}__{localName}` -> `{fileBase}-module__{localName}`.
+  const normalizeClassToken = (token) => {
+    const moduleToken = /^(.+?)-module__[A-Za-z0-9_-]+__(.+)$/.exec(token)
+    if (moduleToken) return `${moduleToken[1].replace(/-module-scss$/, '')}-module__${moduleToken[2]}`
+    return token
+  }
+  const normalizeClass = (value) => value.split(/\s+/).filter(Boolean).map(normalizeClassToken).sort().join(' ')
+
   const skipGeneratedAttribute = (name, value, element) => {
     if (name === 'data-reactroot' || name === 'data-reactid' || name === 'nonce') return true
     if (['id', 'for', 'aria-controls', 'aria-labelledby', 'aria-describedby'].includes(name) && /^(radix-|:r)/.test(value)) return true
@@ -90,6 +115,9 @@ function formatDom(html) {
       .filter((attribute) => !(hasServerActionFields && (attribute.name === 'enctype' || attribute.name === 'method')))
       .map((attribute) => {
         let value = attribute.value
+        if (attribute.name === 'class') {
+          value = normalizeClass(value)
+        }
         if (attribute.name === 'style') {
           value = element.style.cssText
             .replace(/\b0px\b/g, '0')
@@ -140,7 +168,7 @@ async function screenshotLab(page, width, height) {
 }
 
 async function rootHtml(target) {
-  return target.locator('[data-template="obsidian"]').evaluate((element) => element.outerHTML)
+  return target.locator('[data-template]').evaluate((element) => element.outerHTML)
 }
 
 async function parityInput(target) {
@@ -153,7 +181,7 @@ async function parityInput(target) {
 
 async function fontGate(target) {
   return target.evaluate(() => {
-    const root = document.querySelector('[data-template="obsidian"]')
+    const root = document.querySelector('[data-template]')
     const heading = root?.querySelector('h1, h2, h3')
     const body = root?.querySelector('p, span, a')
     return {
@@ -167,7 +195,7 @@ async function fontGate(target) {
 
 async function assetGate(target) {
   return target.evaluate(async () => {
-    const root = document.querySelector('[data-template="obsidian"]')
+    const root = document.querySelector('[data-template]')
     const paths = new Set()
     for (const image of [...document.images]) {
       if (image.currentSrc || image.src) paths.add(new URL(image.currentSrc || image.src, window.location.href).href)
@@ -193,7 +221,7 @@ async function assetGate(target) {
 }
 
 function expectedProductionUrl(slug) {
-  return slug === 'home' ? `${productionOrigin}/design-parity` : `${productionOrigin}/design-parity/${slug}`
+  return (slug === 'home' ? `${productionOrigin}/design-parity` : `${productionOrigin}/design-parity/${slug}`) + `?design=${designKey}`
 }
 
 async function main() {
@@ -204,7 +232,7 @@ async function main() {
   await mkdir(path.join(reviewRoot, 'dom'), { recursive: true })
   await mkdir(path.join(reviewRoot, 'inputs'), { recursive: true })
 
-  const browser = await chromium.launch({ headless: true, executablePath: browserExecutable })
+  const browser = await chromium.launch({ headless: true, ...(browserExecutable ? { executablePath: browserExecutable } : {}) })
   const browserVersion = browser.version()
   const productionContext = await browser.newContext({ locale: 'en-US', timezoneId: 'UTC', deviceScaleFactor: 1 })
   const labContext = await browser.newContext({ locale: 'en-US', timezoneId: 'UTC', deviceScaleFactor: 1 })
@@ -214,7 +242,7 @@ async function main() {
   const results = []
   try {
     await labPage.goto(`${labOrigin}/?fixture=production-preview`, { waitUntil: 'networkidle' })
-    await labPage.locator('#lab-design-select').selectOption('obsidian')
+    await labPage.locator('#lab-design-select').selectOption(designKey)
     await labPage.getByRole('tab', { name: 'View', exact: true }).click()
     for (const [viewportName, width, height, viewportLabel] of selectedViewports) {
       await labPage.locator('#lab-viewport-preset').selectOption({ label: viewportLabel })
@@ -277,7 +305,7 @@ async function main() {
         })
         await productionPage.goto(`${productionOrigin}/design-parity`, { waitUntil: 'networkidle' })
         await labPage.reload({ waitUntil: 'networkidle' })
-        await labPage.locator('#lab-design-select').selectOption('obsidian')
+        await labPage.locator('#lab-design-select').selectOption(designKey)
         await labPage.getByRole('tab', { name: 'View', exact: true }).click()
         await labPage.locator('#lab-viewport-preset').selectOption({ label: viewportLabel })
       }
@@ -291,10 +319,10 @@ async function main() {
   const failures = results.filter((result) => !result.pass)
   const manifest = {
     generatedAt: new Date().toISOString(),
-    browser: { engine: 'Chromium', version: browserVersion, executable: browserExecutable, deviceScaleFactor: 1, locale: 'en-US', timezone: 'UTC', reducedMotion: false },
+    browser: { engine: 'Chromium', version: browserVersion, executable: browserExecutable ?? '(playwright default)', deviceScaleFactor: 1, locale: 'en-US', timezone: 'UTC', reducedMotion: false },
     production: { origin: productionOrigin, root: productionRoot, head: gitHead(productionRoot) },
     lab: { origin: labOrigin, root: path.resolve('.'), head: gitHead(path.resolve('.')) },
-    design: { key: 'obsidian', fixture: 'production-preview', folderTreeHash: treeHash(path.resolve('src', 'designs', 'obsidian')) },
+    design: { key: designKey, fixture: 'production-preview', folderTreeHash: treeHash(path.resolve('src', 'designs', designKey)) },
     thresholds: {
       changedPixelRatio: pixelThreshold,
       dom: 'exact after the explicit runtime-noise normalization listed below',
@@ -317,7 +345,7 @@ This packet is the Phase 2 automated evidence for the production Obsidian oracle
 
 ## Automated result
 
-- 16 Class A surfaces × 3 viewports = 48 deterministic comparisons.
+- ${results.length} deterministic comparisons, including optional surfaces when selected.
 - Desktop: 1440×1000; compact: 1024×900; mobile: 390×844.
 - Pixel threshold: 0.5%; observed maximum: ${(manifest.summary.maxChangedPixelRatio * 100).toFixed(3)}%.
 - DOM mismatches: ${manifest.summary.domMismatches} after the explicit runtime-noise normalization listed in manifest.json.

@@ -1,9 +1,10 @@
 import { useEffect, useRef, type CSSProperties, type ReactElement } from 'react'
 
+import type { CharacterProfilePageModel } from '@/lib/page-models/characterProfile'
 import type { DesignDefinition } from '@/lib/design/types'
 import type { SurfaceKey, ClassBSurfaceKey } from '../contracts'
 import type { ScenarioBuilder } from '../fixtures'
-import { productionAboutModel, productionDepartmentModel, productionDepartmentsManagementModel, productionDepartmentsModel, productionDocumentModel, productionDocumentTypesManagementModel, productionFoldersManagementModel, productionHomeModel, productionInvitationsManagementModel, productionLoreModel, productionMembersModel, productionPeopleManagementModel, productionPersonManagementModel, productionRecordsModel, productionRolesManagementModel, productionShellModel, productionWorkModel } from '../fixtures/productionModels'
+import { productionAboutModel, productionCharacterProfileModel, productionDepartmentModel, productionDepartmentsManagementModel, productionDepartmentsModel, productionDocumentModel, productionDocumentTypesManagementModel, productionFoldersManagementModel, productionHomeModel, productionInvitationsManagementModel, productionLoreModel, productionMembersModel, productionPeopleManagementModel, productionPersonManagementModel, productionRecordsModel, productionRolesManagementModel, productionShellModel, productionWorkModel } from '../fixtures/productionModels'
 import type { FakeBackend, FakeBackendSnapshot } from '../workspaces'
 import { SharedFunctionalSurface } from '../host/SharedFunctionalSurface'
 import type { SurfaceParams } from '../host/PathSimulator'
@@ -12,11 +13,11 @@ import type { ProductionRuntime } from '../host/productionRuntime'
 import { setPreviewPath } from './navigation'
 import { PRODUCTION_PARITY_BASE, productionParityInput, productionParityPageModel, productionParityPath, productionParityShellModel } from './productionParityModels'
 
-export type PreviewRendererProps = {
-  design: DesignDefinition
+export type PreviewRendererProps<TConfig extends object = object> = {
+  design: DesignDefinition<TConfig>
   builder: ScenarioBuilder
   backend: FakeBackend
-  runtime: ProductionRuntime
+  runtime: ProductionRuntime<TConfig>
   surface: SurfaceKey
   params: SurfaceParams
   viaCompat?: 'review' | 'subdomains'
@@ -25,7 +26,7 @@ export type PreviewRendererProps = {
   onBackendSnapshot?(snapshot: FakeBackendSnapshot): void
 }
 
-export function PreviewRenderer(props: PreviewRendererProps) {
+export function PreviewRenderer<TConfig extends object>(props: PreviewRendererProps<TConfig>) {
   const { design, builder, backend, runtime, surface, params, viaCompat, onNavigate, onExternal, onBackendSnapshot } = props
   const navigateRef = useRef(onNavigate)
   navigateRef.current = onNavigate
@@ -33,7 +34,7 @@ export function PreviewRenderer(props: PreviewRendererProps) {
   const productionFixtureMode = builder.spec.fixtureProfile === 'production-preview'
   const shellModel = productionFixtureMode ? productionParityShellModel() : productionShellModel(builder)
   const route = routeContextForSurface(effectiveSurface, params, viaCompat, productionFixtureMode ? PRODUCTION_PARITY_BASE : builder.baseUrl)
-  if (productionFixtureMode) route.canonicalPath = productionParityPath(effectiveSurface)
+  if (productionFixtureMode) route.canonicalPath = `${productionParityPath(effectiveSurface)}?design=${encodeURIComponent(design.key)}`
   const activeBaseUrl = productionFixtureMode ? PRODUCTION_PARITY_BASE : builder.baseUrl
 
   useEffect(() => { setPreviewPath(route.canonicalPath) }, [route.canonicalPath])
@@ -79,12 +80,12 @@ export function PreviewRenderer(props: PreviewRendererProps) {
   </div>
 }
 
-function renderSurfaceBody(
-  design: DesignDefinition,
+function renderSurfaceBody<TConfig extends object>(
+  design: DesignDefinition<TConfig>,
   builder: ScenarioBuilder,
   surface: SurfaceKey,
   params: SurfaceParams,
-  runtime: ProductionRuntime,
+  runtime: ProductionRuntime<TConfig>,
   productionFixtureMode: boolean,
   actions: {
     workflowAction: (formData: FormData) => Promise<void>
@@ -111,6 +112,13 @@ function renderSurfaceBody(
     case 'lore': return <design.pages.lore {...(productionFixtureMode ? parityPage('lore') as ReturnType<typeof productionLoreModel> : productionLoreModel(builder))} designConfig={designConfig} headerLayout="" documentStyle="" />
     case 'members': return <design.pages.members {...(productionFixtureMode ? parityPage('members') as ReturnType<typeof productionMembersModel> : productionMembersModel(builder))} designConfig={designConfig} headerLayout="" documentStyle="" />
     case 'work': return <design.pages.work {...(productionFixtureMode ? parityPage('work') as ReturnType<typeof productionWorkModel> : productionWorkModel(builder))} designConfig={designConfig} headerLayout="" documentStyle="" approveAction={actions.approveAction} rejectAction={actions.rejectAction} />
+    case 'character-profile': {
+      const characterId = params.characterId ?? builder.universe.members[0]?.id ?? 1
+      const model = productionFixtureMode ? parityPage('character-profile') as CharacterProfilePageModel : productionCharacterProfileModel(builder, characterId)
+      return design.pages.characterProfile
+        ? <design.pages.characterProfile {...model} designConfig={designConfig} headerLayout="" documentStyle="" />
+        : <main><a href={`${builder.baseUrl}/members`}>Back to members</a><h1>{model.character.name}</h1></main>
+    }
     case 'management.departments': return <design.pages.management.departments {...(productionFixtureMode ? parityPage('management.departments') as ReturnType<typeof productionDepartmentsManagementModel> : productionDepartmentsManagementModel(builder))} designConfig={designConfig} headerLayout="" documentStyle="" />
     case 'management.folders': return <design.pages.management.folders {...(productionFixtureMode ? parityPage('management.folders') as ReturnType<typeof productionFoldersManagementModel> : productionFoldersManagementModel(builder))} designConfig={designConfig} headerLayout="" documentStyle="" />
     case 'management.roles': return <design.pages.management.roles {...(productionFixtureMode ? parityPage('management.roles') as ReturnType<typeof productionRolesManagementModel> : productionRolesManagementModel(builder))} designConfig={designConfig} headerLayout="" documentStyle="" />

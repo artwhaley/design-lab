@@ -1,3 +1,4 @@
+import type { CharacterProfilePageModel } from '@/lib/page-models/characterProfile'
 import type { DomainShellModel } from '@/lib/page-models/shell'
 import type { HomePageModel } from '@/lib/page-models/home'
 import type { RecordsPageModel } from '@/lib/page-models/records'
@@ -88,6 +89,24 @@ export function productionMembersModel(builder: ScenarioBuilder): MembersPageMod
   }
 }
 
+export function productionCharacterProfileModel(builder: ScenarioBuilder, characterId: number): CharacterProfilePageModel {
+  const member = builder.universe.members.find((m) => m.id === characterId)
+  const name = member?.name ?? 'Unnamed character'
+  const department = member ? builder.universe.departments.find((d) => d.id === member.departmentIds[0]) ?? null : null
+  const role = member ? builder.universe.roles.find((r) => r.id === member.roleIds[0]) ?? null : null
+  return {
+    baseUrl: builder.baseUrl,
+    domainSlug: builder.universe.domain.slug,
+    character: { id: characterId, name, kind: member?.kind ?? 'player', status: member?.status ?? 'active' },
+    departmentName: department?.name ?? 'Domain members',
+    departmentHref: department ? `${builder.baseUrl}/departments/${department.slug}` : `${builder.baseUrl}/members`,
+    departmentDescription: department?.description ?? null,
+    roleName: role?.name ?? 'Member',
+    focus: 'the shared work of the Domain',
+    backHref: `${builder.baseUrl}/members`,
+  }
+}
+
 export function productionWorkModel(builder: ScenarioBuilder): WorkPageModel {
   const source = builder.workModel()
   return { baseUrl: source.baseUrl, domainSlug: source.domainSlug, domainName: source.domainName, domainId: builder.universe.domain.id, authorized: source.authorized, domainAdmin: source.domainAdmin, status: source.status, entries: source.entries.map((entry) => ({ kind: entry.kind as 'document' | 'join' | 'claim', id: entry.id, title: entry.title, summary: entry.summary, href: entry.href, requestedAt: entry.requestedAtLabel, domainId: builder.universe.domain.id, folderName: entry.folderName })) }
@@ -113,20 +132,36 @@ function roleTree(node: { id: number; name: string; held?: boolean; children?: A
   return { id: node.id, name: node.name, held: Boolean(node.held), assignable: true, children: (node.children ?? []).map((child) => roleTree(child)) }
 }
 
+function projectedRoleTree(builder: ScenarioBuilder, departmentId: number, held: number[] = []): RoleTreeNode[] {
+  const records = builder.universe.roles.filter(role => role.departmentId === departmentId)
+  const build = (parentId: number | null, seen = new Set<number>()): RoleTreeNode[] => records.filter(role => (role.parentRoleId ?? null) === parentId && !seen.has(role.id)).map(role => ({
+    id: role.id, name: role.name, held: held.includes(role.id),
+    assignable: builder.projection.canManageRoles && builder.projection.administratedDepartmentIds.includes(departmentId),
+    children: build(role.id, new Set([...seen, role.id])),
+  }))
+  return build(null)
+}
+
 export function productionRolesManagementModel(builder: ScenarioBuilder): RoleManagementPageModel {
   const source = builder.managementRolesModel()
-  const departments: RoleDepartment[] = source.departments.map((department) => ({ id: department.id, name: department.name, roles: department.roles.map((role) => roleTree(role)) }))
+  const departments: RoleDepartment[] = source.departments.map((department) => ({ id: department.id, name: department.name, roles: projectedRoleTree(builder, department.id) }))
   const folderNodes = source.folderNodes.map((node) => folderNode(node as unknown as RawFolder))
   const typeStatesByRole: RoleManagementPageModel['typeStatesByRole'] = {}
   for (const [roleId, states] of Object.entries(source.typeStatesByRole)) {
     typeStatesByRole[roleId] = Object.fromEntries(Object.entries(states).map(([typeId, state]) => [typeId, { create: state.create ? 'grant' : 'inherit', edit: state.edit ? 'grant' : 'inherit' }]))
   }
   const folderStatesByRole: RoleManagementPageModel['folderStatesByRole'] = Object.fromEntries(Object.entries(source.folderStatesByRole).map(([roleId, states]) => [roleId, Object.fromEntries(Object.entries(states).map(([folderId, state]) => [folderId, { readState: state.readState === 'allow' ? 'grant' : state.readState, writeState: state.writeState === 'allow' ? 'grant' : state.writeState }]))]))
+  for (const [key, states] of Object.entries(builder.universe.permissionRules ?? {})) {
+    const [principal, roleId, resource, id] = key.split(':')
+    if (principal !== 'Role') continue
+    if (resource === 'Folder') { folderStatesByRole[roleId] ??= {}; folderStatesByRole[roleId][id] = {readState:states.readState,writeState:states.writeState} }
+    else { typeStatesByRole[roleId] ??= {}; typeStatesByRole[roleId][id] = states }
+  }
   return { baseUrl: source.baseUrl, domainSlug: source.domainSlug, domainName: source.domainName, domainId: builder.universe.domain.id, departments, roleRecords: source.roleRecords, holdersByRole: source.holdersByRole, folderNodes, folderStatesByRole, types: source.types, typeStatesByRole, manageableDepartmentIds: source.manageableDepartmentIds, assignableRoleIds: source.assignableRoleIds, initialRoleId: source.initialRoleId, status: source.status }
 }
 
-function typeLeaf(type: { id: number; name: string; departmentRootId: number | null; archived: boolean }): TypeTreeLeaf {
-  return { id: type.id, name: type.name, description: null, active: !type.archived, departmentId: type.departmentRootId, typeFolderId: null, templateSelection: 'blank', templateId: null, templateName: null, templateKind: null, constructedTemplates: { markdown: null, form: null } }
+function typeLeaf(type: import('./documentTypes').DocumentTypeEntity): TypeTreeLeaf {
+  return { id: type.id, name: type.name, description: type.description ?? null, active: !type.archived, departmentId: type.departmentRootId, typeFolderId: type.parentFolderId, templateSelection: type.templateMode === 'form-to-markdown' ? 'form' : type.templateMode, templateId: null, templateName: null, templateKind: null, constructedTemplates: { markdown: null, form: null } }
 }
 
 export function productionDocumentTypesManagementModel(builder: ScenarioBuilder): DocumentTypesManagementPageModel {
@@ -137,7 +172,12 @@ export function productionDocumentTypesManagementModel(builder: ScenarioBuilder)
   if (unassigned.length > 0) roots.push({ id: 'unassigned', kind: 'unassigned', name: 'Unassigned', children: unassigned.map((leaf) => ({ id: `type-${leaf.id}`, kind: 'type', name: leaf.name, leaf, children: [] })) })
   const tree: TypeTreeData = { roots, hasUnassigned: unassigned.length > 0, departments: builder.universe.departments.map((department) => ({ id: department.id, name: department.name, archived: department.archived })), types: leaves }
   const stagesByType: DocumentTypesManagementPageModel['inspector']['stagesByType'] = {}
-  for (const leaf of leaves) stagesByType[leaf.id] = { draft: null, submitted: null, filed: null, deprecated: null }
+  for (const leaf of leaves) {
+    stagesByType[leaf.id] = { draft: null, submitted: null, filed: null, deprecated: null }
+    for (const stage of builder.universe.documentTypes.find(type => type.id === leaf.id)?.stageConfig ?? []) {
+      stagesByType[leaf.id][stage.stage] = { ...stage, folder: stage.folderId, readRoles: stage.readRoleIds, writeRoles: stage.writeRoleIds, editOthersRoles: stage.editOthersRoleIds, manageRoles: stage.manageRoleIds }
+    }
+  }
   const folders: InspectorFolderNode[] = source.inspector.folders.map((folder) => ({ id: folder.id, name: folder.name, children: folder.children.map((child) => ({ id: child.id, name: child.name, children: [] })) }))
   return { ...source, domainId: builder.universe.domain.id, tree, inspector: { roles: source.inspector.roles.map((role) => ({ id: role.id, name: role.name, active: true })), folders, stagesByType } }
 }
@@ -148,7 +188,10 @@ export function productionPeopleManagementModel(builder: ScenarioBuilder): Peopl
 
 export function productionPersonManagementModel(builder: ScenarioBuilder, characterId: number): PersonManagementPageModel {
   const source = builder.managementPersonModel(characterId)
-  return { ...source, domainId: builder.universe.domain.id, roleDepartments: source.roleDepartments.map((department) => ({ ...department, roles: department.roles.map((role) => roleTree(role)) })), folderNodes: source.folderNodes.map((node) => folderNode(node as unknown as RawFolder)) }
+  const mapFolder = (node: RawFolder): FolderTreeNode => ({...folderNode(node),
+    ...builder.universe.permissionRules?.[`Character:${characterId}:Folder:${node.id}`],
+    canManageAccess: source.canManageMembers, children: node.children.map(mapFolder) })
+  return { ...source, domainId: builder.universe.domain.id, roleDepartments: source.roleDepartments.map((department) => ({ ...department, roles: projectedRoleTree(builder, department.id, builder.universe.members.find(member => member.id === characterId)?.roleIds) })), folderNodes: source.folderNodes.map((node) => mapFolder(node as unknown as RawFolder)) }
 }
 
 export function productionInvitationsManagementModel(builder: ScenarioBuilder): InvitationsManagementPageModel {

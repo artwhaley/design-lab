@@ -19,6 +19,9 @@ const state = {
 }
 
 describe('preview protocol guards', () => {
+  it('accepts the optional character profile without inventing a required slot', () => {
+    expect(isHostToPreviewMessage({ protocol: PREVIEW_PROTOCOL_VERSION, instanceId: 'pane-a', type: 'preview:init', ...state, surface: 'character-profile' })).toBe(true)
+  })
   it('accepts a complete typed init message', () => {
     expect(isHostToPreviewMessage({ protocol: PREVIEW_PROTOCOL_VERSION, instanceId: 'pane-a', type: 'preview:init', ...state })).toBe(true)
   })

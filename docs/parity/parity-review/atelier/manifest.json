@@ -1,0 +1,2122 @@
+{
+  "generatedAt": "2026-09-08T23:27:51.093Z",
+  "browser": {
+    "engine": "Chromium",
+    "version": "151.0.7922.138",
+    "executable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "deviceScaleFactor": 1,
+    "locale": "en-US",
+    "timezone": "UTC",
+    "reducedMotion": false
+  },
+  "production": {
+    "origin": "http://127.0.0.1:3055",
+    "root": "C:\\Users\\artwh\\Downloads\\loreforge2\\sl-civic-archive",
+    "head": "10030c5b41f39e7c924650232d072536d33e5938"
+  },
+  "lab": {
+    "origin": "http://127.0.0.1:4175",
+    "root": "C:\\Users\\artwh\\Downloads\\loreforge2\\design-lab",
+    "head": "944bcab32278e0b585fe70f2999f8e954a91bc8a"
+  },
+  "design": {
+    "key": "atelier",
+    "fixture": "production-preview",
+    "folderTreeHash": "d1ea453b300a121f30440a7aa4e31175bf68fa21513686b7c043019355f681ed"
+  },
+  "thresholds": {
+    "changedPixelRatio": 0.005,
+    "dom": "exact after the explicit runtime-noise normalization listed below",
+    "domNormalization": [
+      "CSS module scopes are matched by Lab Vite production-shaped namespaces; authored classes remain part of the comparison.",
+      "DOM attributes are sorted and inline-style serialization is canonicalized (including 0px to 0); authored text, classes, and values remain part of the comparison.",
+      "Only generated runtime noise is normalized: React hydration attributes and nonce, React useId names, Radix focus tabindex, React server-action hidden scaffolding/placeholders, and react-arborist draggable/scroll markers."
+    ]
+  },
+  "surfaces": [
+    {
+      "key": "home",
+      "slug": "home"
+    },
+    {
+      "key": "records",
+      "slug": "records"
+    },
+    {
+      "key": "document",
+      "slug": "document"
+    },
+    {
+      "key": "departments",
+      "slug": "departments"
+    },
+    {
+      "key": "department",
+      "slug": "department"
+    },
+    {
+      "key": "about",
+      "slug": "about"
+    },
+    {
+      "key": "lore",
+      "slug": "lore"
+    },
+    {
+      "key": "members",
+      "slug": "members"
+    },
+    {
+      "key": "work",
+      "slug": "work"
+    },
+    {
+      "key": "character-profile",
+      "slug": "character-profile"
+    },
+    {
+      "key": "management.departments",
+      "slug": "management-departments"
+    },
+    {
+      "key": "management.folders",
+      "slug": "management-folders"
+    },
+    {
+      "key": "management.roles",
+      "slug": "management-roles"
+    },
+    {
+      "key": "management.documentTypes",
+      "slug": "management-document-types"
+    },
+    {
+      "key": "management.people",
+      "slug": "management-people"
+    },
+    {
+      "key": "management.person",
+      "slug": "management-person"
+    },
+    {
+      "key": "management.invitations",
+      "slug": "management-invitations"
+    }
+  ],
+  "viewports": [
+    {
+      "name": "desktop-1440x1000",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "name": "compact-1024x900",
+      "width": 1024,
+      "height": 900
+    },
+    {
+      "name": "mobile-390x844",
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "results": [
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "home",
+      "productionUrl": "http://127.0.0.1:3055/design-parity?design=atelier",
+      "labSurface": "home",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 168,
+        "lab": 168
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "records",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/records?design=atelier",
+      "labSurface": "records",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 144,
+        "lab": 144
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "document",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/document?design=atelier",
+      "labSurface": "document",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 139,
+        "lab": 139
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "departments",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/departments?design=atelier",
+      "labSurface": "departments",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 115,
+        "lab": 115
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "department",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/department?design=atelier",
+      "labSurface": "department",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 117,
+        "lab": 117
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "about",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/about?design=atelier",
+      "labSurface": "about",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 105,
+        "lab": 105
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "lore",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/lore?design=atelier",
+      "labSurface": "lore",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 100,
+        "lab": 100
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "members",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/members?design=atelier",
+      "labSurface": "members",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 113,
+        "lab": 113
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "work",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/work?design=atelier",
+      "labSurface": "work",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 117,
+        "lab": 117
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "character-profile",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/character-profile?design=atelier",
+      "labSurface": "character-profile",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 111,
+        "lab": 111
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "management.departments",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-departments?design=atelier",
+      "labSurface": "management-departments",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 106,
+        "lab": 106
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "management.folders",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-folders?design=atelier",
+      "labSurface": "management-folders",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 111,
+        "lab": 111
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "management.roles",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-roles?design=atelier",
+      "labSurface": "management-roles",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 115,
+        "lab": 115
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "management.documentTypes",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-document-types?design=atelier",
+      "labSurface": "management-document-types",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 113,
+        "lab": 113
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "management.people",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-people?design=atelier",
+      "labSurface": "management-people",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 104,
+        "lab": 104
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "management.person",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-person?design=atelier",
+      "labSurface": "management-person",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 136,
+        "lab": 136
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "desktop-1440x1000",
+      "surface": "management.invitations",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-invitations?design=atelier",
+      "labSurface": "management-invitations",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 149,
+        "lab": 149
+      },
+      "raw": {
+        "width": 1440,
+        "height": 1000,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "home",
+      "productionUrl": "http://127.0.0.1:3055/design-parity?design=atelier",
+      "labSurface": "home",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 168,
+        "lab": 168
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "records",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/records?design=atelier",
+      "labSurface": "records",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 144,
+        "lab": 144
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "document",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/document?design=atelier",
+      "labSurface": "document",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 139,
+        "lab": 139
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "departments",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/departments?design=atelier",
+      "labSurface": "departments",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 115,
+        "lab": 115
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "department",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/department?design=atelier",
+      "labSurface": "department",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 117,
+        "lab": 117
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "about",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/about?design=atelier",
+      "labSurface": "about",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 105,
+        "lab": 105
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "lore",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/lore?design=atelier",
+      "labSurface": "lore",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 100,
+        "lab": 100
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "members",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/members?design=atelier",
+      "labSurface": "members",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 113,
+        "lab": 113
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "work",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/work?design=atelier",
+      "labSurface": "work",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 117,
+        "lab": 117
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "character-profile",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/character-profile?design=atelier",
+      "labSurface": "character-profile",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 111,
+        "lab": 111
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "management.departments",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-departments?design=atelier",
+      "labSurface": "management-departments",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 106,
+        "lab": 106
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "management.folders",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-folders?design=atelier",
+      "labSurface": "management-folders",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 111,
+        "lab": 111
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "management.roles",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-roles?design=atelier",
+      "labSurface": "management-roles",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 115,
+        "lab": 115
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "management.documentTypes",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-document-types?design=atelier",
+      "labSurface": "management-document-types",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 113,
+        "lab": 113
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "management.people",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-people?design=atelier",
+      "labSurface": "management-people",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 104,
+        "lab": 104
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "management.person",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-person?design=atelier",
+      "labSurface": "management-person",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 136,
+        "lab": 136
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "compact-1024x900",
+      "surface": "management.invitations",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-invitations?design=atelier",
+      "labSurface": "management-invitations",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 149,
+        "lab": 149
+      },
+      "raw": {
+        "width": 1024,
+        "height": 900,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "home",
+      "productionUrl": "http://127.0.0.1:3055/design-parity?design=atelier",
+      "labSurface": "home",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 168,
+        "lab": 168
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "records",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/records?design=atelier",
+      "labSurface": "records",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 144,
+        "lab": 144
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "document",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/document?design=atelier",
+      "labSurface": "document",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 139,
+        "lab": 139
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "departments",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/departments?design=atelier",
+      "labSurface": "departments",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 115,
+        "lab": 115
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "department",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/department?design=atelier",
+      "labSurface": "department",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 117,
+        "lab": 117
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "about",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/about?design=atelier",
+      "labSurface": "about",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 105,
+        "lab": 105
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "lore",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/lore?design=atelier",
+      "labSurface": "lore",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 100,
+        "lab": 100
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "members",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/members?design=atelier",
+      "labSurface": "members",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 113,
+        "lab": 113
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "work",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/work?design=atelier",
+      "labSurface": "work",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 117,
+        "lab": 117
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "character-profile",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/character-profile?design=atelier",
+      "labSurface": "character-profile",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 111,
+        "lab": 111
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "management.departments",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-departments?design=atelier",
+      "labSurface": "management-departments",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 106,
+        "lab": 106
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "management.folders",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-folders?design=atelier",
+      "labSurface": "management-folders",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 111,
+        "lab": 111
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "management.roles",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-roles?design=atelier",
+      "labSurface": "management-roles",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 115,
+        "lab": 115
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "management.documentTypes",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-document-types?design=atelier",
+      "labSurface": "management-document-types",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 113,
+        "lab": 113
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "management.people",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-people?design=atelier",
+      "labSurface": "management-people",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 104,
+        "lab": 104
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "management.person",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-person?design=atelier",
+      "labSurface": "management-person",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 136,
+        "lab": 136
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    },
+    {
+      "viewport": "mobile-390x844",
+      "surface": "management.invitations",
+      "productionUrl": "http://127.0.0.1:3055/design-parity/management-invitations?design=atelier",
+      "labSurface": "management-invitations",
+      "inputEqual": true,
+      "dom": {
+        "equal": true,
+        "differingLines": 0,
+        "firstDifference": null,
+        "production": 149,
+        "lab": 149
+      },
+      "raw": {
+        "width": 390,
+        "height": 844,
+        "ratio": 0
+      },
+      "fonts": {
+        "production": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        },
+        "lab": {
+          "manrope": false,
+          "instrument": false,
+          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "bodyFamily": "Arial, sans-serif"
+        }
+      },
+      "assets": {
+        "production": {},
+        "lab": {},
+        "equal": true
+      },
+      "pass": true
+    }
+  ],
+  "summary": {
+    "cases": 51,
+    "failures": 0,
+    "maxChangedPixelRatio": 0,
+    "domMismatches": 0,
+    "inputMismatches": 0,
+    "assetMismatches": 0
+  }
+}

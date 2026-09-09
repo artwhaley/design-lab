@@ -11,6 +11,8 @@ export type DocumentTypeEntity = {
   templateMode: DocumentTypeTemplateMode
   archived: boolean
   lifecycleStages: string[]
+  description?: string | null
+  stageConfig?: import('@/lib/actions/documentTypes').LifecycleStageConfigInput[]
 }
 
 export const DOCUMENT_TYPES: readonly DocumentTypeEntity[] = [

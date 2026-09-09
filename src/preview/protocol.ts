@@ -100,7 +100,7 @@ const isSurfaceKey = (value: unknown): value is SurfaceKey => (
   value === 'about' || value === 'lore' || value === 'members' || value === 'work' ||
   value === 'management.departments' || value === 'management.folders' || value === 'management.roles' ||
   value === 'management.documentTypes' || value === 'management.people' || value === 'management.person' ||
-  value === 'management.invitations' || value === 'shared.forms' || value === 'shared.templates' || value === 'shared.import' ||
+  value === 'character-profile' || value === 'management.invitations' || value === 'shared.forms' || value === 'shared.templates' || value === 'shared.import' ||
   value === 'shared.documentEdit' || value === 'shared.documentHistory' || value === 'shared.pageEdit' ||
   value === 'shared.siteStudio' || value === 'compat.review' || value === 'compat.subdomains' || value === 'external'
 )

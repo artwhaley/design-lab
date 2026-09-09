@@ -1,4 +1,5 @@
 import type { SurfaceKey } from '../contracts'
+import type { CharacterProfilePageModel } from '@/lib/page-models/characterProfile'
 import type { DomainShellModel } from '@/lib/page-models/shell'
 import type { HomePageModel } from '@/lib/page-models/home'
 import type { RecordsPageModel } from '@/lib/page-models/records'
@@ -15,6 +16,7 @@ import type { InvitationsManagementPageModel } from '@/lib/page-models/managemen
 import type { WorkPageModel } from '@/lib/page-models/management/work'
 import {
   ABOUT_PREVIEW_MODEL,
+  CHARACTER_PROFILE_PREVIEW_MODEL,
   DEPARTMENT_PREVIEW_MODEL,
   DEPARTMENTS_MANAGEMENT_MODEL,
   DEPARTMENTS_PREVIEW_MODEL,
@@ -50,6 +52,7 @@ type ParityModel =
   | DepartmentPageModel
   | DepartmentsPageModel
   | MembersPageModel
+  | CharacterProfilePageModel
   | DepartmentsManagementPageModel
   | FolderManagementPageModel
   | RoleManagementPageModel
@@ -80,6 +83,7 @@ export function productionParityPageModel(surface: SurfaceKey): ParityModel | nu
     case 'lore': return productionParityModel(LORE_PREVIEW_MODEL)
     case 'members': return productionParityModel(MEMBERS_MANAGEMENT_MODEL)
     case 'work': return productionParityModel(WORK_MANAGEMENT_MODEL)
+    case 'character-profile': return productionParityModel(CHARACTER_PROFILE_PREVIEW_MODEL)
     case 'management.departments': return productionParityModel(DEPARTMENTS_MANAGEMENT_MODEL)
     case 'management.folders': return productionParityModel(FOLDERS_MANAGEMENT_MODEL)
     case 'management.roles': return productionParityModel(ROLES_MANAGEMENT_MODEL)

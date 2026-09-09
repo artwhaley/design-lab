@@ -11,7 +11,7 @@ type Props = {
 
 export function SurfaceNavigator({ active, onSelect }: Props) {
   const groups: Array<{ title: string; surfaces: SurfaceDescriptor[] }> = [
-    { title: 'Public / Domain', surfaces: SURFACE_CATALOG.filter((s) => ['home', 'records', 'document', 'departments', 'department', 'about', 'lore', 'members'].includes(s.key)) },
+    { title: 'Public / Domain', surfaces: SURFACE_CATALOG.filter((s) => ['home', 'records', 'document', 'departments', 'department', 'about', 'lore', 'members', 'character-profile'].includes(s.key)) },
     { title: 'Operational / Management', surfaces: SURFACE_CATALOG.filter((s) => ['work', 'management.departments', 'management.folders', 'management.roles', 'management.documentTypes', 'management.people', 'management.person', 'management.invitations'].includes(s.key)) },
     { title: 'Shared functional (Class B)', surfaces: SURFACE_CATALOG.filter((s) => s.kind === 'classB') },
     { title: 'Compatibility', surfaces: SURFACE_CATALOG.filter((s) => s.kind === 'compatibility') },

@@ -4,14 +4,13 @@
  * identity, primary navigation, Work access, management navigation, content
  * region, and the platform escape route. Nothing is invented when absent.
  */
-import type { LabShellProps } from '../../contracts'
-import type { ProbeConfigV1 } from './config'
+import type { ProbeShellProps } from './probeTypes'
 import './probe.css'
 
-export function ProbeShell({ model, runtime, children }: LabShellProps<ProbeConfigV1>) {
+export function ProbeShell({ model, designConfig, children }: ProbeShellProps) {
   const { domain, primaryNavigation, managementNavigation, operatingContext, routes } = model
   return (
-    <div className="probe-shell" data-density={runtime.config.density}>
+    <div className="probe-shell" data-density={designConfig.density}>
       {/* OperatingContext exactly once (Bible §13) */}
       <div className="probe-context" data-testid="probe-operating-context">
         <span>{operatingContext.platformLabel}</span>

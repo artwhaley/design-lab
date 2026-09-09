@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180">
+  <rect width="320" height="180" rx="12" fill="#1c1f26"/>
+  <rect x="24" y="24" width="272" height="16" rx="4" fill="#3b4252"/>
+  <rect x="24" y="56" width="160" height="10" rx="4" fill="#4c566a"/>
+  <rect x="24" y="76" width="200" height="10" rx="4" fill="#4c566a"/>
+  <rect x="24" y="112" width="272" height="44" rx="6" fill="#2e3440"/>
+  <text x="160" y="104" text-anchor="middle" fill="#88c0d0" font-family="sans-serif" font-size="12">Contract Probe — conformance fixture</text>
+</svg>

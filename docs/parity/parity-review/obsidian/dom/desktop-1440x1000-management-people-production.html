@@ -1,0 +1,168 @@
+<div class="obsidian-module__root" data-template="obsidian" style="--tenant-primary: #bce6d3; --tenant-secondary: #142128; --tenant-accent: #bce6d3; --tenant-page-bg: #0b1419; --tenant-surface-bg: #142128; --tenant-surface-border: #bce6d3; --tenant-text-on-primary: #1A1A1A; --tenant-heading-font: Georgia, 'Times New Roman', Times, serif; --tenant-body-font: Verdana, Geneva, Tahoma, sans-serif; --tenant-muted-text: #a7b7bc; --obsidian-bg: #0b1419; --obsidian-surface: #142128; --obsidian-text: #edf2ef; --obsidian-muted: #a7b7bc; --obsidian-accent: #bce6d3; --obsidian-max: 1440px; --obsidian-gutter: 56px; --obsidian-radius: 18px; --obsidian-atmosphere: /design-assets/obsidian/atmosphere.png;">
+<a class="obsidian-module__skip" href="#main-content">Skip to content</a>
+<div class="obsidian-module__contextBar">
+<div aria-label="Operating context" class="operating-module__contextBar operating-module__obsidianContext">
+<a class="operating-module__platformBrand" href="/">LOREFORGE <svg aria-hidden="true" class="lucide lucide-arrow-up-right" fill="none" height="12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 7h10v10">
+</path>
+<path d="M7 17 17 7">
+</path>
+</svg>
+</a>
+<form action="/api/switch-tenant" class="operating-module__contextControl" method="post">
+<label class="operating-module__contextLabel" for="tenant-switcher">Domain</label>
+<select class="operating-module__contextSelect" disabled="" id="tenant-switcher" name="tenantSlug">
+<option selected="" value="preview-domain">preview-domain</option>
+</select>
+</form>
+<form class="operating-module__contextControl">
+<span aria-hidden="true" class="operating-module__avatar">A</span>
+<label class="operating-module__contextLabel" for="character-switcher">Acting as</label>
+<select class="operating-module__contextSelect" id="character-switcher" name="characterId">
+<option selected="" value="">No participating Character</option>
+</select>
+<input name="returnTo" type="hidden" value="/design-parity/management-people?design=obsidian">
+</form>
+</div>
+</div>
+<div class="obsidian-module__navPosition">
+<div class="obsidian-module__navigation">
+<a aria-label="Preview Domain Domain home" class="obsidian-module__identity" href="/design-parity">
+<span class="obsidian-module__emblem">
+<svg aria-hidden="true" class="lucide lucide-aperture" fill="none" height="27" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" width="27" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="10">
+</circle>
+<path d="m14.31 8 5.74 9.94">
+</path>
+<path d="M9.69 8h11.48">
+</path>
+<path d="m7.38 12 5.74-9.94">
+</path>
+<path d="M9.69 16 3.95 6.06">
+</path>
+<path d="M14.31 16H2.83">
+</path>
+<path d="m16.62 12-5.74 9.94">
+</path>
+</svg>
+</span>
+<span>Preview Domain</span>
+</a>
+<nav aria-label="Primary navigation" class="obsidian-module__desktopNav">
+<a aria-current="page" class="obsidian-module__activeNav" href="/design-parity">Home</a>
+<a class="" href="/design-parity/about">About</a>
+<a class="" href="/design-parity/lore">Lore</a>
+<a class="" href="/design-parity/departments">Departments</a>
+<a class="" href="/design-parity/records">Records</a>
+<a class="" href="/design-parity/work">Work</a>
+</nav>
+<nav aria-label="Management navigation" class="obsidian-module__srOnly">
+<a href="/design-parity/manage/people">People</a>
+<a href="/design-parity/members">Members</a>
+<a href="/design-parity/roles">Roles</a>
+<a href="/design-parity/manage/folders">Folders</a>
+<a href="/design-parity/manage/departments">Departments</a>
+<a href="/design-parity/document-types">Document Types</a>
+<a href="/design-parity/manage/invitations">Invitations</a>
+<a href="/design-parity/customize">Customize</a>
+</nav>
+<button aria-expanded="false" aria-haspopup="dialog" aria-label="Open navigation" class="obsidian-module__mobileMenu" data-state="closed" type="button">
+<svg aria-hidden="true" class="lucide lucide-menu" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 5h16">
+</path>
+<path d="M4 12h16">
+</path>
+<path d="M4 19h16">
+</path>
+</svg>
+</button>
+</div>
+</div>
+<main id="main-content" tabindex="-1">
+<div class="obsidian-module__workspacePage">
+<header class="obsidian-module__pageHeading">
+<div>
+<p class="obsidian-module__eyebrow">DOMAIN MEMBERS</p>
+<h1>People</h1>
+<p>The people who can participate in this domain.</p>
+</div>
+<a class="obsidian-module__primaryButton" href="/design-parity/manage/invitations">
+<svg aria-hidden="true" class="lucide lucide-plus" fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="17" xmlns="http://www.w3.org/2000/svg">
+<path d="M5 12h14">
+</path>
+<path d="M12 5v14">
+</path>
+</svg> Invite person</a>
+</header>
+<section aria-label="People management" class="obsidian-module__managementSurface">
+<div class="obsidian-module__managementToolbar">
+<label class="obsidian-module__search">
+<svg aria-hidden="true" class="lucide lucide-search" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="m21 21-4.34-4.34">
+</path>
+<circle cx="11" cy="11" r="8">
+</circle>
+</svg>
+<span class="obsidian-module__srOnly">Search people</span>
+<input placeholder="Search people" value="">
+</label>
+<button class="obsidian-module__secondaryButton" type="button">
+<svg aria-hidden="true" class="lucide lucide-sliders-horizontal" fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 5H3">
+</path>
+<path d="M12 19H3">
+</path>
+<path d="M14 3v4">
+</path>
+<path d="M16 17v4">
+</path>
+<path d="M21 12h-9">
+</path>
+<path d="M21 19h-5">
+</path>
+<path d="M21 5h-7">
+</path>
+<path d="M8 10v4">
+</path>
+<path d="M8 12H3">
+</path>
+</svg> Filters</button>
+</div>
+<div class="obsidian-module__managementTable">
+<div class="obsidian-module__managementHead">
+<span>Person</span>
+<span>Details</span>
+<span>Status</span>
+<span class="obsidian-module__srOnly">Actions</span>
+</div>
+</div>
+<p class="obsidian-module__managementEmpty">Search the domain to find people.</p>
+</section>
+</div>
+</main>
+<footer class="obsidian-module__footer">
+<div>
+<span class="obsidian-module__footerMark">◈</span> Preview Domain<span class="obsidian-module__footerMotto">A world worth remembering</span>
+</div>
+<div class="obsidian-module__footerLinks">
+<button aria-expanded="false" aria-haspopup="menu" aria-label="Manage domain" class="obsidian-module__menuTrigger" data-state="closed" type="button">
+<svg aria-hidden="true" class="lucide lucide-settings-2" fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg">
+<path d="M14 17H5">
+</path>
+<path d="M19 7h-9">
+</path>
+<circle cx="17" cy="17" r="3">
+</circle>
+<circle cx="7" cy="7" r="3">
+</circle>
+</svg>Manage domain</button>
+<a href="/">LoreForge dashboard <svg aria-hidden="true" class="lucide lucide-arrow-up-right" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 7h10v10">
+</path>
+<path d="M7 17 17 7">
+</path>
+</svg>
+</a>
+</div>
+</footer>
+</div>

@@ -4,7 +4,15 @@
  * Designs.
  */
 import type { ReactNode } from 'react'
-import type { ActionDescriptor } from '../../contracts'
+
+/** Probe-local action descriptor — not a shared Design API (A12). */
+export type ProbeAction = {
+  key: string
+  label: string
+  state: 'available' | 'disabled' | 'absent'
+  disabledReason?: string
+  kind?: 'primary' | 'destructive'
+}
 
 export function Section(props: { title: string; children: ReactNode; hint?: string }) {
   return (
@@ -29,7 +37,7 @@ export function Tag(props: { children: ReactNode }) {
   return <span className="probe-tag">{props.children}</span>
 }
 
-export function Badge(props: { state: ActionDescriptor['state']; children: ReactNode }) {
+export function Badge(props: { state: ProbeAction['state']; children: ReactNode }) {
   return <span className={`probe-badge probe-badge-${props.state}`}>{props.children}</span>
 }
 
@@ -52,7 +60,7 @@ export function Capabilities(props: { title: string; capabilities: Record<string
   )
 }
 
-export function ActionButtons(props: { actions: ActionDescriptor[]; onRun(key: string): void }) {
+export function ActionButtons(props: { actions: ProbeAction[]; onRun(key: string): void }) {
   // Absent actions are NOT offered (Bible §54): never convert absent into
   // disabled just to balance a toolbar.
   const present = props.actions.filter((action) => action.state !== 'absent')

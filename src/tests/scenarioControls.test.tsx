@@ -5,8 +5,7 @@ import { ActionLog, FakeBackend } from '../workspaces'
 import { buildScenario } from '../fixtures'
 import { ScenarioPanel } from '../host/ScenarioPanel'
 import { ActionLog as ActionLogView } from '../host/ActionLog'
-import { clearRegistry, registerDesign } from '../designs/registry'
-import { makeStubDesign } from './helpers/stubDesign'
+
 import { LabApp } from '../host/LabApp'
 
 describe('scenario panel wiring', () => {
@@ -64,11 +63,6 @@ describe('action log view', () => {
 })
 
 describe('host scenario behavior', () => {
-  beforeEach(() => {
-    clearRegistry()
-    registerDesign(makeStubDesign('stub-one', 'Stub One'))
-  })
-  afterEach(() => clearRegistry())
 
   it('switching persona rebuilds a safe projection (visitor shell has no account)', async () => {
     render(<LabApp />)

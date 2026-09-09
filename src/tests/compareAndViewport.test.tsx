@@ -3,8 +3,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
 import { buildScenario } from '../fixtures'
 import { ActionLog, FakeBackend, RecordsWorkspaceImpl } from '../workspaces'
-import { clearRegistry, registerDesign } from '../designs/registry'
-import { makeStubDesign } from './helpers/stubDesign'
+
 import { LabApp } from '../host/LabApp'
 import { ViewportControls } from '../host/ViewportControls'
 import { clearAllBanks, saveBank } from '../host/configBanks'
@@ -66,12 +65,6 @@ describe('compare mode shares semantic state', () => {
 })
 
 describe('host compare mode', () => {
-  beforeEach(() => {
-    clearRegistry()
-    registerDesign(makeStubDesign('stub-one', 'Stub One'))
-    registerDesign(makeStubDesign('stub-two', 'Stub Two'))
-  })
-  afterEach(() => clearRegistry())
 
   it('renders both panes for the same surface', () => {
     render(<LabApp />)
@@ -84,9 +77,10 @@ describe('host compare mode', () => {
   it('switches the surface for both panes together', () => {
     render(<LabApp />)
     fireEvent.click(screen.getByRole('button', { name: 'Compare' }))
+    fireEvent.change(screen.getByLabelText('Compare'), { target: { value: 'contract-probe' } })
     fireEvent.click(screen.getByRole('button', { name: /^manage invitations /i }))
-    expect(within(screen.getByTestId('lab-preview-a')).getByTestId('preview-iframe')).toHaveAttribute('title', 'stub-one preview')
-    expect(within(screen.getByTestId('lab-preview-b')).getByTestId('preview-iframe')).toHaveAttribute('title', 'stub-two preview')
+    expect(within(screen.getByTestId('lab-preview-a')).getByTestId('preview-iframe')).toHaveAttribute('title', 'obsidian preview')
+    expect(within(screen.getByTestId('lab-preview-b')).getByTestId('preview-iframe')).toHaveAttribute('title', 'contract-probe preview')
   })
 })
 
