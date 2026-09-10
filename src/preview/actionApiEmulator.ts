@@ -277,6 +277,7 @@ export function installProductionActionEmulator(
   }
 
   const onSubmit = (event: Event) => {
+    if (event.defaultPrevented) return
     const form = event.target as HTMLFormElement | null
     if (!form) return
     const action = form.getAttribute('action')
@@ -284,11 +285,11 @@ export function installProductionActionEmulator(
     event.preventDefault()
     void apply(new URL(action, window.location.origin).pathname, new FormData(form))
   }
-  document.addEventListener('submit', onSubmit, true)
+  document.addEventListener('submit', onSubmit)
 
   return () => {
     window.fetch = originalFetch
-    document.removeEventListener('submit', onSubmit, true)
+    document.removeEventListener('submit', onSubmit)
     if (originalHandler) globals.__loreforgeLabProductionAction = originalHandler
     else delete globals.__loreforgeLabProductionAction
   }

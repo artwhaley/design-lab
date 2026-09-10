@@ -26,7 +26,7 @@ test('Atelier stays installed across surfaces, Studio changes, and iframe reload
  await page.locator('#lab-design-select').selectOption('atelier')
  await expect(frame.locator('[data-template="atelier"]')).toBeVisible()
  await selectSurface(page,'Records')
- await frame.getByRole('textbox',{name:'Search records'}).fill('no-such-record-portability-check')
+ await frame.getByRole('searchbox',{name:'Search records'}).fill('no-such-record-portability-check')
  await expect(frame.getByText('No records match this view.')).toBeVisible()
  await selectSurface(page,'Character profile')
  await expect(frame.locator('[data-template="atelier"] h1')).toBeVisible()

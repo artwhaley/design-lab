@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-08T23:27:51.093Z",
+  "generatedAt": "2026-09-10T00:24:02.109Z",
   "browser": {
     "engine": "Chromium",
-    "version": "151.0.7922.138",
-    "executable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "version": "152.0.4191.62",
+    "executable": "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
     "deviceScaleFactor": 1,
     "locale": "en-US",
     "timezone": "UTC",
@@ -12,17 +12,17 @@
   "production": {
     "origin": "http://127.0.0.1:3055",
     "root": "C:\\Users\\artwh\\Downloads\\loreforge2\\sl-civic-archive",
-    "head": "10030c5b41f39e7c924650232d072536d33e5938"
+    "head": "00b8a41ad21ed3f06dda84976f10156863fea1ed"
   },
   "lab": {
     "origin": "http://127.0.0.1:4175",
     "root": "C:\\Users\\artwh\\Downloads\\loreforge2\\design-lab",
-    "head": "944bcab32278e0b585fe70f2999f8e954a91bc8a"
+    "head": "edddc214412a54f4f4168e03f452e64d6b072f41"
   },
   "design": {
     "key": "atelier",
     "fixture": "production-preview",
-    "folderTreeHash": "d1ea453b300a121f30440a7aa4e31175bf68fa21513686b7c043019355f681ed"
+    "folderTreeHash": "bb37f61fd3a347c13126554f0b65436f10bcd0971f5f86b9a881122c23cf5f5c"
   },
   "thresholds": {
     "changedPixelRatio": 0.005,
@@ -131,25 +131,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 168,
-        "lab": 168
+        "production": 130,
+        "lab": 130
       },
       "raw": {
         "width": 1440,
         "height": 1000,
-        "ratio": 0
+        "ratio": 0.0005576388888888889
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -170,25 +170,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 144,
-        "lab": 144
+        "production": 146,
+        "lab": 146
       },
       "raw": {
         "width": 1440,
         "height": 1000,
-        "ratio": 0
+        "ratio": 0.0005576388888888889
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -209,25 +209,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 139,
-        "lab": 139
+        "production": 114,
+        "lab": 114
       },
       "raw": {
         "width": 1440,
         "height": 1000,
-        "ratio": 0
+        "ratio": 0.0005493055555555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -248,25 +248,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 115,
-        "lab": 115
+        "production": 90,
+        "lab": 90
       },
       "raw": {
         "width": 1440,
         "height": 1000,
-        "ratio": 0
+        "ratio": 0.0005493055555555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -287,25 +287,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 117,
-        "lab": 117
+        "production": 92,
+        "lab": 92
       },
       "raw": {
         "width": 1440,
         "height": 1000,
-        "ratio": 0
+        "ratio": 0.0005493055555555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -326,25 +326,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 105,
-        "lab": 105
+        "production": 80,
+        "lab": 80
       },
       "raw": {
         "width": 1440,
         "height": 1000,
-        "ratio": 0
+        "ratio": 0.0005493055555555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -365,25 +365,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 100,
-        "lab": 100
+        "production": 75,
+        "lab": 75
       },
       "raw": {
         "width": 1440,
         "height": 1000,
-        "ratio": 0
+        "ratio": 0.0005493055555555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -404,25 +404,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 113,
-        "lab": 113
+        "production": 87,
+        "lab": 87
       },
       "raw": {
         "width": 1440,
         "height": 1000,
-        "ratio": 0
+        "ratio": 0.0005493055555555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -443,25 +443,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 117,
-        "lab": 117
+        "production": 101,
+        "lab": 101
       },
       "raw": {
         "width": 1440,
         "height": 1000,
-        "ratio": 0
+        "ratio": 0.0005493055555555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -482,25 +482,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 111,
-        "lab": 111
+        "production": 86,
+        "lab": 86
       },
       "raw": {
         "width": 1440,
         "height": 1000,
-        "ratio": 0
+        "ratio": 0.0005493055555555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -521,25 +521,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 106,
-        "lab": 106
+        "production": 105,
+        "lab": 105
       },
       "raw": {
         "width": 1440,
         "height": 1000,
-        "ratio": 0
+        "ratio": 0.0005493055555555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -560,25 +560,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 111,
-        "lab": 111
+        "production": 108,
+        "lab": 108
       },
       "raw": {
         "width": 1440,
         "height": 1000,
-        "ratio": 0
+        "ratio": 0.0005493055555555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -599,25 +599,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 115,
-        "lab": 115
+        "production": 356,
+        "lab": 356
       },
       "raw": {
         "width": 1440,
         "height": 1000,
-        "ratio": 0
+        "ratio": 0.0005576388888888889
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -638,25 +638,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 113,
-        "lab": 113
+        "production": 88,
+        "lab": 88
       },
       "raw": {
         "width": 1440,
         "height": 1000,
-        "ratio": 0
+        "ratio": 0.0005493055555555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -677,25 +677,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 104,
-        "lab": 104
+        "production": 80,
+        "lab": 80
       },
       "raw": {
         "width": 1440,
         "height": 1000,
-        "ratio": 0
+        "ratio": 0.0005493055555555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -716,25 +716,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 136,
-        "lab": 136
+        "production": 235,
+        "lab": 235
       },
       "raw": {
         "width": 1440,
         "height": 1000,
-        "ratio": 0
+        "ratio": 0.0005576388888888889
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -755,25 +755,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 149,
-        "lab": 149
+        "production": 139,
+        "lab": 139
       },
       "raw": {
         "width": 1440,
         "height": 1000,
-        "ratio": 0
+        "ratio": 0.0005576388888888889
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -794,25 +794,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 168,
-        "lab": 168
+        "production": 130,
+        "lab": 130
       },
       "raw": {
         "width": 1024,
         "height": 900,
-        "ratio": 0
+        "ratio": 0.0008713107638888889
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -833,25 +833,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 144,
-        "lab": 144
+        "production": 146,
+        "lab": 146
       },
       "raw": {
         "width": 1024,
         "height": 900,
-        "ratio": 0
+        "ratio": 0.0008713107638888889
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -872,25 +872,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 139,
-        "lab": 139
+        "production": 114,
+        "lab": 114
       },
       "raw": {
         "width": 1024,
         "height": 900,
-        "ratio": 0
+        "ratio": 0.0008582899305555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -911,25 +911,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 115,
-        "lab": 115
+        "production": 90,
+        "lab": 90
       },
       "raw": {
         "width": 1024,
         "height": 900,
-        "ratio": 0
+        "ratio": 0.0008582899305555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -950,25 +950,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 117,
-        "lab": 117
+        "production": 92,
+        "lab": 92
       },
       "raw": {
         "width": 1024,
         "height": 900,
-        "ratio": 0
+        "ratio": 0.0008582899305555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -989,25 +989,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 105,
-        "lab": 105
+        "production": 80,
+        "lab": 80
       },
       "raw": {
         "width": 1024,
         "height": 900,
-        "ratio": 0
+        "ratio": 0.0008582899305555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1028,25 +1028,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 100,
-        "lab": 100
+        "production": 75,
+        "lab": 75
       },
       "raw": {
         "width": 1024,
         "height": 900,
-        "ratio": 0
+        "ratio": 0.0008582899305555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1067,25 +1067,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 113,
-        "lab": 113
+        "production": 87,
+        "lab": 87
       },
       "raw": {
         "width": 1024,
         "height": 900,
-        "ratio": 0
+        "ratio": 0.0008582899305555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1106,25 +1106,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 117,
-        "lab": 117
+        "production": 101,
+        "lab": 101
       },
       "raw": {
         "width": 1024,
         "height": 900,
-        "ratio": 0
+        "ratio": 0.0008582899305555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1145,25 +1145,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 111,
-        "lab": 111
+        "production": 86,
+        "lab": 86
       },
       "raw": {
         "width": 1024,
         "height": 900,
-        "ratio": 0
+        "ratio": 0.0008582899305555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1184,25 +1184,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 106,
-        "lab": 106
+        "production": 105,
+        "lab": 105
       },
       "raw": {
         "width": 1024,
         "height": 900,
-        "ratio": 0
+        "ratio": 0.0008582899305555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1223,25 +1223,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 111,
-        "lab": 111
+        "production": 108,
+        "lab": 108
       },
       "raw": {
         "width": 1024,
         "height": 900,
-        "ratio": 0
+        "ratio": 0.0008582899305555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1262,25 +1262,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 115,
-        "lab": 115
+        "production": 356,
+        "lab": 356
       },
       "raw": {
         "width": 1024,
         "height": 900,
-        "ratio": 0
+        "ratio": 0.0008713107638888889
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1301,25 +1301,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 113,
-        "lab": 113
+        "production": 88,
+        "lab": 88
       },
       "raw": {
         "width": 1024,
         "height": 900,
-        "ratio": 0
+        "ratio": 0.0008582899305555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1340,25 +1340,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 104,
-        "lab": 104
+        "production": 80,
+        "lab": 80
       },
       "raw": {
         "width": 1024,
         "height": 900,
-        "ratio": 0
+        "ratio": 0.0008582899305555556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1379,25 +1379,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 136,
-        "lab": 136
+        "production": 235,
+        "lab": 235
       },
       "raw": {
         "width": 1024,
         "height": 900,
-        "ratio": 0
+        "ratio": 0.0008713107638888889
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1418,25 +1418,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 149,
-        "lab": 149
+        "production": 139,
+        "lab": 139
       },
       "raw": {
         "width": 1024,
         "height": 900,
-        "ratio": 0
+        "ratio": 0.0008713107638888889
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1457,25 +1457,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 168,
-        "lab": 168
+        "production": 130,
+        "lab": 130
       },
       "raw": {
         "width": 390,
         "height": 844,
-        "ratio": 0
+        "ratio": 0.0027220804471989306
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1496,25 +1496,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 144,
-        "lab": 144
+        "production": 146,
+        "lab": 146
       },
       "raw": {
         "width": 390,
         "height": 844,
-        "ratio": 0
+        "ratio": 0.0011696439421557904
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1535,25 +1535,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 139,
-        "lab": 139
+        "production": 114,
+        "lab": 114
       },
       "raw": {
         "width": 390,
         "height": 844,
-        "ratio": 0
+        "ratio": 0.002798031352533722
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1574,25 +1574,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 115,
-        "lab": 115
+        "production": 90,
+        "lab": 90
       },
       "raw": {
         "width": 390,
         "height": 844,
-        "ratio": 0
+        "ratio": 0.0028830963665086888
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1613,25 +1613,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 117,
-        "lab": 117
+        "production": 92,
+        "lab": 92
       },
       "raw": {
         "width": 390,
         "height": 844,
-        "ratio": 0
+        "ratio": 0.0028587920768015553
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1652,25 +1652,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 105,
-        "lab": 105
+        "production": 80,
+        "lab": 80
       },
       "raw": {
         "width": 390,
         "height": 844,
-        "ratio": 0
+        "ratio": 0.0028223356422408556
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1691,25 +1691,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 100,
-        "lab": 100
+        "production": 75,
+        "lab": 75
       },
       "raw": {
         "width": 390,
         "height": 844,
-        "ratio": 0
+        "ratio": 0.0027615749179730224
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1730,25 +1730,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 113,
-        "lab": 113
+        "production": 87,
+        "lab": 87
       },
       "raw": {
         "width": 390,
         "height": 844,
-        "ratio": 0
+        "ratio": 0.0028952485113622555
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1769,25 +1769,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 117,
-        "lab": 117
+        "production": 101,
+        "lab": 101
       },
       "raw": {
         "width": 390,
         "height": 844,
-        "ratio": 0
+        "ratio": 0.002737270628265889
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1808,25 +1808,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 111,
-        "lab": 111
+        "production": 86,
+        "lab": 86
       },
       "raw": {
         "width": 390,
         "height": 844,
-        "ratio": 0
+        "ratio": 0.0027949933163203306
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1847,25 +1847,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 106,
-        "lab": 106
+        "production": 105,
+        "lab": 105
       },
       "raw": {
         "width": 390,
         "height": 844,
-        "ratio": 0
+        "ratio": 0.002709928302345364
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1886,25 +1886,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 111,
-        "lab": 111
+        "production": 108,
+        "lab": 108
       },
       "raw": {
         "width": 390,
         "height": 844,
-        "ratio": 0
+        "ratio": 0.002743346700692672
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1925,25 +1925,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 115,
-        "lab": 115
+        "production": 356,
+        "lab": 356
       },
       "raw": {
         "width": 390,
         "height": 844,
-        "ratio": 0
+        "ratio": 0.0027251184834123222
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -1964,25 +1964,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 113,
-        "lab": 113
+        "production": 88,
+        "lab": 88
       },
       "raw": {
         "width": 390,
         "height": 844,
-        "ratio": 0
+        "ratio": 0.002791955280106939
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -2003,25 +2003,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 104,
-        "lab": 104
+        "production": 80,
+        "lab": 80
       },
       "raw": {
         "width": 390,
         "height": 844,
-        "ratio": 0
+        "ratio": 0.002743346700692672
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -2042,25 +2042,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 136,
-        "lab": 136
+        "production": 235,
+        "lab": 235
       },
       "raw": {
         "width": 390,
         "height": 844,
-        "ratio": 0
+        "ratio": 0.002564102564102564
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -2081,25 +2081,25 @@
         "equal": true,
         "differingLines": 0,
         "firstDifference": null,
-        "production": 149,
-        "lab": 149
+        "production": 139,
+        "lab": 139
       },
       "raw": {
         "width": 390,
         "height": 844,
-        "ratio": 0
+        "ratio": 0.002709928302345364
       },
       "fonts": {
         "production": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         },
         "lab": {
           "manrope": false,
           "instrument": false,
-          "headingFamily": "Georgia, \"Times New Roman\", Times, serif",
+          "headingFamily": "Georgia, serif",
           "bodyFamily": "Arial, sans-serif"
         }
       },
@@ -2114,7 +2114,7 @@
   "summary": {
     "cases": 51,
     "failures": 0,
-    "maxChangedPixelRatio": 0,
+    "maxChangedPixelRatio": 0.0028952485113622555,
     "domMismatches": 0,
     "inputMismatches": 0,
     "assetMismatches": 0

@@ -53,7 +53,8 @@ class PreviewErrorBoundary extends Component<{ children: ReactNode; onError(erro
 export function PreviewRuntimeApp({ instanceId: explicitInstanceId }: Props) {
   const instanceId = useMemo(() => getInstanceId(explicitInstanceId), [explicitInstanceId])
   const [state, setState] = useState<PreviewState | null>(null)
-  const [backendEpoch, setBackendEpoch] = useState(0)
+  const [, setBackendEpoch] = useState(0)
+  const [resetEpoch, setResetEpoch] = useState(0)
   const backendRef = useRef<FakeBackend | null>(null)
 
   const reportError = useCallback((error: Error | string) => {
@@ -81,6 +82,7 @@ export function PreviewRuntimeApp({ instanceId: explicitInstanceId }: Props) {
       if (event.data.type === 'preview:reset') {
         backendRef.current?.reset()
         setBackendEpoch((epoch) => epoch + 1)
+        setResetEpoch((epoch) => epoch + 1)
       }
     }
     window.addEventListener('message', onMessage)
@@ -153,7 +155,7 @@ export function PreviewRuntimeApp({ instanceId: explicitInstanceId }: Props) {
   }
 
   return (
-    <PreviewErrorBoundary onError={reportError} key={`${state.designKey}:${state.surface}:${backendEpoch}`}>
+    <PreviewErrorBoundary onError={reportError} key={`${state.designKey}:${state.surface}:${JSON.stringify(state.params)}:${JSON.stringify(state.scenario)}:${resetEpoch}`}>
       <PreviewRenderer
         design={bundle.design}
         builder={bundle.builder}

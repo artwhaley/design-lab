@@ -6,7 +6,7 @@ This packet is the Phase 2 automated evidence for the production Obsidian oracle
 
 - 51 deterministic comparisons, including optional surfaces when selected.
 - Desktop: 1440×1000; compact: 1024×900; mobile: 390×844.
-- Pixel threshold: 0.5%; observed maximum: 0.000%.
+- Pixel threshold: 0.5%; observed maximum: 0.290%.
 - DOM mismatches: 0 after the explicit runtime-noise normalization listed in manifest.json.
 - Semantic input mismatches: 0.
 - Asset mismatches: 0.

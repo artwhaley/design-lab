@@ -152,6 +152,8 @@ export function civicFromLegacy(legacy: LegacyDomainAppearance): CivicConfigV1 {
       secondary: pick('secondaryColor', civicDefaults.palette.secondary),
       accent: pick('accentColor', civicDefaults.palette.accent),
       page: pick('backgroundColor', civicDefaults.palette.page),
+      surface: civicDefaults.palette.surface,
+      masthead: civicDefaults.palette.masthead,
     },
     typography: {
       headingFontKey: pickUnion(pick('headingFontKey', civicDefaults.typography.headingFontKey), ['georgia', 'palatino', 'newsreader', 'tahoma', 'trebuchet', 'verdana', 'lato'] as const, civicDefaults.typography.headingFontKey),

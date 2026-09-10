@@ -26,11 +26,13 @@ const idOf = (segment: string | undefined): number | null => {
 export class PathSimulator {
   readonly baseUrl: string
 
-  constructor(baseUrl: string) {
+  constructor(baseUrl: string, private readonly aliases: string[] = []) {
     this.baseUrl = baseUrl
   }
 
   simulate(href: string): SimulatedTarget {
+    const alias = this.aliases.find(base => href === base || href.startsWith(`${base}/`) || href.startsWith(`${base}?`))
+    if (alias) href = this.baseUrl + href.slice(alias.length)
     if (href === this.baseUrl || href === `${this.baseUrl}/`) {
       return { kind: 'surface', surface: 'home', params: {} }
     }
@@ -82,6 +84,7 @@ export class PathSimulator {
       case 'subdomains':
         return { kind: 'surface', surface: 'departments', params: {}, viaCompat: 'subdomains' }
       case 'manage':
+        if (second === 'roles') return { kind: 'surface', surface: 'management.roles', params: {} }
         if (second === 'departments') return { kind: 'surface', surface: 'management.departments', params: {} }
         if (second === 'folders') return { kind: 'surface', surface: 'management.folders', params: {} }
         if (second === 'people') {

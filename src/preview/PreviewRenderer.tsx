@@ -49,7 +49,8 @@ export function PreviewRenderer<TConfig extends object>(props: PreviewRendererPr
     if (!href || href.startsWith('#')) return
     const url = new URL(href, window.location.href)
     event.preventDefault()
-    if (url.origin === window.location.origin && (url.pathname === activeBaseUrl || url.pathname.startsWith(`${activeBaseUrl}/`))) onNavigate(`${url.pathname}${url.search}`)
+    const canonicalBaseUrl = `/domain/${shellModel.domain.slug}`
+    if (url.origin === window.location.origin && [activeBaseUrl, canonicalBaseUrl].some(base => url.pathname === base || url.pathname.startsWith(`${base}/`))) onNavigate(`${url.pathname}${url.search}`)
     else onExternal(url.toString())
   }
 

@@ -100,6 +100,7 @@ export function LabApp() {
 
   const simulator = useMemo(() => new PathSimulator(
     scenario.fixtureProfile === 'production-preview' ? '/design-parity' : '/domain/aster-reach',
+    scenario.fixtureProfile === 'production-preview' ? ['/domain/preview-domain'] : [],
   ), [scenario.fixtureProfile])
 
   const handleNavigate = (href: string): void => {
